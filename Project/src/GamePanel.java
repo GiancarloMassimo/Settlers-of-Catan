@@ -1,12 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public class GamePanel extends JPanel {
     public static GamePanel instance;
 
-    private HashSet<GraphicsItem> graphicsItems = new HashSet<>();
+    private ArrayList<GraphicsItem> graphicsItems = new ArrayList<>();
 
     public GamePanel() {
         if (instance == null)
@@ -15,6 +16,7 @@ public class GamePanel extends JPanel {
         setFocusable(true);
 
         addGraphicItem(new BackgroundGraphics());
+        addGraphicItem(new InfoPanelGraphics());
     }
 
     private void addGraphicItem(GraphicsItem graphicsItem) {

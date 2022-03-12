@@ -37,7 +37,7 @@ public class InfoPanelGraphics implements GraphicsItem{
     }
 
     private void drawBackgroundPanel(Graphics g) {
-        g.setColor(ColorPalatte.beigeBackground);
+        g.setColor(ColorPalette.beigeBackground);
         g.fillRoundRect(1056, 25, 525, 250, CORNER_RADIUS, CORNER_RADIUS);
 
         Graphics2D g2d = (Graphics2D) g;

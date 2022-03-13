@@ -61,6 +61,6 @@ public class Tile {
 
     public void setNum(int num) {
         this.num = num;
-        numberImage = num == 0 ? null : ImageLoader.getImage(num+"");
+        numberImage = num < 2 ? null : ImageLoader.getImage(num+"");
     }
 }

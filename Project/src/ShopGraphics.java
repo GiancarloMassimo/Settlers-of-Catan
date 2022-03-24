@@ -13,7 +13,7 @@ public class ShopGraphics implements GraphicsItem
     public void draw(Graphics g)
     {
         g.drawImage(inventoryText, 39, 747, 188, 44, null);
-       // g.drawImage(shopText, 39, 822, 103, 46, null);
+        g.drawImage(shopText, 39, 822, 103, 46, null);
     }
 
 }

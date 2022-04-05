@@ -1,10 +1,10 @@
 public class Building {
-    private int type;//1-settlement, 2-city
+    private BuildingType type;
     Player owner;
     Node location;
     public Building(Player p, Node n) {
         owner = p;
-        type = 1;
+        type = BuildingType.Settlement;
         location=n;
     }
 //    public getResources(){
@@ -12,7 +12,7 @@ public class Building {
 //        for(Tile t:location.getTiles())
 //    }
     public void upgrade() {
-        if(type==1) type++;
+        if(type==BuildingType.Settlement) type = BuildingType.City;
     }
     public Player getOwner(){
         return owner;
@@ -20,7 +20,7 @@ public class Building {
     public Node getLocation(){
         return location;
     }
-    public int getType(){
+    public BuildingType getType(){
         return type;
     }
 }

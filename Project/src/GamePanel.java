@@ -18,6 +18,8 @@ public class GamePanel extends JPanel {
         addGraphicItem(new MapGraphics());
         addGraphicItem(new InventoryGraphics());
         addGraphicItem(new ShopGraphics());
+        addGraphicItem(new TradingGraphics());
+        addGraphicItem(new PlayerGraphics());
     }
 
     private void addGraphicItem(GraphicsItem graphicsItem) {

@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 
 public class Node {
@@ -9,5 +10,5 @@ public class Node {
     }
     public void addAdjacenttiles(Tile t){
         adjacenttiles.add(t);
-    }
+
 }

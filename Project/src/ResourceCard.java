@@ -1,9 +1,9 @@
-public class ResourceCard {
-    private String resource;
-    public ResourceCard(String r){
+
+public class ResourceCard extends Card {
+    private ResourceType resource;
+    public ResourceCard(ResourceType r){
         resource=r;
     }
-    public String getResource() {
+    public ResourceType getResource() {
         return resource;
-    }
 }

@@ -20,7 +20,7 @@ public class TileMapFactory {
         shuffleTileStack();
         fillTileMatrix();
         do {
-            System.out.println();
+            //System.out.println();
             clearMapNumbers();
             fillTileNumbers();
         } while (areRedNumbersTouching());
@@ -229,7 +229,7 @@ public class TileMapFactory {
                         try {
                             int oN = map[r + hexDirections[i][0]][c + hexDirections[i][1]].getNum();
                             if (oN == 6 || oN == 8) {
-                                System.out.println("touching");
+                                //System.out.println("touching");
                                 return true;
                             }
                         } catch (IndexOutOfBoundsException e) {

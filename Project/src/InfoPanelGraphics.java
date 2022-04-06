@@ -7,13 +7,13 @@ public class InfoPanelGraphics implements GraphicsItem{
             "The current player is highlighted below in their color.\n" +
             "Longest Road and Largest Army will be highlighted next to each player.\n" +
             "\n" +
-            "Use the trading to trade with other players on your turn.\n" +
+            "Use the trading panel to trade with other players on your turn.\n" +
             "• Click on a resource to offer/ask for it\n" +
             "• Press O to offer the current selected trade\n" +
             "• Players will click on the check box to accept the trade offer\n" +
             "\n" +
             "Click on a Development Card to play it.\n" +
-            "Press E to end turn.";
+            "Press E to end turn.    Press L (on this window) to toggle the Game Log.";
     private final float FONT_SIZE = 14f;
     private final float BORDER_WIDTH = 4f;
     private final int CORNER_RADIUS = 10;

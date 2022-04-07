@@ -5,10 +5,13 @@ public class Player {
     private Inventory playerInventory;
     private int victoryPoints;
     private int playerNumber;
-    public Player(int playerNumber) {
+    private PlayerGraphicsInfo graphicsInfo;
+
+    public Player(int playerNumber, PlayerColor color) {
         victoryPoints=0;
         this.playerNumber=playerNumber;
         playerInventory = new Inventory();
+        graphicsInfo = new PlayerGraphicsInfo(color);
     }
     public void createBuilding(Node n) {
 
@@ -49,5 +52,8 @@ public class Player {
 
     public int getVictoryPoints(){
         return victoryPoints;
+    }
+    public PlayerGraphicsInfo getGraphicsInfo() {
+        return graphicsInfo;
     }
 }

@@ -3,14 +3,11 @@ import java.awt.image.BufferedImage;
 
 public class ShopGraphics implements GraphicsItem
 {
-    private BufferedImage ShopText, Road, DevCard, City, Village, brickpic, wheatpic, sheeppic, woodpic, orepic;
+    private BufferedImage ShopText, DevCard, brickpic, wheatpic, sheeppic, woodpic, orepic;
     public ShopGraphics()
     {
         ShopText = ImageLoader.getImage("Shop_");
-        Road = ImageLoader.getImage("Road");
         DevCard = ImageLoader.getImage("DevCard");
-        City = ImageLoader.getImage("City");
-        Village = ImageLoader.getImage("Village");
 
         woodpic = ImageLoader.getImage("woodpic");
         brickpic = ImageLoader.getImage("brickpic");
@@ -21,11 +18,13 @@ public class ShopGraphics implements GraphicsItem
 
     public void draw(Graphics g)
     {
+        PlayerGraphicsInfo graphicsInfo = GameManager.instance.getCurrentPlayerGraphicsInfo();
+
         g.drawImage(ShopText, 39, 822, 103, 46, null);
-        g.drawImage(Road, 250, 810, 10, 50, null);
+        g.drawImage(graphicsInfo.getRoadImage(), 250, 810, 10, 50, null);
         g.drawImage(DevCard, 560, 810, 30, 40, null);
-        g.drawImage(City, 410, 805, 65, 49, null);
-        g.drawImage(Village, 310, 810, 45, 38, null);
+        g.drawImage(graphicsInfo.getCityImage(), 410, 805, 65, 49, null);
+        g.drawImage(graphicsInfo.getSettlementImage(), 310, 810, 45, 38, null);
 
         //Road
         g.drawImage(woodpic, 265, 810, 25, 25, null);

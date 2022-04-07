@@ -53,4 +53,7 @@ public class Player {
     public int getVictoryPoints(){
         return victoryPoints;
     }
+    public PlayerGraphicsInfo getGraphicsInfo() {
+        return graphicsInfo;
+    }
 }

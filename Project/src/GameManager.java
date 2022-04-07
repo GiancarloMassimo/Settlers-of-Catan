@@ -1,4 +1,6 @@
-public class GameManager {
+import java.awt.event.KeyEvent;
+
+public class GameManager implements KeyEventHandler {
     public static GameManager instance;
 
     private Player[] players;
@@ -12,6 +14,7 @@ public class GameManager {
         }
 
         InstantiatePlayers();
+        InputHandler.addKeyEvent(this);
     }
 
     void InstantiatePlayers() {
@@ -19,6 +22,7 @@ public class GameManager {
         int i = 0;
         for (PlayerColor color : PlayerColor.values()) {
             players[i] = new Player(i + 1, color);
+            i++;
         }
         currentPlayer = players[0];
     }
@@ -28,5 +32,21 @@ public class GameManager {
         turnIndex %= players.length;
 
         currentPlayer = players[turnIndex];
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public PlayerGraphicsInfo getCurrentPlayerGraphicsInfo() {
+        return currentPlayer.getGraphicsInfo();
+    }
+
+    @Override
+    public void OnKeyDown(KeyEvent e) {
+        if (e.getKeyChar() == 'e' || e.getKeyChar() == 'E') {
+            NextTurn();
+            GameStateChangeListener.invoke();
+        }
     }
 }

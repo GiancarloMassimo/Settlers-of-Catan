@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class Node {
     private ArrayList<Tile> adjacentTiles; //array of all tiles that the node is on
     private ArrayList<Edge> edges;
+    public int screenX, screenY;
     Port port;
 
     public Node(){
@@ -19,11 +20,12 @@ public class Node {
         adjacentTiles.add(t);
     }
 
-    public void addEdge(Edge edge) {
+    public boolean addEdge(Edge edge) {
         for (Edge e : edges)
-            if (e.equals(edge)) return;
+            if (e.equals(edge)) return false;
 
         edges.add(edge);
+        return true;
     }
 
     public ArrayList<Edge> getEdges() {

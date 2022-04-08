@@ -6,7 +6,8 @@ public class GameManager implements KeyEventHandler {
     private Player[] players;
     private Player currentPlayer;
     private int turnIndex;
-
+    private Dice dice;
+    private Bank bank;
 
     public GameManager() {
         if (instance == null) {
@@ -15,6 +16,8 @@ public class GameManager implements KeyEventHandler {
 
         InstantiatePlayers();
         InputHandler.addKeyEvent(this);
+        dice = new Dice();
+        bank = new Bank();
     }
 
     void InstantiatePlayers() {
@@ -27,11 +30,18 @@ public class GameManager implements KeyEventHandler {
         currentPlayer = players[0];
     }
 
-    void NextTurn() {
+    private void NextTurn() {
+        GameLog.instance.logEvent(getCurrentPlayer() + " ended their turn\n");
         turnIndex++;
         turnIndex %= players.length;
-
         currentPlayer = players[turnIndex];
+
+        dice.rollDice();
+        GameStateChangeListener.invoke();
+    }
+
+    public Dice getDice() {
+        return dice;
     }
 
     public Player getCurrentPlayer() {
@@ -46,7 +56,6 @@ public class GameManager implements KeyEventHandler {
     public void OnKeyDown(KeyEvent e) {
         if (e.getKeyChar() == 'e' || e.getKeyChar() == 'E') {
             NextTurn();
-            GameStateChangeListener.invoke();
         }
     }
 }

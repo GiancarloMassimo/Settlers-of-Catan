@@ -5,6 +5,7 @@ import java.util.Collections;
 public class Map {
     private Tile[][] map;
     private Node[] nodes;
+    private Edge[] edges;
 
     public Map() {
         createMap();
@@ -17,12 +18,8 @@ public class Map {
 
         NodeGraphFactory nodeGraphFactory = new NodeGraphFactory(map);
         nodes = Arrays.copyOf(nodeGraphFactory.getNodes(), nodeGraphFactory.getNodes().length);
-
-        for (int i = 1; i <= nodes.length; i++) {
-            System.out.println(i + ". "
-                    + (nodes[i - 1] == null ? "null" : nodes[i - 1].getAdjacentTiles().toString()) + " "
-                    + nodes[i - 1].getEdges().size());
-        }
+        edges = Arrays.copyOf(nodeGraphFactory.getEdges(), nodeGraphFactory.getEdges().length);
+        nodeGraphFactory = null;
     }
 
     public Tile[][] getMap() {
@@ -31,5 +28,9 @@ public class Map {
 
     public Node[] getNodes() {
         return nodes;
+    }
+
+    public Edge[] getEdges() {
+        return edges;
     }
 }

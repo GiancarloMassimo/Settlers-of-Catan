@@ -7,6 +7,7 @@ public class GameLog extends JPanel implements KeyEventHandler {
     public static GameLog instance;
     private ArrayList<String> log;
     private JFrame frame = null;
+    private JTextArea textArea;
 
     public GameLog() {
         if (instance == null) {
@@ -15,9 +16,6 @@ public class GameLog extends JPanel implements KeyEventHandler {
             return;
         }
         log = new ArrayList<>();
-
-        for (int i = 0; i < 20; i++)
-            logEvent("This is a test event.");
 
         InputHandler.addKeyEvent(this);
 
@@ -28,7 +26,7 @@ public class GameLog extends JPanel implements KeyEventHandler {
         this.setLayout(new BorderLayout());
         this.setPreferredSize(new Dimension(500, 200));
 
-        JTextArea textArea = new JTextArea(5, 40);
+        textArea = new JTextArea(5, 40);
 
         String text = getTextAreaText();
 
@@ -64,6 +62,7 @@ public class GameLog extends JPanel implements KeyEventHandler {
 
     public void logEvent(String event) {
         log.add(event);
+        textArea.setText(getTextAreaText());
     }
 
     @Override

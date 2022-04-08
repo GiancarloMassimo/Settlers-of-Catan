@@ -5,10 +5,15 @@ public class Player {
     private Inventory playerInventory;
     private int victoryPoints;
     private int playerNumber;
-    public Player(int playerNumber) {
+    private PlayerGraphicsInfo graphicsInfo;
+    PlayerColor color;
+
+    public Player(int playerNumber, PlayerColor color) {
         victoryPoints=0;
         this.playerNumber=playerNumber;
         playerInventory = new Inventory();
+        this.color = color;
+        graphicsInfo = new PlayerGraphicsInfo(color);
     }
     public void createBuilding(Node n) {
 
@@ -51,7 +56,16 @@ public class Player {
         return victoryPoints;
     }
 
+
     public Inventory getPlayerInventory() {
         return playerInventory;
+
+    public PlayerGraphicsInfo getGraphicsInfo() {
+        return graphicsInfo;
+    }
+
+    @Override
+    public String toString() {
+        return color.toString() + " Player";
     }
 }

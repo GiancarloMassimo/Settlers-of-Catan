@@ -6,5 +6,6 @@ public class ResourceCard extends Card {
     }
     public ResourceType getResource() {
         return resource;
+    }
 }
 }

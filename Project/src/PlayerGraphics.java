@@ -3,21 +3,15 @@ import java.awt.image.BufferedImage;
 
 public class PlayerGraphics implements GraphicsItem
 {
-    private BufferedImage RedPlayer, YellowPlayer, BluePlayer, GreenPlayer, VPindicator;
+    private BufferedImage OpaqueSquare;
     private BufferedImage NormalRoad, LongestRoad, NormalArmy, LargestArmy;
+    private Player[] players;
 
     public PlayerGraphics()
     {
-        //players
-        RedPlayer = ImageLoader.getImage("Red Player");
-        YellowPlayer = ImageLoader.getImage("Yellow Player");
-        BluePlayer = ImageLoader.getImage("Blue Player");
-        GreenPlayer = ImageLoader.getImage("Green Player");
+        players = GameManager.instance.getPlayers();
+        OpaqueSquare = ImageLoader.getImage("SemiOpaqueBackground");
 
-        //other
-        VPindicator = ImageLoader.getImage("Victory Point Indicator");
-
-        //roads and armies
         NormalRoad = ImageLoader.getImage("Normal Road");
         LongestRoad = ImageLoader.getImage("Longest Road");
         NormalArmy = ImageLoader.getImage("Normal Army");
@@ -25,27 +19,15 @@ public class PlayerGraphics implements GraphicsItem
     }
     public void draw(Graphics g)
     {
-        //Red's player components
-        g.drawImage(RedPlayer, 1040, 300, 544 , 81 , null);
-        g.drawImage(NormalRoad, 1140, 320, 77 , 26 , null);
-        g.drawImage(NormalArmy, 1255, 315, 15 , 40 , null);
-
-        //Yellow's player components
-        g.drawImage(YellowPlayer, 1040, 400, 544 , 81 , null);
-        g.drawImage(NormalRoad, 1140, 420, 77 , 26 , null);
-        g.drawImage(NormalArmy, 1255, 415, 15 , 40 , null);
-
-        //Blue's player components
-        g.drawImage(BluePlayer, 1040, 500, 544 , 81 , null);
-        g.drawImage(NormalRoad, 1140, 520, 77 , 26 , null);
-        g.drawImage(NormalArmy, 1255, 515, 15 , 40 , null);
-
-        // Green's player components
-        g.drawImage(GreenPlayer, 1040, 600, 544 , 81 , null);
-        g.drawImage(NormalRoad, 1140, 620, 77 , 26 , null);
-        g.drawImage(NormalArmy, 1255, 615, 15 , 40 , null);
-
-        //g.drawImage(VPindicator,1090,295,30,30,null);
-
+        for (int i = 0; i < players.length; i++)
+        {
+            g.drawImage(OpaqueSquare, 1070, 300 + i * 100, 544 , 81 , null);
+            g.drawImage(NormalRoad, 1150, 320 + i * 100, 77 , 26 , null);
+            g.drawImage(NormalArmy, 1265, 315 + i * 100, 15 , 40 , null);
+            g.setColor(players[i].getGraphicsInfo().getPlayerColor());
+            g.fillArc(1050, 295 + i * 100,75,75,0,360);
+            g.setColor(Color.BLACK);
+            g.drawArc(1050, 295 + i * 100, 75, 75, 0, 360);
+        }
     }
 }

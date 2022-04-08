@@ -34,6 +34,11 @@ public class GameManager implements KeyEventHandler {
         currentPlayer = players[turnIndex];
     }
 
+    public Player[] getPlayers()
+    {
+        return players;
+    }
+
     public Player getCurrentPlayer() {
         return currentPlayer;
     }

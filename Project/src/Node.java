@@ -8,7 +8,8 @@ public class Node {
         port =p;
         adjacenttiles = new ArrayList<>();
     }
-    public void addAdjacenttiles(Tile t){
+    public void addAdjacenttiles(Tile t)
+    {
         adjacenttiles.add(t);
-
+    }
 }

@@ -71,14 +71,27 @@ public class NodeGraphFactory {
     }
 
     public void assignAdjacentNodes(Tile t, int r, int c) {
-        if (isValidPosition(r - 1, c - 1)) {
-            map[r - 1][c - 1].lowerRight = t.upper;
-            map[r - 1][c - 1].lower = t.upperLeft;
-        }
+        if (r < 3) {
+            if (isValidPosition(r - 1, c - 1)) {
+                map[r - 1][c - 1].lowerRight = t.upper;
+                map[r - 1][c - 1].lower = t.upperLeft;
+            }
 
-        if (isValidPosition(r - 1, c)) {
-            map[r - 1][c].lowerLeft = t.upper;
-            map[r - 1][c].lower = t.upperRight;
+            if (isValidPosition(r - 1, c)) {
+                map[r - 1][c].lowerLeft = t.upper;
+                map[r - 1][c].lower = t.upperRight;
+            }
+        }
+        else {
+            if (isValidPosition(r - 1, c)) {
+                map[r - 1][c].lowerRight = t.upper;
+                map[r - 1][c].lower = t.upperLeft;
+            }
+
+            if (isValidPosition(r - 1, c + 1)) {
+                map[r - 1][c + 1].lowerLeft = t.upper;
+                map[r - 1][c + 1].lower = t.upperRight;
+            }
         }
 
         if (isValidPosition(r, c + 1)) {

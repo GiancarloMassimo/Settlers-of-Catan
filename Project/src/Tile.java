@@ -6,6 +6,8 @@ public class Tile {
     private TileType type;
     private BufferedImage image, numberImage;
 
+    public int screenX, screenY;
+
     public Node upper, upperRight, lowerRight, lower, lowerLeft, upperLeft;
 
     public Tile(TileType type, int r, int c) {

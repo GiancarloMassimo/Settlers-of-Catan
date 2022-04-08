@@ -1,6 +1,6 @@
 public class Port {
-    String give; //what is wants
-    int quantity;//how much it needs
+    private String give; //what is wants
+    private int quantity;//how much it needs
     public Port(String g, int q){
         give=g;
         quantity=q;

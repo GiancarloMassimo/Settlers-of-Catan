@@ -8,3 +8,4 @@ public class ResourceCard extends Card {
         return resource;
     }
 }
+}

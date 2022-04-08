@@ -50,4 +50,8 @@ public class Player {
     public int getVictoryPoints(){
         return victoryPoints;
     }
+
+    public Inventory getPlayerInventory() {
+        return playerInventory;
+    }
 }

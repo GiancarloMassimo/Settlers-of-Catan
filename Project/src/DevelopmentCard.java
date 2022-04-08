@@ -3,4 +3,8 @@ public class DevelopmentCard {
     public DevelopmentCard(Player o){
         owner =o;
     }
+
+    public Player getOwner() {
+        return owner;
+    }
 }

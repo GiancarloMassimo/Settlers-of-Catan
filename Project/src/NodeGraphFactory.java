@@ -1,7 +1,10 @@
 public class NodeGraphFactory {
     private final int nodeCount = 54;
+    private final int edgeCount = 72;
     private Node[] nodes = new Node[nodeCount];
+    private Edge[] edges = new Edge[edgeCount];
     int nodesAdded = 0;
+    int edgesAdded = 0;
 
     Tile[][] map;
 
@@ -35,7 +38,10 @@ public class NodeGraphFactory {
 
     void createBidirectionalEdge(Node a, Node b) {
         Edge e = new Edge(a, b);
-        a.addEdge(e); b.addEdge(e);
+        if (a.addEdge(e) && b.addEdge(e)) {
+            edges[edgesAdded] = e;
+            edgesAdded++;
+        }
     }
 
     void assignNullNodes(Tile t) {
@@ -145,5 +151,9 @@ public class NodeGraphFactory {
 
     public Node[] getNodes() {
         return nodes;
+    }
+
+    public Edge[] getEdges() {
+        return edges;
     }
 }

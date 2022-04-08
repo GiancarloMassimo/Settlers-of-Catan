@@ -20,11 +20,12 @@ public class Node {
         adjacentTiles.add(t);
     }
 
-    public void addEdge(Edge edge) {
+    public boolean addEdge(Edge edge) {
         for (Edge e : edges)
-            if (e.equals(edge)) return;
+            if (e.equals(edge)) return false;
 
         edges.add(edge);
+        return true;
     }
 
     public ArrayList<Edge> getEdges() {

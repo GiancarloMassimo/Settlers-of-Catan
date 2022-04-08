@@ -3,7 +3,6 @@ import java.awt.*;
 public class Main {
     public static void main(String[] args) {
         //TODO: Make a bank class
-        //TODO: Make a dice roll class with graphics
         //TODO: Fix player inventory drawing
 
         GameManager gameManager = new GameManager();

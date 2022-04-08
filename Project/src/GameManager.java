@@ -7,6 +7,7 @@ public class GameManager implements KeyEventHandler {
     private Player currentPlayer;
     private int turnIndex;
     private Dice dice;
+    private Bank bank;
 
     public GameManager() {
         if (instance == null) {
@@ -16,6 +17,7 @@ public class GameManager implements KeyEventHandler {
         InstantiatePlayers();
         InputHandler.addKeyEvent(this);
         dice = new Dice();
+        bank = new Bank();
     }
 
     void InstantiatePlayers() {

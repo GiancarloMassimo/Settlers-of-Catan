@@ -12,9 +12,9 @@ public class PlayerGraphics implements GraphicsItem
     }
     public void draw(Graphics g)
     {
-        g.drawImage(RedPlayer, 1040, 300, 544 , 81 , null);
-        g.drawImage(YellowPlayer, 1040, 400, 544 , 81 , null);
-        g.drawImage(RedPlayer, 1040, 500, 544 , 81 , null);
-        g.drawImage(RedPlayer, 1040, 600, 544 , 81 , null);
+        g.drawImage(RedPlayer, 1050, 300, 544 , 81 , null);
+        g.drawImage(YellowPlayer, 1050, 400, 544 , 81 , null);
+        g.drawImage(RedPlayer, 1050, 500, 544 , 81 , null);
+        g.drawImage(RedPlayer, 1050, 600, 544 , 81 , null);
     }
 }

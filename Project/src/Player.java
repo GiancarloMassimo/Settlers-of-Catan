@@ -59,6 +59,7 @@ public class Player {
 
     public Inventory getPlayerInventory() {
         return playerInventory;
+    }
 
     public PlayerGraphicsInfo getGraphicsInfo() {
         return graphicsInfo;

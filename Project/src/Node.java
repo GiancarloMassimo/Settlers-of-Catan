@@ -6,6 +6,7 @@ public class Node {
     private ArrayList<Edge> edges;
     public int screenX, screenY;
     Port port;
+    Building building = null;
 
     public Node(){
         adjacentTiles = new ArrayList<>();
@@ -18,6 +19,21 @@ public class Node {
 
     public void addAdjacentTiles(Tile t) {
         adjacentTiles.add(t);
+    }
+
+    public Building getBuilding(){ return building;}
+    public void createBuilding(Building b){
+        building = b;
+    }
+    public boolean containsBuilding() {
+        return building != null;
+    }
+    public boolean buildingAvailable(){//search outwards once to see if building can be placed, assumes current node is empty
+
+        for(Edge e: edges){
+            if(e.a.containsBuilding()||e.b.containsBuilding()) return false;
+        }
+        return true;
     }
 
     public boolean addEdge(Edge edge) {

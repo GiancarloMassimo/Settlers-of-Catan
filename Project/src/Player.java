@@ -15,7 +15,6 @@ public class Player {
 
         //update Inventory/Bank interactions
 
-
         secretVictoryPoints=0;
         publicVictoryPoints=0;
         this.playerNumber=playerNumber;
@@ -26,9 +25,7 @@ public class Player {
     public void createBuilding(Node n) {
 
         //check if building can be placed on node
-//        if(n.containsBuilding()) {
-//            return;
-//        }
+        if(n.containsBuilding()||!n.buildingAvailable()) return;
 
 
         if(!playerInventory.purchase(1, 1, 0, 1, 1)){
@@ -58,6 +55,8 @@ public class Player {
         }
     }
     public void createRoad(Edge e){
+        //road already exists on edge
+        if(e.containsRoad()||!e.roadAvailable(this)) return;
         if(!playerInventory.purchase(1, 0, 0, 0, 1)){
             //not enough resources to purchase road
             return;

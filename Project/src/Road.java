@@ -5,4 +5,8 @@ public class Road {
         owner = p;
         location = e;
     }
+    public Player getOwner(){
+        return owner;
+    }
+
 }

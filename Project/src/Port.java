@@ -1,9 +1,15 @@
 public class Port {
-    String give; //what is wants
+    PortType type;
+    ResourceType give; //what is wants
     int quantity;//how much it needs
-    public Port(String g, int q){
-        give=g;
-        quantity=q;
+    public Port(ResourceType resource, PortType type){
+        if(type==PortType.Generic){
+            quantity = 3;
+        }
+        else {
+            quantity = 2;
+            give = resource;
+        }
     }
 //    public boolean requirement(){
 //        checks if players can trade

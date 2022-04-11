@@ -44,6 +44,11 @@ public class GameManager implements KeyEventHandler {
         return dice;
     }
 
+    public Player[] getPlayers()
+    {
+        return players;
+    }
+
     public Player getCurrentPlayer() {
         return currentPlayer;
     }

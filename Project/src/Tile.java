@@ -6,13 +6,17 @@ public class Tile {
     private TileType type;
     private BufferedImage image, numberImage;
 
+    public int screenX, screenY;
+
+    public Node upper, upperRight, lowerRight, lower, lowerLeft, upperLeft;
+
     public Tile(TileType type, int r, int c) {
         this.type = type;
         this.r = r; this.c = c;
         assignImage();
     }
 
-    void assignImage() {
+    private void assignImage() {
         switch (type) {
             case Brick:
                 image = ImageLoader.getImage("BrickTile");
@@ -62,5 +66,9 @@ public class Tile {
     public void setNum(int num) {
         this.num = num;
         numberImage = num < 2 ? null : ImageLoader.getImage(num+"");
+    }
+
+    public String toString() {
+        return type.toString() + ", " + num + " [" + r + ", " + c + "]";
     }
 }

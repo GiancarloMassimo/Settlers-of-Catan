@@ -2,13 +2,26 @@ import java.util.ArrayList;
 
 public class Player {
     private ArrayList<Building> buildings;
+    private ArrayList<Road> roads;
     private Inventory playerInventory;
-    private int victoryPoints;
+    private int secretVictoryPoints;
+    private int publicVictoryPoints;
     private int playerNumber;
-    public Player(int playerNumber) {
-        victoryPoints=0;
+
+    private PlayerGraphicsInfo graphicsInfo;
+    PlayerColor color;
+
+    public Player(int playerNumber, PlayerColor color) {
+
+        //update Inventory/Bank interactions
+
+
+        secretVictoryPoints=0;
+        publicVictoryPoints=0;
         this.playerNumber=playerNumber;
         playerInventory = new Inventory();
+        this.color = color;
+        graphicsInfo = new PlayerGraphicsInfo(color);
     }
     public void createBuilding(Node n) {
 
@@ -22,12 +35,10 @@ public class Player {
             //not enough resources to purchase building
             return;
         }
-        else{
-            //purchase building (resources already subtracted)
-        }
+        //purchase building (resources already subtracted)
 
         buildings.add(new Building(this, n));
-        victoryPoints++;
+        publicVictoryPoints++;
     }
     public void upgradeBuilding(Building b){
         if(b.getType()==BuildingType.Settlement) {
@@ -40,14 +51,46 @@ public class Player {
 
             }
             b.upgrade();
-            victoryPoints++;
+            publicVictoryPoints++;
         }
         else{
             //cannot upgrade existing city
         }
     }
+    public void createRoad(Edge e){
+        if(!playerInventory.purchase(1, 0, 0, 0, 1)){
+            //not enough resources to purchase road
+            return;
+        }
+        //purchase road
 
-    public int getVictoryPoints(){
-        return victoryPoints;
+        roads.add(new Road(this, e));
+    }
+    public void purchaseDevelopmentCard(){
+        if(!playerInventory.purchase(0, 1, 1, 1, 0)){
+            return;
+        }
+        //get random development card from bank
+        Card temp;
+
+    }
+    public void useKnightCard(){
+
+    }
+    public int getPublicVictoryPoints(){
+        return publicVictoryPoints;
+    }
+    public int getSecretVictoryPoints(){
+        return secretVictoryPoints;
+    }
+    public PlayerGraphicsInfo getGraphicsInfo() {
+        return graphicsInfo;
+    }
+    public Inventory getPlayerInventory(){
+        return playerInventory;
+    }
+    @Override
+    public String toString() {
+        return color.toString() + " Player";
     }
 }

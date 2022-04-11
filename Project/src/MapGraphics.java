@@ -7,9 +7,29 @@ public class MapGraphics implements GraphicsItem {
     private BufferedImage boardBackground;
     private Map map;
 
-    public MapGraphics() {
+    public MapGraphics(Map map) {
         boardBackground = ImageLoader.getImage("BoardBackground");
-        map = new Map();
+        this.map = map;
+        assignTileScreenPositions();
+    }
+
+    void assignTileScreenPositions() {
+        int spacingX = 100;
+        int spacingY = 85;
+        int offsetX = 275;
+        int offsetY = 150;
+
+        Tile[][] mat = map.getMap();
+        for (int r = 0; r < mat.length; r++) {
+            int translationX = Math.abs(((mat.length + 1) / 2) - (r + 1)) * (spacingX / 2);
+            for (int c = 0; c < mat[r].length; c++) {
+                int x = translationX + offsetX + spacingX * c;
+                int y = offsetY + spacingY * r;
+                mat[r][c].screenX = x;
+                mat[r][c].screenY = y;
+            }
+        }
+
     }
 
     @Override
@@ -25,18 +45,14 @@ public class MapGraphics implements GraphicsItem {
     }
 
     private void drawTiles(Graphics g) {
-        int spacingX = 100;
-        int spacingY = 85;
-        int offsetX = 275;
-        int offsetY = 150;
         int numberOffsetY = 10;
 
         Tile[][] mat = map.getMap();
         for (int r = 0; r < mat.length; r++) {
-            int translationX = Math.abs(((mat.length + 1) / 2) - (r + 1)) * (spacingX / 2);
             for (int c = 0; c < mat[r].length; c++) {
-                g.drawImage(mat[r][c].getImage(), translationX + offsetX + spacingX * c, offsetY + spacingY * r, 100, 115, null);
-                g.drawImage(mat[r][c].getNumberImage(), translationX + offsetX + spacingX * c, offsetY + spacingY * r + numberOffsetY, 99, 87, null);
+                Tile t = mat[r][c];
+                g.drawImage(t.getImage(), t.screenX, t.screenY, 100, 115, null);
+                g.drawImage(t.getNumberImage(), t.screenX, t.screenY + numberOffsetY, 99, 87, null);
             }
         }
 

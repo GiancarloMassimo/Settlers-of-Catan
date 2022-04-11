@@ -28,7 +28,7 @@ public class Inventory {
     //subtracts resources and returns true if able to purchase, returns false if not able to purchase
     public boolean purchase(int brickNeeded, int sheepNeeded, int oreNeeded, int wheatNeeded, int woodNeeded){//parameters must be positive
         if(available(brickNeeded, sheepNeeded, oreNeeded, wheatNeeded, woodNeeded)){
-            changeBrick(-1*brickNeeded);changeSheep(-1*sheepNeeded);changeOre(-1*oreNeeded);changeWheat(-1*wheatNeeded);changeWood(-1*woodNeeded);
+            numBrick-=brickNeeded;numSheep-=sheepNeeded;numOre-=oreNeeded;numWheat-=wheatNeeded;numWood-=woodNeeded;
             return true;
         }
         return false;

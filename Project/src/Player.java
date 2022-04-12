@@ -56,6 +56,9 @@ public class Player {
         return victoryPoints;
     }
 
+    public void addvictoryPoints(int n){
+        victoryPoints+=n;
+    }
 
     public Inventory getPlayerInventory() {
         return playerInventory;

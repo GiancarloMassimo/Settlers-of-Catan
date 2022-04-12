@@ -4,4 +4,8 @@ public class VictoryPointCard extends DevelopmentCard{
         super(o);
         title =t;
     }
+
+    public void use(){
+        getOwner().addvictoryPoints(1);
+    }
 }

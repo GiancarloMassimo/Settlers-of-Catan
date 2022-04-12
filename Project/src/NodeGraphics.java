@@ -49,7 +49,7 @@ public class NodeGraphics implements GraphicsItem, MouseEventHandler {
 
     @Override
     public void draw(Graphics g) {
-        //drawNodeIndicators(g);
+        drawNodeIndicators(g);
         drawEdgeIndicators(g);
     }
 

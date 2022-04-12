@@ -8,5 +8,8 @@ public class Road {
     public Player getOwner(){
         return owner;
     }
+    public Edge getLocation(){
+        return location;
+    }
 
 }

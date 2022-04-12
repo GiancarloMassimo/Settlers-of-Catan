@@ -59,13 +59,18 @@ public class Player {
 
     public Inventory getPlayerInventory() {
         return playerInventory;
-
-    public PlayerGraphicsInfo getGraphicsInfo() {
-        return graphicsInfo;
     }
+        public PlayerGraphicsInfo getGraphicsInfo () {
+            return graphicsInfo;
+        }
 
-    @Override
-    public String toString() {
-        return color.toString() + " Player";
-    }
+        @Override
+        public String toString () {
+            return color.toString() + " Player";
+        }
+
+        public void addvictoryPoints(int n){
+        victoryPoints+=n;
+        }
+
 }

@@ -70,8 +70,7 @@ public class GameManager implements KeyEventHandler {
         if (e.getKeyChar() == 'e' || e.getKeyChar() == 'E') {
            GameActionHandler.signalAction(
                    GameActionTypes.Instant,
-                   (Object... params) -> NextTurn(),
-                   null
+                   () -> NextTurn()
                    );
         }
     }

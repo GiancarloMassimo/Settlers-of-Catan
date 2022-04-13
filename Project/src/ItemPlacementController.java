@@ -9,8 +9,7 @@ public class ItemPlacementController {
     public static void placeInitialSettlement() {
         GameActionHandler.signalAction(
                 GameActionTypes.StartMultiStageAction,
-                (Object... params) -> nodeItemPlacer.startItemPlacement(initialSettlementItemPlacement),
-                null
+                () -> nodeItemPlacer.startItemPlacement(initialSettlementItemPlacement)
         );
 
     }

@@ -110,12 +110,11 @@ public class NodeGraphics implements GraphicsItem, MouseEventHandler, ItemPlacer
                 if (placement.checkCondition(clicked)) {
                     GameActionHandler.signalAction(
                             GameActionTypes.EndMultiStageAction,
-                            (Object... params) -> {
+                            () -> {
                                 placement.place(clicked);
                                 placement = null;
                                 GameStateChangeListener.invoke();
-                            },
-                            null
+                            }
                     );
 
                 }

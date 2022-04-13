@@ -1,10 +1,10 @@
 public class GameActionHandler {
     private static boolean takingAction = false;
 
-    public static void signalAction(GameActionTypes type, GameActionOperator action, Object... params) {
+    public static void signalAction(GameActionTypes type, GameActionOperator action) {
         if (canTakeAction(type)) {
             processActionType(type);
-            action.TakeAction(params);
+            action.TakeAction();
         }
     }
 

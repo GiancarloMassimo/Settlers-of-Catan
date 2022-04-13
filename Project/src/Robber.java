@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Robber {
     private int row;
     private int col;
@@ -16,7 +18,9 @@ public class Robber {
     }public void SetCol(int c){
         col = c;
     }
-//    public ArrayList<Player> check(){
-//        checks all 6 nodes to see if there is a building, return an array of players
-//    }
+    //checks all 6 nodes(edges) to see if there is a building, return an array of players\
+    public ArrayList<Player> check(){
+        ArrayList<Player> players = new ArrayList<>();
+        return players;
+    }
 }

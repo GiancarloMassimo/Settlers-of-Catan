@@ -20,6 +20,11 @@ public class GameManager implements KeyEventHandler {
         bank = new Bank();
     }
 
+    public void onWindowLoad() {
+        ItemPlacementController.placeInitialSettlement();
+        GameStateChangeListener.invoke();
+    }
+
     void InstantiatePlayers() {
         players = new Player[4];
         int i = 0;
@@ -37,6 +42,9 @@ public class GameManager implements KeyEventHandler {
         currentPlayer = players[turnIndex];
 
         dice.rollDice();
+
+        ItemPlacementController.placeInitialSettlement();
+
         GameStateChangeListener.invoke();
     }
 
@@ -60,7 +68,11 @@ public class GameManager implements KeyEventHandler {
     @Override
     public void OnKeyDown(KeyEvent e) {
         if (e.getKeyChar() == 'e' || e.getKeyChar() == 'E') {
-            NextTurn();
+           GameActionHandler.signalAction(
+                   GameActionTypes.Instant,
+                   (Object... params) -> NextTurn(),
+                   null
+                   );
         }
     }
 }

@@ -6,6 +6,7 @@ public class Node {
     private ArrayList<Edge> edges;
     public int screenX, screenY;
     Port port;
+    Building building = null;
 
     public Node(){
         adjacentTiles = new ArrayList<>();
@@ -34,5 +35,15 @@ public class Node {
 
     public ArrayList<Tile> getAdjacentTiles() {
         return adjacentTiles;
+    }
+
+    public String toString() {
+        String out = "";
+
+        for (Tile t : adjacentTiles) {
+            out += t.getNum() + " ";
+        }
+
+        return out;
     }
 }

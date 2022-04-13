@@ -1,15 +1,20 @@
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.nio.Buffer;
 
-public class NodeGraphics implements GraphicsItem, MouseEventHandler {
+public class NodeGraphics implements GraphicsItem, MouseEventHandler, ItemPlacer<Node> {
+    final int INDICATOR_RADIUS = 12;
+
     Node[] nodes;
     Edge[] edges;
-    final int INDICATOR_RADIUS = 12;
+    ItemPlacement<Node> placement = null;
 
     public NodeGraphics(Map map) {
         nodes = map.getNodes();
         edges = map.getEdges();
         InputHandler.addMouseEvent(this);
+        ItemPlacementController.setNodeItemPlacer(this);
         assignNodeScreenPositions();
         assignEdgeScreenPositions();
     }
@@ -49,8 +54,29 @@ public class NodeGraphics implements GraphicsItem, MouseEventHandler {
 
     @Override
     public void draw(Graphics g) {
-        drawNodeIndicators(g);
-        drawEdgeIndicators(g);
+        if (placement != null) {
+            drawNodeIndicators(g);
+        }
+
+        drawBuildings(g);
+
+        //TODO: Move edges into a different class
+        //drawEdgeIndicators(g);
+    }
+
+    private void drawBuildings(Graphics g) {
+        for (Node node : nodes) {
+            if (node.building != null) {
+                Player player = node.building.getOwner();
+                PlayerGraphicsInfo graphicsInfo = player.getGraphicsInfo();
+                BuildingType buildingType = node.building.getType();
+                BufferedImage buildingImage = buildingType == BuildingType.Settlement ?
+                        graphicsInfo.getSettlementImage() :
+                        graphicsInfo.getCityImage();
+
+                g.drawImage(buildingImage, node.screenX - 10, node.screenY - 10, null);
+            }
+        }
     }
 
     private void drawEdgeIndicators(Graphics g) {
@@ -61,7 +87,9 @@ public class NodeGraphics implements GraphicsItem, MouseEventHandler {
 
     private void drawNodeIndicators(Graphics g) {
         for (Node node : nodes) {
-            drawNodeIndicator(node, g);
+            if (placement.checkCondition(node)) {
+                drawNodeIndicator(node, g);
+            }
         }
     }
 
@@ -74,20 +102,28 @@ public class NodeGraphics implements GraphicsItem, MouseEventHandler {
         g.fillArc(x, y, INDICATOR_RADIUS * 2, INDICATOR_RADIUS * 2, 0, 360);
     }
 
-
-
     @Override
     public void OnMouseClick(MouseEvent e) {
-        Node clicked = getEdgeClicked(e.getX(), e.getY());
+        Node clicked = getNodeClicked(e.getX(), e.getY());
         if (clicked != null) {
-            for (Tile t : clicked.getAdjacentTiles()) {
-                System.out.print(t.getNum() + " ");
+            if (placement != null) {
+                if (placement.checkCondition(clicked)) {
+                    GameActionHandler.signalAction(
+                            GameActionTypes.EndMultiStageAction,
+                            (Object... params) -> {
+                                placement.place(clicked);
+                                placement = null;
+                                GameStateChangeListener.invoke();
+                            },
+                            null
+                    );
+
+                }
             }
-            System.out.println();
         }
     }
 
-    private Node getEdgeClicked(int x, int y) {
+    private Node getNodeClicked(int x, int y) {
         for (Node node : nodes) {
             int centerX = node.screenX + INDICATOR_RADIUS;
             int centerY = node.screenY + INDICATOR_RADIUS;
@@ -96,5 +132,11 @@ public class NodeGraphics implements GraphicsItem, MouseEventHandler {
             }
         }
         return null;
+    }
+
+    @Override
+    public void startItemPlacement(ItemPlacement<Node> placement) {
+        this.placement = placement;
+        GameStateChangeListener.invoke();
     }
 }

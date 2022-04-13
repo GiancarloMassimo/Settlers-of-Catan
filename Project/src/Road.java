@@ -1,13 +1,17 @@
 public class Road {
-//    private Player owner;
-//    public Road(Player o){
-//        owner = 0;
-//    }
-//    public boolean Connects(){
-//        return true;
-//    }
-//    public int longestRoad(){
-//        int num =0;
-//        return num;
-//    }
+
+    Edge location;
+    Player owner;
+    public Road(Player p, Edge e){
+        owner = p;
+        location = e;
+    }
+    public Player getOwner(){
+        return owner;
+    }
+    public Edge getLocation(){
+        return location;
+    }
+
+
 }

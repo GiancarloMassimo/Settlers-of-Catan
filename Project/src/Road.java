@@ -1,4 +1,5 @@
 public class Road {
+
     private Player owner;
     private Edge edge;
     public Road(Player o, Edge edge){
@@ -13,13 +14,5 @@ public class Road {
     public Edge getEdge() {
         return edge;
     }
-
-    //    public boolean Connects(){
-//        return true;
-//    }
-//
-//    public int longestRoad(){
-//        int num =0;
-//        return num;
-//    }
+    
 }

@@ -7,6 +7,7 @@ public class PlayerGraphics implements GraphicsItem
     private BufferedImage NormalRoad, LongestRoad, NormalArmy, LargestArmy;
     private Player[] players;
 
+
     public PlayerGraphics()
     {
         players = GameManager.instance.getPlayers();
@@ -16,6 +17,8 @@ public class PlayerGraphics implements GraphicsItem
         LongestRoad = ImageLoader.getImage("Longest Road");
         NormalArmy = ImageLoader.getImage("Normal Army");
         LargestArmy = ImageLoader.getImage("Largest Army");
+
+
     }
     public void draw(Graphics g)
     {
@@ -30,6 +33,14 @@ public class PlayerGraphics implements GraphicsItem
             g.fillArc(1050, 295 + i * 100,75,75,0,360);
             g.setColor(Color.BLACK);
             g.drawArc(1050, 295 + i * 100, 75, 75, 0, 360);
+
+            g.setColor(Color.white);
+            g.drawString("1", 1290, 342 + i * 100);
+            g.drawString("1", 1235, 342 + i * 100);
+
+            g.setFont(new Font("default", Font.BOLD, 50));
+            g.drawString(players[i].getVictoryPoints()+"", 1075, 347 + i * 100);
+            g.setFont(new Font("default", Font.BOLD, 16));
         }
     }
 }

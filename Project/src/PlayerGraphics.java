@@ -28,6 +28,8 @@ public class PlayerGraphics implements GraphicsItem
             g.drawImage(NormalRoad, 1150, 320 + i * 100, 77 , 26 , null);
             g.drawImage(NormalArmy, 1265, 315 + i * 100, 15 , 40 , null);
             g.setColor(players[i].getGraphicsInfo().getPlayerColor());
+            if (players[i] == GameManager.instance.getCurrentPlayer())
+                g.drawRect(1070, 300 + i * 100, 544, 66);
             g.fillArc(1050, 295 + i * 100,75,75,0,360);
             g.setColor(Color.BLACK);
             g.drawArc(1050, 295 + i * 100, 75, 75, 0, 360);

@@ -60,4 +60,14 @@ public class Node {
     public ArrayList<Tile> getAdjacentTiles() {
         return adjacentTiles;
     }
+
+    public String toString() {
+        String out = "";
+
+        for (Tile t : adjacentTiles) {
+            out += t.getNum() + " ";
+        }
+
+        return out;
+    }
 }

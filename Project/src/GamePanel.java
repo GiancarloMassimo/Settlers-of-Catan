@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements KeyListener, MouseListener {
@@ -28,8 +29,11 @@ public class GamePanel extends JPanel implements KeyListener, MouseListener {
         addGraphicItem(new ShopGraphics());
         addGraphicItem(new TradingGraphics());
         addGraphicItem(new PlayerGraphics());
+        addGraphicItem(new EdgeGraphics(map));
         addGraphicItem(new NodeGraphics(map));
         addGraphicItem(new DiceGraphics());
+
+        GameManager.instance.onWindowLoad();
     }
 
     private void addGraphicItem(GraphicsItem graphicsItem) {

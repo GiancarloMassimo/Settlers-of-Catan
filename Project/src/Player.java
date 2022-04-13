@@ -21,14 +21,14 @@ public class Player {
         playerInventory = new Inventory();
         this.color = color;
         graphicsInfo = new PlayerGraphicsInfo(color);
+        buildings = new ArrayList<>();
     }
-    public void createBuilding(Node n) {
 
-    }
-    public void upgradeBuilding(Building b){
+
+    public void upgradeBuilding(Building b) {
 
         //check if building can be placed on node
-        if(n.containsBuilding()||!n.buildingAvailable()) return;
+        if (n.containsBuilding() || !n.buildingAvailable()) return;
 
 
 //        if(!playerInventory.purchase(1, 1, 0, 1, 1)){
@@ -40,6 +40,15 @@ public class Player {
         buildings.add(new Building(this, n));
         publicVictoryPoints++;
     }
+    public void addBuilding(Building building) {
+        buildings.add(building);
+        publicVictoryPoints++;
+    }
+
+    public Building getLastBuildingPlaced() {
+        return buildings.get(buildings.size() - 1);
+    }
+
     public void upgradeBuilding(Building b){
         if(b.getType()==BuildingType.Settlement) {
             if(!playerInventory.purchase(0, 0, 3, 2, 0)){

@@ -25,21 +25,7 @@ public class Player {
     }
 
 
-    public void upgradeBuilding(Building b) {
 
-        //check if building can be placed on node
-        if (n.containsBuilding() || !n.buildingAvailable()) return;
-
-
-//        if(!playerInventory.purchase(1, 1, 0, 1, 1)){
-//            //not enough resources to purchase building
-//            return;
-//        }
-        //purchase building (resources already subtracted)
-
-        buildings.add(new Building(this, n));
-        publicVictoryPoints++;
-    }
     public void addBuilding(Building building) {
         buildings.add(building);
         publicVictoryPoints++;
@@ -51,14 +37,14 @@ public class Player {
 
     public void upgradeBuilding(Building b){
         if(b.getType()==BuildingType.Settlement) {
-            if(!playerInventory.purchase(0, 0, 3, 2, 0)){
-                //not enough resources to upgrade to city
-                return;
-            }
-            else{
-                //upgrade to city (resources already subtracted)
-
-            }
+//            if(!playerInventory.purchase(0, 0, 3, 2, 0)){
+//                //not enough resources to upgrade to city
+//                return;
+//            }
+//            else{
+//                //upgrade to city (resources already subtracted)
+//
+//            }
             b.upgrade();
             publicVictoryPoints++;
         }
@@ -66,10 +52,10 @@ public class Player {
     public void createRoad(Edge e){
         //road already exists on edge
         if(e.containsRoad()||!e.roadAvailable(this)) return;
-        if(!playerInventory.purchase(1, 0, 0, 0, 1)){
-            //not enough resources to purchase road
-            return;
-        }
+//        if(!playerInventory.purchase(1, 0, 0, 0, 1)){
+//            //not enough resources to purchase road
+//            return;
+//        }
         //purchase road
 
         roads.add(new Road(this, e));
@@ -95,9 +81,6 @@ public class Player {
     public PlayerGraphicsInfo getGraphicsInfo()
     {
         return graphicsInfo;
-    }
-    public Inventory getPlayerInventory(){
-        return playerInventory;
     }
     @Override
     public String toString() {

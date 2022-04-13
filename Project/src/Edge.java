@@ -1,6 +1,5 @@
 public class Edge {
     Node a, b;
-    Road road;
     int screenX, screenY;
     Road road = null;
 

@@ -14,12 +14,10 @@ public class Map {
     private void createMap() {
         TileMapFactory tileMapFactory = new TileMapFactory();
         map = Arrays.copyOf(tileMapFactory.getMap(), tileMapFactory.getMap().length);
-        tileMapFactory = null;
 
         NodeGraphFactory nodeGraphFactory = new NodeGraphFactory(map);
         nodes = Arrays.copyOf(nodeGraphFactory.getNodes(), nodeGraphFactory.getNodes().length);
         edges = Arrays.copyOf(nodeGraphFactory.getEdges(), nodeGraphFactory.getEdges().length);
-        nodeGraphFactory = null;
     }
 
     public Tile[][] getMap() {

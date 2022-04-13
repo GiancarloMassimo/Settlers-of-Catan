@@ -14,7 +14,9 @@ public class InitialSettlementItemPlacement extends ItemPlacement<Node> {
 
     @Override
     public void place(Node location) {
-        Building building = new Building(GameManager.instance.getCurrentPlayer(), location);
+        Player currentPlayer = GameManager.instance.getCurrentPlayer();
+        Building building = new Building(currentPlayer, location);
+        currentPlayer.addBuilding(building);
         location.building = building;
         GameLog.instance.logEvent(building.getOwner() + " placed a " + building.getType() + " at " + location);
     }

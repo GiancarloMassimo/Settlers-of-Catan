@@ -8,14 +8,28 @@ public class RoadItemPlacement extends ItemPlacement<Edge> {
 
         if (location.a.building != null) {
             owner1 = location.a.building.owner;
-            if (owner1 != currentPlayer) return false;
+            if (owner1 != currentPlayer) {
+                for (Edge adjacentEdge : location.b.getEdges()) {
+                    if  (adjacentEdge.road != null && adjacentEdge.road.getOwner() == currentPlayer) {
+                        return true;
+                    }
+                }
+                return false;
+            }
         }
 
         Player owner2 = null;
 
         if (location.b.building != null) {
             owner2 = location.b.building.owner;
-            if (owner2 != currentPlayer) return false;
+            if (owner2 != currentPlayer) {
+                for (Edge adjacentEdge : location.a.getEdges()) {
+                    if  (adjacentEdge.road != null && adjacentEdge.road.getOwner() == currentPlayer) {
+                        return true;
+                    }
+                }
+                return false;
+            }
         }
 
         if (currentPlayer == owner1 || currentPlayer == owner2) {

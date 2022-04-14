@@ -25,7 +25,7 @@ public class Player {
     }
 
 
-    public void upgradeBuilding(Building b) {
+    /*public void upgradeBuilding(Building b) {
 
         //check if building can be placed on node
         if (n.containsBuilding() || !n.buildingAvailable()) return;
@@ -39,7 +39,7 @@ public class Player {
 
         buildings.add(new Building(this, n));
         publicVictoryPoints++;
-    }
+    }*/
     public void addBuilding(Building building) {
         buildings.add(building);
         publicVictoryPoints++;
@@ -50,7 +50,7 @@ public class Player {
     }
 
     public void upgradeBuilding(Building b){
-        if(b.getType()==BuildingType.Settlement) {
+       /* if(b.getType()==BuildingType.Settlement) {
             if(!playerInventory.purchase(0, 0, 3, 2, 0)){
                 //not enough resources to upgrade to city
                 return;
@@ -61,18 +61,18 @@ public class Player {
             }
             b.upgrade();
             publicVictoryPoints++;
-        }
+        }*/
     }
     public void createRoad(Edge e){
         //road already exists on edge
-        if(e.containsRoad()||!e.roadAvailable(this)) return;
+       /* if(e.containsRoad()||!e.roadAvailable(this)) return;
         if(!playerInventory.purchase(1, 0, 0, 0, 1)){
             //not enough resources to purchase road
             return;
         }
         //purchase road
 
-        roads.add(new Road(this, e));
+        roads.add(new Road(this, e));*/
     }
     public void purchaseDevelopmentCard(){
 
@@ -95,11 +95,13 @@ public class Player {
     public PlayerGraphicsInfo getGraphicsInfo() {
         return graphicsInfo;
     }
-    public Inventory getPlayerInventory(){
-        return playerInventory;
-    }
+
     @Override
     public String toString() {
         return color.toString() + " Player";
+    }
+
+    public void addSecretVictoryPoints(int n){
+        secretVictoryPoints+=n;
     }
 }

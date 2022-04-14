@@ -11,12 +11,15 @@ public class Robber {
     public int getRow(){
         return row;
     }
-    public void SetRow(int r){
-         row = r;
-    }public int getCol(){
+
+    public int getCol() {
         return col;
-    }public void SetCol(int c){
-        col = c;
+    }
+
+    public void move(int c, int r){
+        row =r;
+        col =c;
+        check();
     }
     //checks all 6 nodes(edges) to see if there is a building, return an array of players\
     public ArrayList<Player> check(){

@@ -26,8 +26,7 @@ public class Player {
 
 
     public void upgradeBuilding(Building b) {
-
-        //check if building can be placed on node
+        /*//check if building can be placed on node
         if (n.containsBuilding() || !n.buildingAvailable()) return;
 
 
@@ -38,18 +37,22 @@ public class Player {
         //purchase building (resources already subtracted)
 
         buildings.add(new Building(this, n));
-        publicVictoryPoints++;
+        publicVictoryPoints++;*/
     }
     public void addBuilding(Building building) {
         buildings.add(building);
         publicVictoryPoints++;
     }
 
+    public ArrayList<Building> getBuildings() {
+        return buildings;
+    }
+
     public Building getLastBuildingPlaced() {
         return buildings.get(buildings.size() - 1);
     }
 
-    public void upgradeBuilding(Building b){
+    /*public void upgradeBuilding(Building b){
         if(b.getType()==BuildingType.Settlement) {
             if(!playerInventory.purchase(0, 0, 3, 2, 0)){
                 //not enough resources to upgrade to city
@@ -62,9 +65,9 @@ public class Player {
             b.upgrade();
             publicVictoryPoints++;
         }
-    }
+    }*/
     public void createRoad(Edge e){
-        //road already exists on edge
+       /* //road already exists on edge
         if(e.containsRoad()||!e.roadAvailable(this)) return;
         if(!playerInventory.purchase(1, 0, 0, 0, 1)){
             //not enough resources to purchase road
@@ -72,7 +75,7 @@ public class Player {
         }
         //purchase road
 
-        roads.add(new Road(this, e));
+        roads.add(new Road(this, e));*/
     }
     public void purchaseDevelopmentCard(){
 
@@ -88,15 +91,12 @@ public class Player {
     }
 
 
-    public Inventory getPlayerInventory() {
+    public Inventory getInventory() {
         return playerInventory;
     }
 
     public PlayerGraphicsInfo getGraphicsInfo() {
         return graphicsInfo;
-    }
-    public Inventory getPlayerInventory(){
-        return playerInventory;
     }
     @Override
     public String toString() {

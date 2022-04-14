@@ -41,7 +41,13 @@ public class Bank {
             for (ResourceType resourceType : cost.keySet()) {
                 inventory.payItem(resourceType, cost.get(resourceType));
             }
+
+            if (itemType == ItemType.Road) {
+                ItemPlacementController.placeRoad();
+            }
         }
+
+        GameStateChangeListener.invoke();
     }
 
     public boolean hasEnoughResources(Inventory inventory, HashMap<ResourceType, Integer> cost) {

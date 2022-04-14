@@ -1,11 +1,15 @@
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
-public class ShopGraphics implements GraphicsItem
+public class ShopGraphics implements GraphicsItem, MouseEventHandler
 {
     private BufferedImage ShopText, DevCard, brickpic, wheatpic, sheeppic, woodpic, orepic;
+
     public ShopGraphics()
     {
+        InputHandler.addMouseEvent(this);
+
         ShopText = ImageLoader.getImage("Shop_");
         DevCard = ImageLoader.getImage("DevCard");
 
@@ -47,5 +51,36 @@ public class ShopGraphics implements GraphicsItem
         g.drawImage(sheeppic, 595, 810, 25, 25, null);
         g.drawImage(wheatpic, 620, 810, 25, 25, null);
         g.drawImage(orepic, 595, 835, 25, 25, null);
+    }
+
+
+    @Override
+    public void OnMouseClick(MouseEvent e) {
+        ItemType clicked = getItemClicked(e.getX(), e.getY());
+        System.out.println(clicked == null ? "null" : clicked.toString());
+
+        if (clicked != null) {
+            Inventory inventory = GameManager.instance.getCurrentPlayer().getInventory();
+            Bank bank = GameManager.instance.getBank();
+
+            GameActionHandler.signalAction(
+                    GameActionTypes.Instant,
+                    () -> bank.purchase(inventory, clicked)
+            );
+        }
+
+    }
+
+    private ItemType getItemClicked(int x, int y) {
+        final int itemRadius = 30;
+        final int[] roadPos = {250, 810},
+                    settlementPos = {310, 810},
+                    cityPos = {410, 810};
+
+        if (Helpers.getDistance(x, y, roadPos[0] + 20, roadPos[1] + 20) < itemRadius) return ItemType.Road;
+        if (Helpers.getDistance(x, y, settlementPos[0] + 20, settlementPos[1] + 20) < itemRadius) return ItemType.Settlement;
+        if (Helpers.getDistance(x, y, cityPos[0] + 20, cityPos[1] + 20) < itemRadius) return ItemType.City;
+
+        return null;
     }
 }

@@ -11,6 +11,6 @@ public class SettlementItemPlacement extends InitialSettlementItemPlacement {
             }
         }
 
-        return true;
+        return false;
     }
 }

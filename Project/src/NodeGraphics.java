@@ -16,11 +16,11 @@ public class NodeGraphics implements GraphicsItem, MouseEventHandler, ItemPlacer
 
     @Override
     public void draw(Graphics g) {
+        drawBuildings(g);
+
         if (placement != null) {
             drawNodeIndicators(g);
         }
-
-        drawBuildings(g);
     }
 
     private void drawBuildings(Graphics g) {
@@ -89,6 +89,7 @@ public class NodeGraphics implements GraphicsItem, MouseEventHandler, ItemPlacer
     @Override
     public void startItemPlacement(ItemPlacement<Node> placement) {
         this.placement = placement;
+        System.out.println("FUCKKKKKK");
         GameStateChangeListener.invoke();
     }
 }

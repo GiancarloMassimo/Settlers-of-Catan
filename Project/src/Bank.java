@@ -18,7 +18,7 @@ public class Bank {
                     brick = 1;
                     sheep = 1;
                     wheat = 1;
-                    ore = 1;
+                    wood = 1;
                 }
                 case City -> {
                     wheat = 2;
@@ -53,6 +53,8 @@ public class Bank {
                 ItemPlacementController.placeRoad();
             } else if (itemType == ItemType.Settlement) {
                 ItemPlacementController.placeSettlement();
+            } else if (itemType == ItemType.City) {
+                ItemPlacementController.placeCity();
             }
         }
 

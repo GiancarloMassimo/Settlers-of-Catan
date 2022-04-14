@@ -12,8 +12,9 @@ public class Building {
         var tiles = location.getAdjacentTiles();
         for (Tile t : tiles) {
             if (GameManager.instance.getDice().getDiceTotal() == t.getNum()) {
-                owner.getInventory().receiveItem(t.getResourceType(), 1);
-                GameLog.instance.logEvent(owner + " received 1 " + t.getResourceType());
+                int count = type == BuildingType.Settlement ? 1 : 2;
+                owner.getInventory().receiveItem(t.getResourceType(), count);
+                GameLog.instance.logEvent(owner + " received " + count + " " + t.getResourceType());
             }
         }
     }

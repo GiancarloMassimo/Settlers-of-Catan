@@ -6,6 +6,7 @@ public class ItemPlacementController {
     private static final RoadItemPlacement roadItemPlacement = new RoadItemPlacement();
     private static final InitialRoadItemPlacement initialRoadItemPlacement = new InitialRoadItemPlacement();
     private static final SettlementItemPlacement settlementItemPlacement = new SettlementItemPlacement();
+    private static final CityItemPlacement cityItemPlacement = new CityItemPlacement();
 
     public static void setNodeItemPlacer(ItemPlacer<Node> placer) {
         nodeItemPlacer = placer;
@@ -38,6 +39,13 @@ public class ItemPlacementController {
         GameActionHandler.signalAction(
                 GameActionTypes.StartMultiStageAction,
                 () -> edgeItemPlacer.startItemPlacement(roadItemPlacement)
+        );
+    }
+
+    public static void placeCity() {
+        GameActionHandler.signalAction(
+                GameActionTypes.StartMultiStageAction,
+                () -> nodeItemPlacer.startItemPlacement(cityItemPlacement)
         );
     }
 }

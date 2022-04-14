@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.InputStream;
 
 public class MapGraphics implements GraphicsItem {
     private final int CORNER_RADIUS = 10;

@@ -31,8 +31,7 @@ public class Port {
             if (p.getPlayerInventory().getResourceCount(lose) >= quantity)
                 return true;
             else
-                if(p.getPlayerInventory().getResourceCount(give) >= quantity)
-                    return true;
+                return p.getPlayerInventory().getResourceCount(give) >= quantity;
         return false;
     }
 }

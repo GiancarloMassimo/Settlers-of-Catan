@@ -2,9 +2,10 @@ public class ItemPlacementController {
     private static ItemPlacer<Node> nodeItemPlacer;
     private static ItemPlacer<Edge> edgeItemPlacer;
 
-    private static InitialSettlementItemPlacement initialSettlementItemPlacement = new InitialSettlementItemPlacement();
-    private static RoadItemPlacement roadItemPlacement = new RoadItemPlacement();
-    private static InitialRoadItemPlacement initialRoadItemPlacement = new InitialRoadItemPlacement();
+    private static final InitialSettlementItemPlacement initialSettlementItemPlacement = new InitialSettlementItemPlacement();
+    private static final RoadItemPlacement roadItemPlacement = new RoadItemPlacement();
+    private static final InitialRoadItemPlacement initialRoadItemPlacement = new InitialRoadItemPlacement();
+    private static final SettlementItemPlacement settlementItemPlacement = new SettlementItemPlacement();
 
     public static void setNodeItemPlacer(ItemPlacer<Node> placer) {
         nodeItemPlacer = placer;
@@ -16,6 +17,13 @@ public class ItemPlacementController {
         GameActionHandler.signalAction(
                 GameActionTypes.StartMultiStageAction,
                 () -> nodeItemPlacer.startItemPlacement(initialSettlementItemPlacement)
+        );
+    }
+
+    public static void placeSettlement() {
+        GameActionHandler.signalAction(
+                GameActionTypes.StartMultiStageAction,
+                () -> nodeItemPlacer.startItemPlacement(settlementItemPlacement)
         );
     }
 

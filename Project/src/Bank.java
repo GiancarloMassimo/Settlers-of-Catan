@@ -14,18 +14,25 @@ public class Bank {
             int brick = 0, sheep = 0, ore = 0, wheat = 0, wood = 0;
 
             switch (item) {
-                case Settlement:
-                    brick = 1; sheep = 1; wheat = 1; ore = 1;
-                    break;
-                case City:
-                    wheat = 2; ore = 3;
-                    break;
-                case Road:
-                    wood = 1; brick = 1;
-                    break;
-                case DevelopmentCard:
-                    wheat = 1; sheep = 1; ore = 1;
-                    break;
+                case Settlement -> {
+                    brick = 1;
+                    sheep = 1;
+                    wheat = 1;
+                    ore = 1;
+                }
+                case City -> {
+                    wheat = 2;
+                    ore = 3;
+                }
+                case Road -> {
+                    wood = 1;
+                    brick = 1;
+                }
+                case DevelopmentCard -> {
+                    wheat = 1;
+                    sheep = 1;
+                    ore = 1;
+                }
             }
 
             costMap.put(item, new ItemCost(brick, sheep, ore, wheat, wood));
@@ -44,6 +51,8 @@ public class Bank {
 
             if (itemType == ItemType.Road) {
                 ItemPlacementController.placeRoad();
+            } else if (itemType == ItemType.Settlement) {
+                ItemPlacementController.placeSettlement();
             }
         }
 

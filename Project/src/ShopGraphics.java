@@ -57,7 +57,6 @@ public class ShopGraphics implements GraphicsItem, MouseEventHandler
     @Override
     public void OnMouseClick(MouseEvent e) {
         ItemType clicked = getItemClicked(e.getX(), e.getY());
-        System.out.println(clicked == null ? "null" : clicked.toString());
 
         if (clicked != null) {
             Inventory inventory = GameManager.instance.getCurrentPlayer().getInventory();

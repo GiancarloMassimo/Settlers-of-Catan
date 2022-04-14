@@ -89,7 +89,6 @@ public class NodeGraphics implements GraphicsItem, MouseEventHandler, ItemPlacer
     @Override
     public void startItemPlacement(ItemPlacement<Node> placement) {
         this.placement = placement;
-        System.out.println("FUCKKKKKK");
         GameStateChangeListener.invoke();
     }
 }

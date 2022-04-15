@@ -4,6 +4,7 @@ public class Tile {
     private int num = -1;
     private int r, c;
     private TileType type;
+    private ResourceType resourceType = null;
     private BufferedImage image, numberImage;
 
     public int screenX, screenY;
@@ -12,6 +13,23 @@ public class Tile {
 
     public Tile(TileType type, int r, int c) {
         this.type = type;
+        switch (type) {
+            case Ore:
+                resourceType = ResourceType.Ore;
+                break;
+            case Wood:
+                resourceType = ResourceType.Wood;
+                break;
+            case Wheat:
+                resourceType = ResourceType.Wheat;
+                break;
+            case Brick:
+                resourceType = ResourceType.Brick;
+                break;
+            case Sheep:
+                resourceType = ResourceType.Sheep;
+                break;
+        }
         this.r = r; this.c = c;
         assignImage();
     }
@@ -49,6 +67,10 @@ public class Tile {
 
     public TileType getType() {
         return type;
+    }
+
+    public ResourceType getResourceType() {
+        return resourceType;
     }
 
     public BufferedImage getImage() {

@@ -2,9 +2,11 @@ public class ItemPlacementController {
     private static ItemPlacer<Node> nodeItemPlacer;
     private static ItemPlacer<Edge> edgeItemPlacer;
 
-    private static InitialSettlementItemPlacement initialSettlementItemPlacement = new InitialSettlementItemPlacement();
-    private static RoadItemPlacement roadItemPlacement = new RoadItemPlacement();
-    private static InitialRoadItemPlacement initialRoadItemPlacement = new InitialRoadItemPlacement();
+    private static final InitialSettlementItemPlacement initialSettlementItemPlacement = new InitialSettlementItemPlacement();
+    private static final RoadItemPlacement roadItemPlacement = new RoadItemPlacement();
+    private static final InitialRoadItemPlacement initialRoadItemPlacement = new InitialRoadItemPlacement();
+    private static final SettlementItemPlacement settlementItemPlacement = new SettlementItemPlacement();
+    private static final CityItemPlacement cityItemPlacement = new CityItemPlacement();
 
     public static void setNodeItemPlacer(ItemPlacer<Node> placer) {
         nodeItemPlacer = placer;
@@ -19,6 +21,13 @@ public class ItemPlacementController {
         );
     }
 
+    public static void placeSettlement() {
+        GameActionHandler.signalAction(
+                GameActionTypes.StartMultiStageAction,
+                () -> nodeItemPlacer.startItemPlacement(settlementItemPlacement)
+        );
+    }
+
     public static void placeInitialRoad() {
         GameActionHandler.signalAction(
                 GameActionTypes.StartMultiStageAction,
@@ -30,6 +39,13 @@ public class ItemPlacementController {
         GameActionHandler.signalAction(
                 GameActionTypes.StartMultiStageAction,
                 () -> edgeItemPlacer.startItemPlacement(roadItemPlacement)
+        );
+    }
+
+    public static void placeCity() {
+        GameActionHandler.signalAction(
+                GameActionTypes.StartMultiStageAction,
+                () -> nodeItemPlacer.startItemPlacement(cityItemPlacement)
         );
     }
 }

@@ -91,6 +91,15 @@ public class GameManager implements KeyEventHandler {
         return turnIndex;
     }
 
+    public void distributeResources() {
+        for (Player player : players) {
+            for (Building building : player.getBuildings()) {
+                building.collectResources();
+            }
+        }
+        GameStateChangeListener.invoke();
+    }
+
     public Dice getDice() {
         return dice;
     }

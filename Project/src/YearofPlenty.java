@@ -8,29 +8,29 @@ public class YearofPlenty extends ProgressCard{
         switch(c1)
         {
             case Brick:
-                super.getOwner().getPlayerInventory().receiveItem(ResourceType.Brick,1);
+                super.getOwner().getInventory().receiveItem(ResourceType.Brick,1);
             case Sheep:
-                super.getOwner().getPlayerInventory().receiveItem(ResourceType.Sheep,1);
+                super.getOwner().getInventory().receiveItem(ResourceType.Sheep,1);
             case Ore:
-                super.getOwner().getPlayerInventory().receiveItem(ResourceType.Ore ,1);
+                super.getOwner().getInventory().receiveItem(ResourceType.Ore ,1);
             case Wheat:
-                super.getOwner().getPlayerInventory().receiveItem(ResourceType.Wheat,1);
+                super.getOwner().getInventory().receiveItem(ResourceType.Wheat,1);
             case Wood:
-                super.getOwner().getPlayerInventory().receiveItem(ResourceType.Wood,1);
+                super.getOwner().getInventory().receiveItem(ResourceType.Wood,1);
         }
 
         switch(c2)
         {
             case Brick:
-                super.getOwner().getPlayerInventory().receiveItem(ResourceType.Brick,1);
+                super.getOwner().getInventory().receiveItem(ResourceType.Brick,1);
             case Sheep:
-                super.getOwner().getPlayerInventory().receiveItem(ResourceType.Sheep,1);
+                super.getOwner().getInventory().receiveItem(ResourceType.Sheep,1);
             case Ore:
-                super.getOwner().getPlayerInventory().receiveItem(ResourceType.Ore ,1);
+                super.getOwner().getInventory().receiveItem(ResourceType.Ore ,1);
             case Wheat:
-                super.getOwner().getPlayerInventory().receiveItem(ResourceType.Wheat,1);
+                super.getOwner().getInventory().receiveItem(ResourceType.Wheat,1);
             case Wood:
-                super.getOwner().getPlayerInventory().receiveItem(ResourceType.Wood,1);
+                super.getOwner().getInventory().receiveItem(ResourceType.Wood,1);
         }
 
     }

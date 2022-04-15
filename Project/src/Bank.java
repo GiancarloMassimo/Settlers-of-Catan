@@ -2,9 +2,11 @@ import java.util.HashMap;
 
 public class Bank {
     HashMap<ItemType, ItemCost> costMap;
+    HashMap<ResourceType, Integer> remainingResources;
 
     public Bank() {
         InitializeCosts();
+        InitializeResources();
     }
 
     public void InitializeCosts() {
@@ -39,6 +41,14 @@ public class Bank {
         }
     }
 
+    public void InitializeResources() {
+        remainingResources.put(ResourceType.Brick, 19);
+        remainingResources.put(ResourceType.Ore, 19);
+        remainingResources.put(ResourceType.Sheep, 19);
+        remainingResources.put(ResourceType.Wheat, 19);
+        remainingResources.put(ResourceType.Wood, 19);
+    }
+
     public void purchase(Inventory inventory, ItemType itemType) {
         HashMap<ResourceType, Integer> cost = costMap.get(itemType).getCostMap();
 
@@ -48,6 +58,8 @@ public class Bank {
             for (ResourceType resourceType : cost.keySet()) {
                 inventory.payItem(resourceType, cost.get(resourceType));
             }
+
+            returnResources(cost);
 
             if (itemType == ItemType.Road) {
                 ItemPlacementController.placeRoad();
@@ -67,7 +79,39 @@ public class Bank {
                 return false;
             }
         }
-
         return true;
     }
+
+    public int getRemainingResourceCount(ResourceType type) {
+        return remainingResources.get(type);
+    }
+
+    public void returnResources(HashMap<ResourceType, Integer> resources) {
+        for(ResourceType resourceType:resources.keySet()) {
+            remainingResources.put(resourceType, remainingResources.get(resourceType) + resources.get(resourceType));
+        }
+    }
+
+    //function with hashmap as parameter instead of single resource might be needed for hasEnoughRemainingResources and giveResource
+    public boolean hasEnoughRemainingResources(ResourceType type, int count) {
+        return count <= remainingResources.get(type);
+    }
+    public void giveResource(ResourceType type, int count) {
+        remainingResources.put(type, remainingResources.get(type) - count);
+    }
+
+//    public void giveResources(HashMap<ResourceType, Integer> resources) {
+//        for(ResourceType resourceType:resources.keySet()) {
+//            remainingResources.put(resourceType, remainingResources.get(resourceType) - resources.get(resourceType));
+//        }
+//    }
+//    public boolean hasEnoughRemainingResources(HashMap<ResourceType, Integer> pay) {
+//        for(ResourceType resource:pay.keySet()) {
+//            if(pay.get(resource)>remainingResources.get(resource)) {
+//                return false;
+//            }
+//        }
+//        return true;
+//    }
+
 }

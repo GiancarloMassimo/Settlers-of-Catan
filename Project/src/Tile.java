@@ -1,4 +1,5 @@
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Tile {
     private int num = -1;
@@ -10,6 +11,7 @@ public class Tile {
     public int screenX, screenY;
 
     public Node upper, upperRight, lowerRight, lower, lowerLeft, upperLeft;
+    public ArrayList<Building> buildings = new ArrayList<>();
 
     public Tile(TileType type, int r, int c) {
         this.type = type;

@@ -10,6 +10,7 @@ public class ItemPlacementController {
     private static final SettlementItemPlacement settlementItemPlacement = new SettlementItemPlacement();
     private static final CityItemPlacement cityItemPlacement = new CityItemPlacement();
     private static final RobberPlacement robberPlacement = new RobberPlacement();
+    private static final StealingFromSettlementChoicePlacement stealingFromSettlementChoicePlacement = new StealingFromSettlementChoicePlacement();
 
     public static void setNodeItemPlacer(ItemPlacer<Node> placer) {
         nodeItemPlacer = placer;
@@ -60,6 +61,16 @@ public class ItemPlacementController {
         GameActionHandler.signalAction(
                 GameActionTypes.StartMultiStageAction,
                 () -> nodeItemPlacer.startItemPlacement(cityItemPlacement)
+        );
+    }
+
+    public static void selectStealingLocation() throws NoValidPositionForItemException {
+        if (!stealingFromSettlementChoicePlacement.validPositionExists(GameManager.instance.getMap().getNodes()))
+            throw new NoValidPositionForItemException();
+
+        GameActionHandler.signalAction(
+                GameActionTypes.StartMultiStageAction,
+                () -> nodeItemPlacer.startItemPlacement(stealingFromSettlementChoicePlacement)
         );
     }
 

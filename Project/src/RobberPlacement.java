@@ -10,5 +10,11 @@ public class RobberPlacement extends ItemPlacement<Tile> {
         Robber robber = GameManager.instance.getRobber();
         robber.move(location);
         GameLog.instance.logEvent("Robber moved to " + location.toString());
+        try {
+            ItemPlacementController.selectStealingLocation();
+        }
+        catch (NoValidPositionForItemException e) {
+            // simply do nothing
+        }
     }
 }

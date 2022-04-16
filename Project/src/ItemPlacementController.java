@@ -21,7 +21,10 @@ public class ItemPlacementController {
         );
     }
 
-    public static void placeSettlement() {
+    public static void placeSettlement() throws NoValidPositionForItemException {
+        if (!settlementItemPlacement.validPositionExists(GameManager.instance.getMap().getNodes()))
+            throw new NoValidPositionForItemException();
+
         GameActionHandler.signalAction(
                 GameActionTypes.StartMultiStageAction,
                 () -> nodeItemPlacer.startItemPlacement(settlementItemPlacement)
@@ -35,14 +38,20 @@ public class ItemPlacementController {
         );
     }
 
-    public static void placeRoad() {
+    public static void placeRoad() throws NoValidPositionForItemException{
+        if (!roadItemPlacement.validPositionExists(GameManager.instance.getMap().getEdges()))
+            throw new NoValidPositionForItemException();
+
         GameActionHandler.signalAction(
                 GameActionTypes.StartMultiStageAction,
                 () -> edgeItemPlacer.startItemPlacement(roadItemPlacement)
         );
     }
 
-    public static void placeCity() {
+    public static void placeCity() throws NoValidPositionForItemException {
+        if (!cityItemPlacement.validPositionExists(GameManager.instance.getMap().getNodes()))
+            throw new NoValidPositionForItemException();
+
         GameActionHandler.signalAction(
                 GameActionTypes.StartMultiStageAction,
                 () -> nodeItemPlacer.startItemPlacement(cityItemPlacement)

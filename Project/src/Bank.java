@@ -43,19 +43,25 @@ public class Bank {
         HashMap<ResourceType, Integer> cost = costMap.get(itemType).getCostMap();
 
         if (hasEnoughResources(inventory, cost)) {
+            try {
+                if (itemType == ItemType.Road) {
+                    ItemPlacementController.placeRoad();
+                } else if (itemType == ItemType.Settlement) {
+                    ItemPlacementController.placeSettlement();
+                } else if (itemType == ItemType.City) {
+                    ItemPlacementController.placeCity();
+                }
+            }
+            catch (NoValidPositionForItemException e) {
+                return;
+            }
+
             GameLog.instance.logEvent(GameManager.instance.getCurrentPlayer() + " bought a " + itemType.toString());
 
             for (ResourceType resourceType : cost.keySet()) {
                 inventory.payItem(resourceType, cost.get(resourceType));
             }
 
-            if (itemType == ItemType.Road) {
-                ItemPlacementController.placeRoad();
-            } else if (itemType == ItemType.Settlement) {
-                ItemPlacementController.placeSettlement();
-            } else if (itemType == ItemType.City) {
-                ItemPlacementController.placeCity();
-            }
         }
 
         GameStateChangeListener.invoke();

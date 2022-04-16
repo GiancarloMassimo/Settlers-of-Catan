@@ -11,6 +11,10 @@ public class Building {
     public void collectResources() {
         var tiles = location.getAdjacentTiles();
         for (Tile t : tiles) {
+            if (GameManager.instance.getRobber().getTile() == t) {
+                continue;
+            }
+
             if (GameManager.instance.getDice().getDiceTotal() == t.getNum()) {
                 int count = type == BuildingType.Settlement ? 1 : 2;
                 owner.getInventory().receiveItem(t.getResourceType(), count);

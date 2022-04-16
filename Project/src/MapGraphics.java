@@ -1,6 +1,5 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.InputStream;
 
 public class MapGraphics implements GraphicsItem {
     private final int CORNER_RADIUS = 10;
@@ -20,7 +19,7 @@ public class MapGraphics implements GraphicsItem {
         int offsetX = 275;
         int offsetY = 150;
 
-        Tile[][] mat = map.getMap();
+        Tile[][] mat = map.getTiles();
         for (int r = 0; r < mat.length; r++) {
             int translationX = Math.abs(((mat.length + 1) / 2) - (r + 1)) * (spacingX / 2);
             for (int c = 0; c < mat[r].length; c++) {
@@ -48,7 +47,7 @@ public class MapGraphics implements GraphicsItem {
     private void drawTiles(Graphics g) {
         int numberOffsetY = 10;
 
-        Tile[][] mat = map.getMap();
+        Tile[][] mat = map.getTiles();
         for (int r = 0; r < mat.length; r++) {
             for (int c = 0; c < mat[r].length; c++) {
                 Tile t = mat[r][c];

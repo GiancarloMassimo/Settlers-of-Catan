@@ -91,6 +91,6 @@ public class Tile {
     }
 
     public String toString() {
-        return type.toString() + ", " + num + " [" + r + ", " + c + "]";
+        return type.toString() + " " + num;
     }
 }

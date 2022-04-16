@@ -1,18 +1,23 @@
+
 public class ItemPlacementController {
     private static ItemPlacer<Node> nodeItemPlacer;
     private static ItemPlacer<Edge> edgeItemPlacer;
+    private static ItemPlacer<Tile> tileItemPlacer;
 
     private static final InitialSettlementItemPlacement initialSettlementItemPlacement = new InitialSettlementItemPlacement();
     private static final RoadItemPlacement roadItemPlacement = new RoadItemPlacement();
     private static final InitialRoadItemPlacement initialRoadItemPlacement = new InitialRoadItemPlacement();
     private static final SettlementItemPlacement settlementItemPlacement = new SettlementItemPlacement();
     private static final CityItemPlacement cityItemPlacement = new CityItemPlacement();
+    private static final RobberPlacement robberPlacement = new RobberPlacement();
 
     public static void setNodeItemPlacer(ItemPlacer<Node> placer) {
         nodeItemPlacer = placer;
     }
 
     public static void setEdgeItemPlacer(ItemPlacer<Edge> placer) { edgeItemPlacer = placer; }
+
+    public static void setTileItemPlacer(ItemPlacer<Tile> placer) { tileItemPlacer = placer; }
 
     public static void placeInitialSettlement() {
         GameActionHandler.signalAction(
@@ -55,6 +60,13 @@ public class ItemPlacementController {
         GameActionHandler.signalAction(
                 GameActionTypes.StartMultiStageAction,
                 () -> nodeItemPlacer.startItemPlacement(cityItemPlacement)
+        );
+    }
+
+    public static void placeRobber() {
+        GameActionHandler.signalAction(
+                GameActionTypes.StartMultiStageAction,
+                () -> tileItemPlacer.startItemPlacement(robberPlacement)
         );
     }
 }

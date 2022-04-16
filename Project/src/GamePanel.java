@@ -29,6 +29,7 @@ public class GamePanel extends JPanel implements KeyListener, MouseListener {
         addGraphicItem(new EdgeGraphics(GameManager.instance.getMap()));
         addGraphicItem(new NodeGraphics(GameManager.instance.getMap()));
         addGraphicItem(new DiceGraphics());
+        addGraphicItem(new RobberGraphics());
 
         GameManager.instance.onWindowLoad();
     }

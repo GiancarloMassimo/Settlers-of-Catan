@@ -6,6 +6,10 @@ public class Dice {
         die2 = Helpers.randInt(1, 7);
         GameLog.instance.logEvent(GameManager.instance.getCurrentPlayer() + " rolled a " + getDiceTotal());
         GameManager.instance.distributeResources();
+
+        if (getDiceTotal() == 7) {
+            ItemPlacementController.placeRobber();
+        }
     }
 
     public int getDie1() {

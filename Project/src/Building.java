@@ -11,9 +11,19 @@ public class Building {
     public void collectResources() {
         var tiles = location.getAdjacentTiles();
         for (Tile t : tiles) {
+            if (GameManager.instance.getRobber().getTile() == t) {
+                continue;
+            }
+
             if (GameManager.instance.getDice().getDiceTotal() == t.getNum()) {
                 int count = type == BuildingType.Settlement ? 1 : 2;
+
+                if (!GameManager.instance.getBank().hasResource(t.getResourceType(), count)) {
+                    return;
+                }
+
                 owner.getInventory().receiveItem(t.getResourceType(), count);
+                GameManager.instance.getBank().removeStock(t.getResourceType(), count);
                 GameLog.instance.logEvent(owner + " received " + count + " " + t.getResourceType());
 
                 //need to do special cases like the resources not being enough for multiple people

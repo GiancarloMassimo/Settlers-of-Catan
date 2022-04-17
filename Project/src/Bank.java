@@ -1,15 +1,24 @@
 import java.util.HashMap;
 
 public class Bank {
-    HashMap<ItemType, ItemCost> costMap;
-    HashMap<ResourceType, Integer> remainingResources;
+    private HashMap<ItemType, ItemCost> costMap;
+    private HashMap<ResourceType, Integer> bankStock;
+    private int developmentCardCount = 25;
 
     public Bank() {
-        InitializeCosts();
-        InitializeResources();
+        initializeCosts();
+        fillStock();
     }
 
-    public void InitializeCosts() {
+    public void fillStock() {
+        bankStock = new HashMap<>();
+
+        for (ResourceType resourceType : ResourceType.values()) {
+            bankStock.put(resourceType, 19);
+        }
+    }
+
+    public void initializeCosts() {
         costMap = new HashMap<>();
 
         for (ItemType item : ItemType.values()) {
@@ -41,36 +50,41 @@ public class Bank {
         }
     }
 
-    public void InitializeResources() {
-        remainingResources.put(ResourceType.Brick, 19);
-        remainingResources.put(ResourceType.Ore, 19);
-        remainingResources.put(ResourceType.Sheep, 19);
-        remainingResources.put(ResourceType.Wheat, 19);
-        remainingResources.put(ResourceType.Wood, 19);
-    }
-
     public void purchase(Inventory inventory, ItemType itemType) {
         HashMap<ResourceType, Integer> cost = costMap.get(itemType).getCostMap();
 
         if (hasEnoughResources(inventory, cost)) {
+            try {
+                if (itemType == ItemType.Road) {
+                    ItemPlacementController.placeRoad();
+                } else if (itemType == ItemType.Settlement) {
+                    ItemPlacementController.placeSettlement();
+                } else if (itemType == ItemType.City) {
+                    ItemPlacementController.placeCity();
+                }
+            }
+            catch (NoValidPositionForItemException e) {
+                return;
+            }
+
             GameLog.instance.logEvent(GameManager.instance.getCurrentPlayer() + " bought a " + itemType.toString());
 
             for (ResourceType resourceType : cost.keySet()) {
                 inventory.payItem(resourceType, cost.get(resourceType));
+                addStock(resourceType, cost.get(resourceType));
             }
 
-            returnResources(cost);
-
-            if (itemType == ItemType.Road) {
-                ItemPlacementController.placeRoad();
-            } else if (itemType == ItemType.Settlement) {
-                ItemPlacementController.placeSettlement();
-            } else if (itemType == ItemType.City) {
-                ItemPlacementController.placeCity();
-            }
         }
 
         GameStateChangeListener.invoke();
+    }
+
+    public void addStock(ResourceType resourceType, int amount) {
+        bankStock.put(resourceType, bankStock.get(resourceType) + amount);
+    }
+
+    public void removeStock(ResourceType resourceType, int amount) {
+        bankStock.put(resourceType, bankStock.get(resourceType) - amount);
     }
 
     public boolean hasEnoughResources(Inventory inventory, HashMap<ResourceType, Integer> cost) {
@@ -79,39 +93,19 @@ public class Bank {
                 return false;
             }
         }
+
         return true;
     }
 
-    public int getRemainingResourceCount(ResourceType type) {
-        return remainingResources.get(type);
+    public int getStockOfResource(ResourceType resourceType) {
+        return bankStock.get(resourceType);
     }
 
-    public void returnResources(HashMap<ResourceType, Integer> resources) {
-        for(ResourceType resourceType:resources.keySet()) {
-            remainingResources.put(resourceType, remainingResources.get(resourceType) + resources.get(resourceType));
-        }
+    public int getDevelopmentCardCount() {
+        return developmentCardCount;
     }
 
-    //function with hashmap as parameter instead of single resource might be needed for hasEnoughRemainingResources and giveResource
-    public boolean hasEnoughRemainingResources(ResourceType type, int count) {
-        return count <= remainingResources.get(type);
+    public boolean hasResource(ResourceType resourceType, int amount) {
+        return getStockOfResource(resourceType) >= amount;
     }
-    public void giveResource(ResourceType type, int count) {
-        remainingResources.put(type, remainingResources.get(type) - count);
-    }
-
-//    public void giveResources(HashMap<ResourceType, Integer> resources) {
-//        for(ResourceType resourceType:resources.keySet()) {
-//            remainingResources.put(resourceType, remainingResources.get(resourceType) - resources.get(resourceType));
-//        }
-//    }
-//    public boolean hasEnoughRemainingResources(HashMap<ResourceType, Integer> pay) {
-//        for(ResourceType resource:pay.keySet()) {
-//            if(pay.get(resource)>remainingResources.get(resource)) {
-//                return false;
-//            }
-//        }
-//        return true;
-//    }
-
 }

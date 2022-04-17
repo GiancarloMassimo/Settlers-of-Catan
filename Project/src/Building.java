@@ -17,7 +17,13 @@ public class Building {
 
             if (GameManager.instance.getDice().getDiceTotal() == t.getNum()) {
                 int count = type == BuildingType.Settlement ? 1 : 2;
+
+                if (!GameManager.instance.getBank().hasResource(t.getResourceType(), count)) {
+                    return;
+                }
+
                 owner.getInventory().receiveItem(t.getResourceType(), count);
+                GameManager.instance.getBank().removeStock(t.getResourceType(), count);
                 GameLog.instance.logEvent(owner + " received " + count + " " + t.getResourceType());
             }
         }

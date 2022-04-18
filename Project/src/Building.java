@@ -26,11 +26,7 @@ public class Building {
                 GameManager.instance.getBank().removeStock(t.getResourceType(), count);
                 GameLog.instance.logEvent(owner + " received " + count + " " + t.getResourceType());
 
-                //need to do special cases like the resources not being enough for multiple people
-                Bank b = GameManager.instance.getBank();
-                if(b.hasEnoughRemainingResources(t.getResourceType(), count)) {
-                    b.giveResource(t.getResourceType(), count);
-                }
+
             }
         }
     }

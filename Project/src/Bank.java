@@ -4,6 +4,7 @@ public class Bank {
     private HashMap<ItemType, ItemCost> costMap;
     private HashMap<ResourceType, Integer> bankStock;
     private int developmentCardCount = 25;
+    private HashMap<DevelopmentCardType, Integer> developmentCardStock;
 
     public Bank() {
         initializeCosts();
@@ -16,6 +17,9 @@ public class Bank {
         for (ResourceType resourceType : ResourceType.values()) {
             bankStock.put(resourceType, 19);
         }
+        developmentCardStock.put(DevelopmentCardType.Knight, 14);
+        developmentCardStock.put(DevelopmentCardType.VictoryPoint, 5);
+        developmentCardStock.put(DevelopmentCardType.Progress, 6);//could treat different types of progress cards as separate
     }
 
     public void initializeCosts() {

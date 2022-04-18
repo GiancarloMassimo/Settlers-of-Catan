@@ -13,8 +13,6 @@ public class Player {
 
     public Player(int playerNumber, PlayerColor color) {
 
-        //update Inventory/Bank interactions
-
         secretVictoryPoints=0;
         publicVictoryPoints=0;
         this.playerNumber=playerNumber;
@@ -24,10 +22,22 @@ public class Player {
         buildings = new ArrayList<>();
     }
 
-
     public void addBuilding(Building building) {
         buildings.add(building);
+        inventory.decrementItem(ItemType.Settlement);
         publicVictoryPoints++;
+    }
+
+    public void upgradeBuilding(Building building) {
+        building.upgrade();
+        inventory.decrementItem(ItemType.City);
+        inventory.incrementItem(ItemType.Settlement);
+        publicVictoryPoints++;
+    }
+
+    public void addRoad(Road road) {
+        roads.add(road);
+        inventory.decrementItem(ItemType.Road);
     }
 
     public ArrayList<Building> getBuildings() {

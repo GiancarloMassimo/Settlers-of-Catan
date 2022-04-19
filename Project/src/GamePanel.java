@@ -4,7 +4,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements KeyListener, MouseListener {
@@ -20,18 +19,18 @@ public class GamePanel extends JPanel implements KeyListener, MouseListener {
         addMouseListener(this);
         addKeyListener(this);
 
-        Map map = new Map();
-
         addGraphicItem(new BackgroundGraphics());
         addGraphicItem(new InfoPanelGraphics());
-        addGraphicItem(new MapGraphics(map));
+        addGraphicItem(new MapGraphics(GameManager.instance.getMap()));
         addGraphicItem(new InventoryGraphics());
         addGraphicItem(new ShopGraphics());
         addGraphicItem(new TradingGraphics());
         addGraphicItem(new PlayerGraphics());
-        addGraphicItem(new EdgeGraphics(map));
-        addGraphicItem(new NodeGraphics(map));
+        addGraphicItem(new EdgeGraphics(GameManager.instance.getMap()));
+        addGraphicItem(new NodeGraphics(GameManager.instance.getMap()));
         addGraphicItem(new DiceGraphics());
+        addGraphicItem(new RobberGraphics());
+        addGraphicItem(new BankPanelGraphics());
 
         GameManager.instance.onWindowLoad();
     }

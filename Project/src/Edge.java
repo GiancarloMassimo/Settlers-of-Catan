@@ -1,7 +1,6 @@
 public class Edge {
     Node a, b;
     int screenX, screenY;
-    Road road = null;
 
     public Edge(Node a, Node b) {
         this.a = a; this.b = b;

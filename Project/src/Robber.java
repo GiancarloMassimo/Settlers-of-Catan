@@ -1,22 +1,14 @@
 public class Robber {
-    private int row;
-    private int col;
-    public Robber(int r, int c){
-        row=r;
-        col=c;
+    private Tile tile;
+    public Robber(Tile tile) {
+        this.tile = tile;
     }
 
-    public int getRow(){
-        return row;
+    public Tile getTile() {
+        return tile;
     }
-    public void SetRow(int r){
-         row = r;
-    }public int getCol(){
-        return col;
-    }public void SetCol(int c){
-        col = c;
+
+    public void move(Tile tile) {
+        this.tile = tile;
     }
-//    public ArrayList<Player> check(){
-//        checks all 6 nodes to see if there is a building, return an array of players
-//    }
 }

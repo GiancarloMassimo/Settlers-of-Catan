@@ -6,8 +6,10 @@ public class ShopGraphics implements GraphicsItem, MouseEventHandler
 {
     private BufferedImage ShopText, DevCard, brickpic, wheatpic, sheeppic, woodpic, orepic;
 
+    private Player[] players;
     public ShopGraphics()
     {
+        players = GameManager.instance.getPlayers();
         InputHandler.addMouseEvent(this);
 
         ShopText = ImageLoader.getImage("Shop_");
@@ -51,6 +53,18 @@ public class ShopGraphics implements GraphicsItem, MouseEventHandler
         g.drawImage(sheeppic, 595, 810, 25, 25, null);
         g.drawImage(wheatpic, 620, 810, 25, 25, null);
         g.drawImage(orepic, 595, 835, 25, 25, null);
+
+        for(int i = 0; i < 3; i++)
+        {
+            g.setColor(GameManager.instance.getCurrentPlayer().getGraphicsInfo().getPlayerColor());
+            g.fillArc(225, 800, 25, 25, 0, 360);
+            g.fillArc(400, 800, 25, 25, 0, 360);
+            g.fillArc(300, 800, 25, 25, 0, 360);
+            g.setColor(Color.black);
+            g.drawArc(225, 800, 25, 25, 0, 360);
+            g.drawArc(400, 800, 25, 25, 0, 360);
+            g.drawArc(300, 800, 25, 25, 0, 360);
+        }
     }
 
 

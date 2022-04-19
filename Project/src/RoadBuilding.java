@@ -8,6 +8,4 @@ public class RoadBuilding extends ProgressCard{
 //        builds two roads
 //    }
 
-
-
 }

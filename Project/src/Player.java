@@ -72,6 +72,18 @@ public class Player {
         return secretVictoryPoints;
     }
 
+    public void addPublicVictoryPoints(int n) {
+        publicVictoryPoints+=n;
+    }
+    public void addSecretVictoryPoints(int n) {
+        secretVictoryPoints+=n;
+    }
+    public void subtractPublicVictoryPoints(int n) {
+        publicVictoryPoints-=n;
+    }
+    public void subtractSecretVictoryPoints(int n) {
+        secretVictoryPoints-=n;
+    }
 
     public Inventory getInventory() {
         return inventory;

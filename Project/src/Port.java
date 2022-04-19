@@ -1,4 +1,5 @@
 public class Port {
+
     PortType type;
     ResourceType give; //what is wants, only used when type is special
     int quantity;//how much it needs

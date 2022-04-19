@@ -3,51 +3,44 @@ import java.awt.image.BufferedImage;
 
 public class PlayerGraphics implements GraphicsItem
 {
-    private BufferedImage RedPlayer, YellowPlayer, BluePlayer, GreenPlayer, VPindicator;
+    private BufferedImage OpaqueSquare;
     private BufferedImage NormalRoad, LongestRoad, NormalArmy, LargestArmy;
+    private Player[] players;
+
 
     public PlayerGraphics()
     {
-        //players
-        RedPlayer = ImageLoader.getImage("Red Player");
-        YellowPlayer = ImageLoader.getImage("Yellow Player");
-        BluePlayer = ImageLoader.getImage("Blue Player");
-        GreenPlayer = ImageLoader.getImage("Green Player");
+        players = GameManager.instance.getPlayers();
+        OpaqueSquare = ImageLoader.getImage("SemiOpaqueBackground");
 
-        //other
-        VPindicator = ImageLoader.getImage("Victory Point Indicator");
-
-        //roads and armies
         NormalRoad = ImageLoader.getImage("Normal Road");
         LongestRoad = ImageLoader.getImage("Longest Road");
         NormalArmy = ImageLoader.getImage("Normal Army");
         LargestArmy = ImageLoader.getImage("Largest Army");
+
+
     }
     public void draw(Graphics g)
     {
-        //TODO: WRITE THIS WITH A FOR LOOP USING PLAYER DATA
-        //The way this is right now is going to be really tedious
-        //Red's player components
-        g.drawImage(RedPlayer, 1050, 300, 544 , 81 , null);
-        g.drawImage(NormalRoad, 1150, 320, 77 , 26 , null);
-        g.drawImage(NormalArmy, 1265, 315, 15 , 40 , null);
+        for (int i = 0; i < players.length; i++)
+        {
+            g.drawImage(OpaqueSquare, 1070, 380 + i * 80, 544 , 81 , null);
+            g.drawImage(NormalRoad, 1150, 400 + i * 80, 77 , 26 , null);
+            g.drawImage(NormalArmy, 1265, 385 + i * 80, 15 , 40 , null);
+            g.setColor(players[i].getGraphicsInfo().getPlayerColor());
+            if (players[i] == GameManager.instance.getCurrentPlayer())
+                g.drawRect(1070, 380 + i * 80, 544, 66);
+            g.fillArc(1050, 375 + i * 80,75,75,0,360);
+            g.setColor(Color.BLACK);
+            g.drawArc(1050, 375 + i * 80, 75, 75, 0, 360);
 
-        //Yellow's player components
-        g.drawImage(YellowPlayer, 1050, 400, 544 , 81 , null);
-        g.drawImage(NormalRoad, 1150, 420, 77 , 26 , null);
-        g.drawImage(NormalArmy, 1265, 415, 15 , 40 , null);
+            g.setColor(Color.white);
+            g.drawString("1", 1290, 422 + i * 80);
+            g.drawString("1", 1235, 422 + i * 80);
 
-        //Blue's player components
-        g.drawImage(BluePlayer, 1050, 500, 544 , 81 , null);
-        g.drawImage(NormalRoad, 1150, 520, 77 , 26 , null);
-        g.drawImage(NormalArmy, 1265, 515, 15 , 40 , null);
-
-        // Green's player components
-        g.drawImage(GreenPlayer, 1050, 600, 544 , 81 , null);
-        g.drawImage(NormalRoad, 1150, 620, 77 , 26 , null);
-        g.drawImage(NormalArmy, 1265, 615, 15 , 40 , null);
-
-        //g.drawImage(VPindicator,1090,295,30,30,null);
-
+            g.setFont(new Font("default", Font.BOLD, 50));
+            g.drawString(players[i].getPublicVictoryPoints()+"", 1075, 427 + i * 80);
+            g.setFont(new Font("default", Font.BOLD, 16));
+        }
     }
 }

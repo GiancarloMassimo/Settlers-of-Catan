@@ -1,36 +1,57 @@
+import java.util.HashMap;
+
 public class Inventory {
-    private int numBrick, numSheep, numOre, numWheat, numWood;
+    private int itemsInInventory = 0;
+    private HashMap<ResourceType, Integer> inventory;
+    private HashMap<ItemType, Integer> remainingItems;
 
-    public Inventory(){
-        numBrick=0;numSheep=0;numOre=0;numWheat=0;numWood=0;
-    }
-
-    //n can be negative or positive
-    public void changeBrick(int n){
-        numBrick+=n;
-    }
-    public void changeSheep(int n){
-        numSheep+=n;
-    }
-    public void changeOre(int n){
-        numOre+=n;
-    }
-    public void changeWheat(int n){
-        numWheat+=n;
-    }
-    public void changeWood(int n){
-        numWood+=n;
-    }
-    //needed must be positive
-    public boolean available(int brickNeeded, int sheepNeeded, int oreNeeded, int wheatNeeded, int woodNeeded){//parameters must be positive
-        return numBrick>=brickNeeded && numSheep>=sheepNeeded && numOre>=oreNeeded && numWheat>=wheatNeeded && numWood>=woodNeeded;
-    }
-    //subtracts resources and returns true if able to purchase, returns false if not able to purchase
-    public boolean purchase(int brickNeeded, int sheepNeeded, int oreNeeded, int wheatNeeded, int woodNeeded){//parameters must be positive
-        if(available(brickNeeded, sheepNeeded, oreNeeded, wheatNeeded, woodNeeded)){
-            numBrick-=brickNeeded;numSheep-=sheepNeeded;numOre-=oreNeeded;numWheat-=wheatNeeded;numWood-=woodNeeded;
-            return true;
+    public Inventory() {
+        inventory = new HashMap<>();
+        for (ResourceType type : ResourceType.values()) {
+            inventory.put(type, 0);
         }
-        return false;
+
+        remainingItems.put(ItemType.Settlement, 5);
+        remainingItems.put(ItemType.City, 4);
+        remainingItems.put(ItemType.Road, 15);
     }
+
+    public void receiveItem(ResourceType type, int count) {
+        inventory.put(type, inventory.get(type) + count);
+        itemsInInventory += count;
+    }
+
+    public void payItem(ResourceType type, int count) {
+        inventory.put(type, inventory.get(type) - count);
+        itemsInInventory -= count;
+    }
+
+    public int getResourceCount(ResourceType type) {
+        return inventory.get(type);
+    }
+
+    public ResourceType getRandomResource() {
+        if (itemsInInventory == 0) return null;
+
+        int n = Helpers.randInt(1, itemsInInventory + 1);
+        for (ResourceType resource : inventory.keySet()) {
+            if (inventory.get(resource) >= n) return resource;
+            n -= inventory.get(resource);
+        }
+
+        return null;
+    }
+
+    public void decrementItem(ItemType type) {
+        remainingItems.put(type, remainingItems.get(type) - 1);
+    }
+
+    public void incrementItem(ItemType type) {
+        remainingItems.put(type, remainingItems.get(type) + 1);
+    }
+
+    public boolean itemAvailable(ItemType type) {
+        return remainingItems.get(type) > 0;
+    }
+
 }

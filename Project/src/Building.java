@@ -7,10 +7,30 @@ public class Building {
         type = BuildingType.Settlement;
         location=n;
     }
-//    public getResources(){
-//        Node location;
-//        for(Tile t:location.getTiles())
-//    }
+
+    public void collectResources() {
+        var tiles = location.getAdjacentTiles();
+        for (Tile t : tiles) {
+            if (GameManager.instance.getRobber().getTile() == t) {
+                continue;
+            }
+
+            if (GameManager.instance.getDice().getDiceTotal() == t.getNum()) {
+                int count = type == BuildingType.Settlement ? 1 : 2;
+
+                if (!GameManager.instance.getBank().hasResource(t.getResourceType(), count)) {
+                    return;
+                }
+
+                owner.getInventory().receiveItem(t.getResourceType(), count);
+                GameManager.instance.getBank().removeStock(t.getResourceType(), count);
+                GameLog.instance.logEvent(owner + " received " + count + " " + t.getResourceType());
+
+
+            }
+        }
+    }
+
     public void upgrade() {
         if(type==BuildingType.Settlement) type = BuildingType.City;
     }

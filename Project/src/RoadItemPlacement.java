@@ -57,5 +57,7 @@ public class RoadItemPlacement extends ItemPlacement<Edge> {
         Road newRoad = new Road(currentPlayer, location);
         location.road = newRoad;
         GameLog.instance.logEvent(currentPlayer + " placed a road between " + location.a + " and " + location.b);
+
+        //currentPlayer.addRoad(newRoad);
     }
 }

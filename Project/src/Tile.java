@@ -1,17 +1,37 @@
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Tile {
     private int num = -1;
     private int r, c;
     private TileType type;
+    private ResourceType resourceType = null;
     private BufferedImage image, numberImage;
 
     public int screenX, screenY;
 
     public Node upper, upperRight, lowerRight, lower, lowerLeft, upperLeft;
+    public ArrayList<Building> buildings = new ArrayList<>();
 
     public Tile(TileType type, int r, int c) {
         this.type = type;
+        switch (type) {
+            case Ore:
+                resourceType = ResourceType.Ore;
+                break;
+            case Wood:
+                resourceType = ResourceType.Wood;
+                break;
+            case Wheat:
+                resourceType = ResourceType.Wheat;
+                break;
+            case Brick:
+                resourceType = ResourceType.Brick;
+                break;
+            case Sheep:
+                resourceType = ResourceType.Sheep;
+                break;
+        }
         this.r = r; this.c = c;
         assignImage();
     }
@@ -51,6 +71,10 @@ public class Tile {
         return type;
     }
 
+    public ResourceType getResourceType() {
+        return resourceType;
+    }
+
     public BufferedImage getImage() {
         return image;
     }
@@ -69,6 +93,6 @@ public class Tile {
     }
 
     public String toString() {
-        return type.toString() + ", " + num + " [" + r + ", " + c + "]";
+        return type.toString() + " " + num;
     }
 }

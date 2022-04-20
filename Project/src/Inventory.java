@@ -7,6 +7,7 @@ public class Inventory {
 
     public Inventory() {
         inventory = new HashMap<>();
+        remainingItems = new HashMap<>();
         for (ResourceType type : ResourceType.values()) {
             inventory.put(type, 0);
         }
@@ -40,6 +41,10 @@ public class Inventory {
         }
 
         return null;
+    }
+
+    public int getItemCount(ItemType type) {
+        return remainingItems.get(type);
     }
 
     public void decrementItem(ItemType type) {

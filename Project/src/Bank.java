@@ -13,7 +13,7 @@ public class Bank {
 
     public void fillStock() {
         bankStock = new HashMap<>();
-
+        developmentCardStock = new HashMap<>();
         for (ResourceType resourceType : ResourceType.values()) {
             bankStock.put(resourceType, 19);
         }
@@ -57,7 +57,7 @@ public class Bank {
     public void purchase(Inventory inventory, ItemType itemType) {
         HashMap<ResourceType, Integer> cost = costMap.get(itemType).getCostMap();
 
-        if (hasEnoughResources(inventory, cost)) {
+        if (hasEnoughResources(inventory, cost) && inventory.itemAvailable(itemType)) {
             try {
                 if (itemType == ItemType.Road) {
                     ItemPlacementController.placeRoad();
@@ -72,6 +72,8 @@ public class Bank {
             }
 
             GameLog.instance.logEvent(GameManager.instance.getCurrentPlayer() + " bought a " + itemType.toString());
+
+            inventory.decrementItem(itemType);
 
             for (ResourceType resourceType : cost.keySet()) {
                 inventory.payItem(resourceType, cost.get(resourceType));

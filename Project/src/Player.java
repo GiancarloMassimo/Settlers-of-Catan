@@ -20,6 +20,7 @@ public class Player {
         this.color = color;
         graphicsInfo = new PlayerGraphicsInfo(color);
         buildings = new ArrayList<>();
+        roads = new ArrayList<>();
     }
 
     public void addBuilding(Building building) {
@@ -59,9 +60,10 @@ public class Player {
         return resource;
     }
 
-    public void purchaseDevelopmentCard(){
+    public void addDevelopmentCard(){
 
     }
+
     public void useKnightCard(){
 
     }

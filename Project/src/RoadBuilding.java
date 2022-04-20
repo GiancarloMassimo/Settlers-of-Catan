@@ -5,9 +5,11 @@ public class RoadBuilding extends ProgressCard{
     }
 
 //    public void use(){
-//        builds two roads
+//        for (int i=0;i<2;i++)
+//            GameActionHandler.queueAction(
+//                    GameActionTypes.Instant,
+//                    () -> ItemPlacementController.placeRoad()
+//            );
 //    }
-
-
 
 }

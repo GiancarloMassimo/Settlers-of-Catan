@@ -39,7 +39,9 @@ public class PlayerGraphics implements GraphicsItem
             g.drawString("1", 1235, 422 + i * 80);
 
             g.setFont(new Font("default", Font.BOLD, 50));
+
             g.drawString(players[i].getPublicVictoryPoints()+"", 1075, 427 + i * 80);
+
             g.setFont(new Font("default", Font.BOLD, 16));
         }
     }

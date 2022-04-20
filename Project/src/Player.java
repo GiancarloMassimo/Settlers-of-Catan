@@ -25,6 +25,7 @@ public class Player {
     }
 
 
+
     public void addBuilding(Building building) {
         buildings.add(building);
         publicVictoryPoints++;
@@ -47,6 +48,31 @@ public class Player {
         otherPlayer.payItem(resource, 1);
 
         return resource;
+
+    public void upgradeBuilding(Building b){
+       /* if(b.getType()==BuildingType.Settlement) {
+            if(!playerInventory.purchase(0, 0, 3, 2, 0)){
+                //not enough resources to upgrade to city
+                return;
+            }
+            else{
+                //upgrade to city (resources already subtracted)
+
+            }
+            b.upgrade();
+            publicVictoryPoints++;
+        }*/
+    }
+    public void createRoad(Edge e){
+        //road already exists on edge
+       /* if(e.containsRoad()||!e.roadAvailable(this)) return;
+        if(!playerInventory.purchase(1, 0, 0, 0, 1)){
+            //not enough resources to purchase road
+            return;
+        }
+        //purchase road
+
+        roads.add(new Road(this, e));*/
     }
 
     public void purchaseDevelopmentCard(){
@@ -70,8 +96,13 @@ public class Player {
     public PlayerGraphicsInfo getGraphicsInfo() {
         return graphicsInfo;
     }
+
     @Override
     public String toString() {
         return color.toString() + " Player";
+    }
+
+    public void addSecretVictoryPoints(int n){
+        secretVictoryPoints+=n;
     }
 }

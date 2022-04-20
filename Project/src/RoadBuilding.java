@@ -4,10 +4,12 @@ public class RoadBuilding extends ProgressCard{
         super(o,ProgressCardType.RoadBuilding);
     }
 
-//    public void use(){
-//        builds two roads
-//    }
-
-
+    public void use(){
+        for (int i=0;i<2;i++)
+            GameActionHandler.queueAction(
+                    GameActionTypes.Instant,
+                    () -> ItemPlacementController.placeRoad()
+            );
+    }
 
 }

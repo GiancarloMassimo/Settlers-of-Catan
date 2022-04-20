@@ -18,20 +18,20 @@ public class Port {
         Player mod=p;
        if (requirement(mod, lose)){
            if (type==PortType.Generic)
-               mod.getPlayerInventory().payItem(lose,quantity);
+               mod.getInventory().payItem(lose,quantity);
            else
-               mod.getPlayerInventory().payItem(give,quantity);
-           mod.getPlayerInventory().receiveItem(req, 1);
+               mod.getInventory().payItem(give,quantity);
+           mod.getInventory().receiveItem(req, 1);
        }
        return mod;
     }
 
     public boolean requirement(Player p, ResourceType lose){//checks if players can trade
         if (type==PortType.Generic)
-            if (p.getPlayerInventory().getResourceCount(lose) >= quantity)
+            if (p.getInventory().getResourceCount(lose) >= quantity)
                 return true;
             else
-                return p.getPlayerInventory().getResourceCount(give) >= quantity;
+                return p.getInventory().getResourceCount(give) >= quantity;
         return false;
     }
 }

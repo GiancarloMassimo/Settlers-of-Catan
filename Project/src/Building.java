@@ -25,6 +25,8 @@ public class Building {
                 owner.getInventory().receiveItem(t.getResourceType(), count);
                 GameManager.instance.getBank().removeStock(t.getResourceType(), count);
                 GameLog.instance.logEvent(owner + " received " + count + " " + t.getResourceType());
+
+
             }
         }
     }

@@ -13,6 +13,7 @@ public class GameManager implements KeyEventHandler {
     private Bank bank;
     private Map map;
     private Robber robber;
+    private LongestRoad longestRoad;
 
     public GameManager() {
         if (instance == null) {
@@ -25,6 +26,7 @@ public class GameManager implements KeyEventHandler {
         bank = new Bank();
         map = new Map();
         robber = new Robber(map.getDesert());
+        longestRoad = new LongestRoad();
 
         turnCount = 0;
         initialTurns = players.length * 2;
@@ -118,6 +120,10 @@ public class GameManager implements KeyEventHandler {
 
     public Robber getRobber() {
         return robber;
+    }
+
+    public LongestRoad getLongestRoad() {
+        return longestRoad;
     }
 
     public Player[] getPlayers()

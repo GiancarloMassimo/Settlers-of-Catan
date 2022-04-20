@@ -9,7 +9,7 @@ public class Player {
     private int playerNumber;
 
     private PlayerGraphicsInfo graphicsInfo;
-    PlayerColor color;
+    private PlayerColor color;
 
     public Player(int playerNumber, PlayerColor color) {
 

@@ -56,6 +56,7 @@ public class ShopGraphics implements GraphicsItem, MouseEventHandler
 
         for(int i = 0; i < 3; i++)
         {
+            //g.drawString(GameManager.instance.getCurrentPlayer());
             g.setColor(GameManager.instance.getCurrentPlayer().getGraphicsInfo().getPlayerColor());
             g.fillArc(225, 800, 25, 25, 0, 360);
             g.fillArc(400, 800, 25, 25, 0, 360);

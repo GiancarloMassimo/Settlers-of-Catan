@@ -11,6 +11,9 @@ public class GameManager implements KeyEventHandler {
     private int turnIndex;
     private Dice dice;
     private Bank bank;
+    private Map map;
+    private Robber robber;
+    private LongestRoad longestRoad;
 
     public GameManager() {
         if (instance == null) {
@@ -21,6 +24,9 @@ public class GameManager implements KeyEventHandler {
         InputHandler.addKeyEvent(this);
         dice = new Dice();
         bank = new Bank();
+        map = new Map();
+        robber = new Robber(map.getDesert());
+        longestRoad = new LongestRoad();
 
         turnCount = 0;
         initialTurns = players.length * 2;
@@ -106,6 +112,18 @@ public class GameManager implements KeyEventHandler {
 
     public Bank getBank() {
         return bank;
+    }
+
+    public Map getMap() {
+        return map;
+    }
+
+    public Robber getRobber() {
+        return robber;
+    }
+
+    public LongestRoad getLongestRoad() {
+        return longestRoad;
     }
 
     public Player[] getPlayers()

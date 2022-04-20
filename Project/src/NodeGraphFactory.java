@@ -40,6 +40,7 @@ public class NodeGraphFactory {
         Edge e = new Edge(a, b);
         if (a.addEdge(e) && b.addEdge(e)) {
             edges[edgesAdded] = e;
+            e.index = edgesAdded;
             edgesAdded++;
         }
     }
@@ -145,6 +146,7 @@ public class NodeGraphFactory {
 
     private Node addNode(Node node) {
         nodes[nodesAdded] = node;
+        node.index = nodesAdded;
         nodesAdded++;
         return node;
     }

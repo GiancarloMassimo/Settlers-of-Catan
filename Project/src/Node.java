@@ -7,6 +7,7 @@ public class Node {
     public int screenX, screenY;
     Port port;
     Building building = null;
+    int index = 0;
 
     public Node(){
         adjacentTiles = new ArrayList<>();

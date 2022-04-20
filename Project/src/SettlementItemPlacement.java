@@ -1,5 +1,4 @@
 public class SettlementItemPlacement extends InitialSettlementItemPlacement {
-    //TODO: DON'T ALLOW SOMEONE TO BUY A BUILDING THAT THEY CANT PLACE
 
     @Override
     public boolean checkCondition(Node location) {
@@ -11,6 +10,6 @@ public class SettlementItemPlacement extends InitialSettlementItemPlacement {
             }
         }
 
-        return true;
+        return false;
     }
 }

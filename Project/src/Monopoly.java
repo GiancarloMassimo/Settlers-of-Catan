@@ -4,7 +4,7 @@ public class Monopoly extends ProgressCard{
         super(o,ProgressCardType.Monopoly);
     }
     //get one requested card from all players, once finished returns the updated player arraylist to update all card counts
-    public Player[] use(ResourceType req, Player[] playerList){
+    public void use(ResourceType req, Player[] playerList){
         Player[] list = playerList;
         int cnt=0;
         int pos =0;
@@ -17,11 +17,11 @@ public class Monopoly extends ProgressCard{
             if (i != pos)
                 if (list[i].getInventory().getResourceCount(req) != 0){
                     list[i].getInventory().payItem(req,1);
-                cnt++;
+                    cnt++;
                 }
 
         list[pos].getInventory().receiveItem(req,cnt);
 
-        return list;//returns an array of players to update their inventories
+        //return list;//returns an array of players to update their inventories
     }
 }

@@ -74,6 +74,7 @@ public class Bank {
             GameLog.instance.logEvent(GameManager.instance.getCurrentPlayer() + " bought a " + itemType.toString());
 
             inventory.decrementItem(itemType);
+            //replace with addRoad/addBuilding/upgradeBuilding
 
             for (ResourceType resourceType : cost.keySet()) {
                 inventory.payItem(resourceType, cost.get(resourceType));

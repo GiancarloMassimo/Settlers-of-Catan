@@ -7,6 +7,7 @@ public class Node {
     public int screenX, screenY;
     Port port;
     Building building = null;
+    int index = 0;
 
     public Node(){
         adjacentTiles = new ArrayList<>();
@@ -43,6 +44,14 @@ public class Node {
             if(e.getRoad().getOwner().equals(p)) return true;
         }
         return false;
+    }
+
+    public int connectedRoadCount(Player p) {
+        int i = 0;
+        for(Edge e:edges){
+            if(e.getRoad() != null && e.getRoad().getOwner().equals(p)) i++;
+        }
+        return i;
     }
 
     public boolean addEdge(Edge edge) {

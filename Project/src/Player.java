@@ -9,7 +9,7 @@ public class Player {
     private int playerNumber;
 
     private PlayerGraphicsInfo graphicsInfo;
-    PlayerColor color;
+    private PlayerColor color;
 
     public Player(int playerNumber, PlayerColor color) {
 
@@ -72,6 +72,9 @@ public class Player {
     }
     public int getSecretVictoryPoints(){
         return secretVictoryPoints;
+    }
+    public void changePublicVictoryPoints(int increment) {
+        publicVictoryPoints += increment;
     }
 
     public void addPublicVictoryPoints(int n) {

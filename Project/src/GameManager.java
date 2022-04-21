@@ -1,4 +1,8 @@
+import javax.swing.*;
 import java.awt.event.KeyEvent;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class GameManager implements KeyEventHandler {
     public static GameManager instance;
@@ -42,13 +46,30 @@ public class GameManager implements KeyEventHandler {
     }
 
     void InstantiatePlayers() {
-        players = new Player[4];
+        int playerCount = 4;
+        boolean validInput = false;
+        while(!validInput) {
+            try {
+                playerCount = Integer.parseInt(JOptionPane.showInputDialog("Enter the number of players (2 - 4)"));
+                validInput = playerCount >= 2 && playerCount <= 4;
+            }
+            catch (Exception e) {
+
+            }
+        }
+
+        players = new Player[playerCount];
         int i = 0;
-        for (PlayerColor color : PlayerColor.values()) {
+        var colors = Arrays.asList(PlayerColor.values());
+        Collections.shuffle(colors);
+        for (PlayerColor color : colors) {
             players[i] = new Player(i + 1, color);
             i++;
+            if (i == playerCount) {
+                break;
+            }
         }
-        turnIndex = Helpers.randInt(0, players.length);
+        turnIndex = 0;
         currentPlayer = players[turnIndex];
     }
 

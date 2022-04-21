@@ -24,7 +24,7 @@ public class GameLog extends JPanel implements KeyEventHandler {
 
     private void createScrollPane() {
         this.setLayout(new BorderLayout());
-        this.setPreferredSize(new Dimension(500, 200));
+        this.setPreferredSize(new Dimension(525, 200));
 
         textArea = new JTextArea(5, 40);
 

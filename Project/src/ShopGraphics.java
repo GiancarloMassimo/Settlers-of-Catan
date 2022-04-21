@@ -56,17 +56,18 @@ public class ShopGraphics implements GraphicsItem, MouseEventHandler
 
         for(int i = 0; i < 3; i++)
         {
-            g.drawString(GameManager.instance.getCurrentPlayer().getInventory().getItemCount(ItemType.Settlement)+"", 300, 800);
-            g.drawString(GameManager.instance.getCurrentPlayer().getInventory().getItemCount(ItemType.Road)+"", 205, 800);
-            g.drawString(GameManager.instance.getCurrentPlayer().getInventory().getItemCount(ItemType.City)+"", 400, 800);
             g.setColor(GameManager.instance.getCurrentPlayer().getGraphicsInfo().getPlayerColor());
             g.fillArc(225, 800, 25, 25, 0, 360);
             g.fillArc(400, 800, 25, 25, 0, 360);
             g.fillArc(300, 800, 25, 25, 0, 360);
+
             g.setColor(Color.black);
-            g.drawArc(225, 800, 25, 25, 0, 360);
-            g.drawArc(400, 800, 25, 25, 0, 360);
-            g.drawArc(300, 800, 25, 25, 0, 360);
+            g.setFont(new Font("default", Font.PLAIN, 20));
+            g.drawString(GameManager.instance.getCurrentPlayer().getInventory().getItemCount(ItemType.Settlement)+"", 307, 820);
+            g.drawString(GameManager.instance.getCurrentPlayer().getInventory().getItemCount(ItemType.Road)+"", 225, 820);
+            g.drawString(GameManager.instance.getCurrentPlayer().getInventory().getItemCount(ItemType.City)+"", 407, 820);
+
+
         }
     }
 

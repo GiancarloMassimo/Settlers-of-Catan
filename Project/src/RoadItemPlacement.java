@@ -59,6 +59,6 @@ public class RoadItemPlacement extends ItemPlacement<Edge> {
         GameManager.instance.getLongestRoad().measureLongestRoad(newRoad);
         GameLog.instance.logEvent(currentPlayer + " placed a road between " + location.a + " and " + location.b);
 
-        //currentPlayer.addRoad(newRoad);
+        currentPlayer.addRoad(newRoad);
     }
 }

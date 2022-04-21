@@ -1,7 +1,7 @@
 public class Road {
 
-    private Player owner;
-    private Edge edge;
+    private final Player owner;
+    private final Edge edge;
     public Road(Player o, Edge edge){
         owner = o;
         this.edge = edge;

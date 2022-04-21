@@ -70,17 +70,17 @@ public class TileMapFactory {
         int counterclockwiseCycleIndex = 0;
 
         // Pick a starting point on the outer edge of the grid
-        r = Helpers.RandInt(0, map.length);
+        r = Helpers.randInt(0, map.length);
 
         if (r == 0 || r == map.length - 1) {
-            c = Helpers.RandInt(0, map[r].length);
+            c = Helpers.randInt(0, map[r].length);
             if (r == 0) {
                 counterclockwiseCycleIndex = 0;
             } else {
                 counterclockwiseCycleIndex = 2;
             }
         } else {
-            c = Helpers.RandInt(0, 2) == 0 ? 0 : map[r].length - 1;
+            c = Helpers.randInt(0, 2) == 0 ? 0 : map[r].length - 1;
             if (c == 0) {
                 counterclockwiseCycleIndex = 1;
             } else {

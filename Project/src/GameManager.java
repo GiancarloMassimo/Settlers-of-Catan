@@ -48,7 +48,8 @@ public class GameManager implements KeyEventHandler {
             players[i] = new Player(i + 1, color);
             i++;
         }
-        currentPlayer = players[0];
+        turnIndex = Helpers.randInt(0, players.length);
+        currentPlayer = players[turnIndex];
     }
 
     private void nextTurn() {

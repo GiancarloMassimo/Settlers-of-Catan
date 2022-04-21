@@ -46,6 +46,14 @@ public class Node {
         return false;
     }
 
+    public int connectedRoadCount(Player p) {
+        int i = 0;
+        for(Edge e:edges){
+            if(e.getRoad() != null && e.getRoad().getOwner().equals(p)) i++;
+        }
+        return i;
+    }
+
     public boolean addEdge(Edge edge) {
         for (Edge e : edges)
             if (e.equals(edge)) return false;

@@ -13,4 +13,13 @@ public class Helpers {
             this.value = value;
         }
     }
+
+    public static class ReferenceSourceEdge {
+        Edge edge;
+        Node node;
+
+        public ReferenceSourceEdge(Edge edge, Node node) {
+            this.edge = edge; this.node = node;
+        }
+    }
 }

@@ -61,6 +61,9 @@ public class Player {
     public int getSecretVictoryPoints(){
         return secretVictoryPoints;
     }
+    public void changePublicVictoryPoints(int increment) {
+        publicVictoryPoints += increment;
+    }
 
 
     public Inventory getInventory() {

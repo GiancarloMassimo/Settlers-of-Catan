@@ -33,6 +33,7 @@ public class Building {
 
     public void upgrade() {
         type = BuildingType.City;
+        owner.upgradeBuilding(this);
     }
     public Player getOwner(){
         return owner;

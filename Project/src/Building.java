@@ -32,7 +32,8 @@ public class Building {
     }
 
     public void upgrade() {
-        if(type==BuildingType.Settlement) type = BuildingType.City;
+        type = BuildingType.City;
+        owner.upgradeBuilding(this);
     }
     public Player getOwner(){
         return owner;

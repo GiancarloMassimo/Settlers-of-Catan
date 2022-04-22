@@ -68,7 +68,7 @@ public class ItemPlacementController {
         if (!stealingFromSettlementChoicePlacement.validPositionExists(GameManager.instance.getMap().getNodes()))
             throw new NoValidPositionForItemException();
 
-        GameActionHandler.signalAction(
+        GameActionHandler.queueAction(
                 GameActionTypes.StartMultiStageAction,
                 () -> nodeItemPlacer.startItemPlacement(stealingFromSettlementChoicePlacement)
         );

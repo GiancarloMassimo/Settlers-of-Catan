@@ -1,6 +1,6 @@
 import java.util.HashMap;
 
-public class DiscardItemSelection implements ItemSelection{
+public class DiscardItemSelection implements ItemSelection {
     Player currentPlayer;
     int discardAmount;
     int selectedAmount = 0;
@@ -11,11 +11,7 @@ public class DiscardItemSelection implements ItemSelection{
     public void setUp(Player player) {
         currentPlayer = player;
         discardAmount = currentPlayer.getInventory().getTotalResources() / 2;
-        selectionMap = new HashMap<>();
-        for (ResourceType resourceType : ResourceType.values()) {
-            selectionMap.put(resourceType, 0);
-        }
-        selectedAmount = 0;
+        clearSelection();
     }
 
     @Override
@@ -44,6 +40,16 @@ public class DiscardItemSelection implements ItemSelection{
             GameManager.instance.getBank().addStock(resourceType, selectionMap.get(resourceType));
         }
         GameLog.instance.logEvent(currentPlayer + " discarded " + discardAmount + " cards");
+        GameStateChangeListener.invoke();
+    }
+
+    @Override
+    public void clearSelection() {
+        selectionMap = new HashMap<>();
+        for (ResourceType resourceType : ResourceType.values()) {
+            selectionMap.put(resourceType, 0);
+        }
+        selectedAmount = 0;
         GameStateChangeListener.invoke();
     }
 

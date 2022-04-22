@@ -60,8 +60,9 @@ public class ItemSelectionGraphics implements GraphicsItem, KeyEventHandler, Mou
         g.setColor(Color.BLACK);
         g.setFont(new Font("default", Font.BOLD, 20));
         g.drawString(selection.getSelectionMessage(), 80, 625);
-        g.setFont(new Font("default", Font.TRUETYPE_FONT, 16));
-        g.drawString("Click to select resources", 75, 700);
+        g.setFont(new Font("default", Font.TRUETYPE_FONT, 14));
+        g.drawString("Click to select resources", 75, 690);
+        g.drawString("R to reset", 75, 705);
         if (selection.isCompleteSelection())
             g.drawString("C to confirm", 325, 700);
 
@@ -84,6 +85,9 @@ public class ItemSelectionGraphics implements GraphicsItem, KeyEventHandler, Mou
                         currentPlayer = null;
                     }
             );
+        } else if ((e.getKeyChar() == 'r' || e.getKeyChar() == 'R')
+                && selection != null) {
+            selection.clearSelection();
         }
     }
 

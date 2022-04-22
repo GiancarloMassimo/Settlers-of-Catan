@@ -5,6 +5,7 @@ public interface ItemSelection {
     String getSelectionMessage();
     void tryItemSelection(ResourceType resourceType);
     boolean isCompleteSelection();
+    void clearSelection();
     void confirm();
     HashMap<ResourceType, Integer> getSelection();
 }

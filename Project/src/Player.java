@@ -66,6 +66,7 @@ public class Player {
     }
 
     public void useKnightCard(){
+        // use card
     knightsUsedCount++;
         GameManager.instance.getLargestArmy().checkLargestArmy(this, knightsUsedCount);
 

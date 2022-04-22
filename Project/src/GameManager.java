@@ -14,6 +14,8 @@ public class GameManager implements KeyEventHandler {
     private Map map;
     private Robber robber;
     private LongestRoad longestRoad;
+    private LargestArmy largestArmy;
+
 
     public GameManager() {
         if (instance == null) {
@@ -27,6 +29,7 @@ public class GameManager implements KeyEventHandler {
         map = new Map();
         robber = new Robber(map.getDesert());
         longestRoad = new LongestRoad();
+        largestArmy = new LargestArmy();
 
         turnCount = 0;
         initialTurns = players.length * 2;
@@ -125,6 +128,11 @@ public class GameManager implements KeyEventHandler {
     public LongestRoad getLongestRoad() {
         return longestRoad;
     }
+
+    public LargestArmy getLargestArmy() {
+        return largestArmy;
+    }
+
 
     public Player[] getPlayers()
     {

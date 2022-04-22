@@ -66,7 +66,7 @@ public class GameLog extends JPanel implements KeyEventHandler {
     }
 
     @Override
-    public void OnKeyDown(KeyEvent e) {
+    public void onKeyDown(KeyEvent e) {
         if (e.getKeyChar() == 'l') {
             frame.setVisible(!frame.isVisible());
         }

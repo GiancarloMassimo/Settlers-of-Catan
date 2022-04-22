@@ -10,6 +10,13 @@ public class RobberPlacement extends ItemPlacement<Tile> {
         Robber robber = GameManager.instance.getRobber();
         robber.move(location);
         GameLog.instance.logEvent("Robber moved to " + location.toString());
+
+        for (Player player : GameManager.instance.getPlayers()) {
+            if (player.getInventory().getTotalResources() > 7) {
+                ItemSelectionController.discard(player);
+            }
+        }
+
         try {
             ItemPlacementController.selectStealingLocation();
         }

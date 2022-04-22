@@ -170,7 +170,7 @@ public class GameManager implements KeyEventHandler {
     }
 
     @Override
-    public void OnKeyDown(KeyEvent e) {
+    public void onKeyDown(KeyEvent e) {
         if (e.getKeyChar() == 'e' || e.getKeyChar() == 'E') {
            GameActionHandler.signalAction(
                    GameActionTypes.Instant,

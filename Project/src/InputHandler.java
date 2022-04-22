@@ -30,7 +30,7 @@ public class InputHandler {
 
     public static void InvokeKeyEvents(KeyEvent e) {
         for (KeyEventHandler keyEvent : keyEvents) {
-            keyEvent.OnKeyDown(e);
+            keyEvent.onKeyDown(e);
         }
     }
 

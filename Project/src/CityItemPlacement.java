@@ -9,7 +9,6 @@ public class CityItemPlacement extends ItemPlacement<Node> {
     @Override
     void place(Node location) {
         location.building.upgrade();
-
         GameLog.instance.logEvent(GameManager.instance.getCurrentPlayer() + " built a city on " + location);
     }
 }

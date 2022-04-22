@@ -47,6 +47,16 @@ public class Inventory {
         return remainingItems.get(type);
     }
 
+    public int getTotalResources() {
+        int count = 0;
+
+        for (ResourceType resourceType : inventory.keySet()) {
+            count += inventory.get(resourceType);
+        }
+
+        return count;
+    }
+
     public void decrementItem(ItemType type) {
         remainingItems.put(type, remainingItems.get(type) - 1);
     }

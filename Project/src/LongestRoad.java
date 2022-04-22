@@ -33,7 +33,7 @@ public class LongestRoad {
 
     private void processRoadMeasurement(Player player, int length) {
         if (length > longestRoadLength) {
-            if (longestRoadPlayer != null) {
+            if (longestRoadPlayer != null && longestRoadPlayer != player) {
                 longestRoadPlayer.changePublicVictoryPoints(-2);
             }
             if (player != longestRoadPlayer) {

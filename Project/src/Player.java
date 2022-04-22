@@ -30,7 +30,6 @@ public class Player {
     }
 
     public void upgradeBuilding(Building building) {
-        building.upgrade();
         inventory.decrementItem(ItemType.City);
         inventory.incrementItem(ItemType.Settlement);
         publicVictoryPoints++;

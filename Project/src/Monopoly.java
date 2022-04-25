@@ -4,8 +4,8 @@ public class Monopoly extends ProgressCard{
         super(o,ProgressCardType.Monopoly);
     }
     //get one requested card from all players, once finished returns the updated player arraylist to update all card counts
-    public void use(ResourceType req, Player[] playerList){
-        Player[] list = playerList;
+    public void use(ResourceType req){
+        Player[] list = GameManager.instance.getPlayers();
         int cnt=0;
         int pos =0;
         //gets location of owner

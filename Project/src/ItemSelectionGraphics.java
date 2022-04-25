@@ -61,7 +61,7 @@ public class ItemSelectionGraphics implements GraphicsItem, KeyEventHandler, Mou
         g.setFont(new Font("default", Font.BOLD, 20));
         g.drawString(selection.getSelectionMessage(), 80, 625);
         g.setFont(new Font("default", Font.TRUETYPE_FONT, 14));
-        g.drawString("Click to select resources", 75, 690);
+        g.drawString("Click number to select resources", 75, 690);
         g.drawString("R to reset", 75, 705);
         if (selection.isCompleteSelection())
             g.drawString("C to confirm", 325, 700);

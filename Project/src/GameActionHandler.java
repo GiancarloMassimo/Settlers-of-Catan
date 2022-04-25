@@ -20,7 +20,7 @@ public class GameActionHandler {
     public static void queueAction(GameActionTypes type, GameActionOperator action) {
         actionTypesQueue.add(type);
         actionOperatorQueue.add(action);
-        if (canTakeAction(type)) {
+        if (canTakeAction(type) && actionTypesQueue.isEmpty()) {
             dequeueAction();
         }
     }

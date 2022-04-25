@@ -38,6 +38,7 @@ public class LongestRoad {
             }
             if (player != longestRoadPlayer) {
                 player.changePublicVictoryPoints(2);
+                GameLog.instance.logEvent(player + " took longest road");
             }
 
             longestRoadLength = length;

@@ -23,5 +23,7 @@ public class RobberPlacement extends ItemPlacement<Tile> {
         catch (NoValidPositionForItemException e) {
             // simply do nothing
         }
+
+        System.out.println();
     }
 }

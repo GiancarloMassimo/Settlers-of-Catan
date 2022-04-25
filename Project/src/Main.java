@@ -10,6 +10,14 @@ public class Main {
             Please add any more questions yall have here so we can fix them and not get yeeted
         */
 
+        /*TODO:
+            Stuff we still have left to do:
+            1. Trading
+            2. Development card functions
+            3. Show largest army
+            4. Declare a winner
+         */
+
         GameLog log = new GameLog();
         GameManager gameManager = new GameManager();
         Frame frame = new Frame("Settlers of Catan: Team MatthewZ");

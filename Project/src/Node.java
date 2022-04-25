@@ -5,7 +5,7 @@ public class Node {
     private ArrayList<Tile> adjacentTiles; //array of all tiles that the node is on
     private ArrayList<Edge> edges;
     public int screenX, screenY;
-    Port port;
+    private Port port;
     Building building = null;
     int index = 0;
 
@@ -14,8 +14,13 @@ public class Node {
         edges = new ArrayList<>();
     }
 
-    public void setPort(Port p) {
+    public Port setPort(Port p) {
         port = p;
+        return p;
+    }
+
+    public Port getPort() {
+        return port;
     }
 
     public void addAdjacentTiles(Tile t) {

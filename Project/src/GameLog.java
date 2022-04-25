@@ -24,7 +24,7 @@ public class GameLog extends JPanel implements KeyEventHandler {
 
     private void createScrollPane() {
         this.setLayout(new BorderLayout());
-        this.setPreferredSize(new Dimension(500, 200));
+        this.setPreferredSize(new Dimension(525, 200));
 
         textArea = new JTextArea(5, 40);
 
@@ -66,7 +66,7 @@ public class GameLog extends JPanel implements KeyEventHandler {
     }
 
     @Override
-    public void OnKeyDown(KeyEvent e) {
+    public void onKeyDown(KeyEvent e) {
         if (e.getKeyChar() == 'l') {
             frame.setVisible(!frame.isVisible());
         }

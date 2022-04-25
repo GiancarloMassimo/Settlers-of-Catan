@@ -57,6 +57,13 @@ public class EdgeGraphics implements GraphicsItem, MouseEventHandler, ItemPlacer
         drawRoads(g);
     }
 
+    private void drawDebugIndexed(Graphics g) {
+        for (Edge edge : edges) {
+            g.setColor(Color.black);
+            g.drawString(edge.index + "", edge.screenX + 5, edge.screenY + 20);
+        }
+    }
+
     private void drawEdgeIndicators(Graphics g) {
         for (Edge edge : edges) {
             if (placement.checkCondition(edge)) {

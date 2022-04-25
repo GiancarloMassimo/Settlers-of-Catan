@@ -1,4 +1,8 @@
+import javax.swing.*;
 import java.awt.event.KeyEvent;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class GameManager implements KeyEventHandler {
     public static GameManager instance;
@@ -13,6 +17,9 @@ public class GameManager implements KeyEventHandler {
     private Bank bank;
     private Map map;
     private Robber robber;
+    private LongestRoad longestRoad;
+    private LargestArmy largestArmy;
+
 
     public GameManager() {
         if (instance == null) {
@@ -25,6 +32,8 @@ public class GameManager implements KeyEventHandler {
         bank = new Bank();
         map = new Map();
         robber = new Robber(map.getDesert());
+        longestRoad = new LongestRoad();
+        largestArmy = new LargestArmy();
 
         turnCount = 0;
         initialTurns = players.length * 2;
@@ -40,13 +49,31 @@ public class GameManager implements KeyEventHandler {
     }
 
     void InstantiatePlayers() {
-        players = new Player[4];
+        int playerCount = 4;
+        boolean validInput = false;
+        while(!validInput) {
+            try {
+                playerCount = Integer.parseInt(JOptionPane.showInputDialog("Enter the number of players (2 - 4)"));
+                validInput = playerCount >= 2 && playerCount <= 4;
+            }
+            catch (Exception e) {
+
+            }
+        }
+
+        players = new Player[playerCount];
         int i = 0;
-        for (PlayerColor color : PlayerColor.values()) {
+        var colors = Arrays.asList(PlayerColor.values());
+        Collections.shuffle(colors);
+        for (PlayerColor color : colors) {
             players[i] = new Player(i + 1, color);
             i++;
+            if (i == playerCount) {
+                break;
+            }
         }
-        currentPlayer = players[0];
+        turnIndex = 0;
+        currentPlayer = players[turnIndex];
     }
 
     private void nextTurn() {
@@ -120,6 +147,15 @@ public class GameManager implements KeyEventHandler {
         return robber;
     }
 
+    public LongestRoad getLongestRoad() {
+        return longestRoad;
+    }
+
+    public LargestArmy getLargestArmy() {
+        return largestArmy;
+    }
+
+
     public Player[] getPlayers()
     {
         return players;
@@ -142,7 +178,7 @@ public class GameManager implements KeyEventHandler {
     }
 
     @Override
-    public void OnKeyDown(KeyEvent e) {
+    public void onKeyDown(KeyEvent e) {
         if (e.getKeyChar() == 'e' || e.getKeyChar() == 'E') {
            GameActionHandler.signalAction(
                    GameActionTypes.Instant,

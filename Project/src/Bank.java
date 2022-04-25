@@ -4,6 +4,7 @@ public class Bank {
     private HashMap<ItemType, ItemCost> costMap;
     private HashMap<ResourceType, Integer> bankStock;
     private int developmentCardCount = 25;
+    private HashMap<DevelopmentCardType, Integer> developmentCardStock;
 
     public Bank() {
         initializeCosts();
@@ -12,10 +13,13 @@ public class Bank {
 
     public void fillStock() {
         bankStock = new HashMap<>();
-
+        developmentCardStock = new HashMap<>();
         for (ResourceType resourceType : ResourceType.values()) {
             bankStock.put(resourceType, 19);
         }
+        developmentCardStock.put(DevelopmentCardType.Knight, 14);
+        developmentCardStock.put(DevelopmentCardType.VictoryPoint, 5);
+        developmentCardStock.put(DevelopmentCardType.Progress, 6);//could treat different types of progress cards as separate
     }
 
     public void initializeCosts() {
@@ -53,7 +57,7 @@ public class Bank {
     public void purchase(Inventory inventory, ItemType itemType) {
         HashMap<ResourceType, Integer> cost = costMap.get(itemType).getCostMap();
 
-        if (hasEnoughResources(inventory, cost)) {
+        if (hasEnoughResources(inventory, cost) && inventory.itemAvailable(itemType)) {
             try {
                 if (itemType == ItemType.Road) {
                     ItemPlacementController.placeRoad();
@@ -68,6 +72,8 @@ public class Bank {
             }
 
             GameLog.instance.logEvent(GameManager.instance.getCurrentPlayer() + " bought a " + itemType.toString());
+
+            //inventory.decrementItem(itemType);
 
             for (ResourceType resourceType : cost.keySet()) {
                 inventory.payItem(resourceType, cost.get(resourceType));

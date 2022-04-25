@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+
 public class NodeGraphFactory {
     private final int nodeCount = 54;
     private final int edgeCount = 72;
@@ -11,6 +15,32 @@ public class NodeGraphFactory {
     public NodeGraphFactory(Tile[][] map) {
         this.map = map;
         createGraph();
+        assignPorts();
+    }
+
+    private void assignPorts() {
+        ArrayList<Port> ports = new ArrayList<>();
+        for (int i = 0; i < 4; i++)
+            ports.add(new Port(null));
+        ports.add(new Port(ResourceType.Wood));
+        ports.add(new Port(ResourceType.Wheat));
+        ports.add(new Port(ResourceType.Brick));
+        ports.add(new Port(ResourceType.Ore));
+        ports.add(new Port(ResourceType.Sheep));
+
+        Collections.shuffle(ports);
+
+        Iterator<Port> iterator = ports.iterator();
+
+        map[0][0].upper.setPort(map[0][0].upperLeft.setPort(iterator.next()));
+        map[0][1].upper.setPort(map[0][1].upperRight.setPort(iterator.next()));
+        map[1][3].upper.setPort(map[1][3].upperRight.setPort(iterator.next()));
+        map[0][0].upper.setPort(map[0][0].upperLeft.setPort(iterator.next()));
+        map[0][0].upper.setPort(map[0][0].upperLeft.setPort(iterator.next()));
+        map[0][0].upper.setPort(map[0][0].upperLeft.setPort(iterator.next()));
+        map[0][0].upper.setPort(map[0][0].upperLeft.setPort(iterator.next()));
+        map[0][0].upper.setPort(map[0][0].upperLeft.setPort(iterator.next()));
+        map[0][0].upper.setPort(map[0][0].upperLeft.setPort(iterator.next()));
     }
 
     public void createGraph() {
@@ -27,7 +57,7 @@ public class NodeGraphFactory {
         }
     }
 
-    void assignEdges(Tile t) {
+    private void assignEdges(Tile t) {
         createBidirectionalEdge(t.upper, t.upperRight);
         createBidirectionalEdge(t.upperRight, t.lowerRight);
         createBidirectionalEdge(t.lowerRight, t.lower);
@@ -36,15 +66,16 @@ public class NodeGraphFactory {
         createBidirectionalEdge(t.upperLeft, t.upper);
     }
 
-    void createBidirectionalEdge(Node a, Node b) {
+    private void createBidirectionalEdge(Node a, Node b) {
         Edge e = new Edge(a, b);
         if (a.addEdge(e) && b.addEdge(e)) {
             edges[edgesAdded] = e;
+            e.index = edgesAdded;
             edgesAdded++;
         }
     }
 
-    void assignNullNodes(Tile t) {
+    private void assignNullNodes(Tile t) {
         if (t.upper == null) {
             t.upper = addNode(new Node());
         }
@@ -145,6 +176,7 @@ public class NodeGraphFactory {
 
     private Node addNode(Node node) {
         nodes[nodesAdded] = node;
+        node.index = nodesAdded;
         nodesAdded++;
         return node;
     }

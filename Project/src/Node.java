@@ -5,16 +5,22 @@ public class Node {
     private ArrayList<Tile> adjacentTiles; //array of all tiles that the node is on
     private ArrayList<Edge> edges;
     public int screenX, screenY;
-    Port port;
+    private Port port;
     Building building = null;
+    int index = 0;
 
     public Node(){
         adjacentTiles = new ArrayList<>();
         edges = new ArrayList<>();
     }
 
-    public void setPort(Port p) {
+    public Port setPort(Port p) {
         port = p;
+        return p;
+    }
+
+    public Port getPort() {
+        return port;
     }
 
     public void addAdjacentTiles(Tile t) {
@@ -43,6 +49,14 @@ public class Node {
             if(e.getRoad().getOwner().equals(p)) return true;
         }
         return false;
+    }
+
+    public int connectedRoadCount(Player p) {
+        int i = 0;
+        for(Edge e:edges){
+            if(e.getRoad() != null && e.getRoad().getOwner().equals(p)) i++;
+        }
+        return i;
     }
 
     public boolean addEdge(Edge edge) {

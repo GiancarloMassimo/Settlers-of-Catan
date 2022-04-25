@@ -25,12 +25,15 @@ public class Building {
                 owner.getInventory().receiveItem(t.getResourceType(), count);
                 GameManager.instance.getBank().removeStock(t.getResourceType(), count);
                 GameLog.instance.logEvent(owner + " received " + count + " " + t.getResourceType());
+
+
             }
         }
     }
 
     public void upgrade() {
-        if(type==BuildingType.Settlement) type = BuildingType.City;
+        type = BuildingType.City;
+        owner.upgradeBuilding(this);
     }
     public Player getOwner(){
         return owner;

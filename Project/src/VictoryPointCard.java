@@ -7,6 +7,5 @@ public class VictoryPointCard extends DevelopmentCard{
 
     public void use(){
         getOwner().addSecretVictoryPoints(1);
-
     }
 }

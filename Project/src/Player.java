@@ -9,11 +9,9 @@ public class Player {
     private int playerNumber;
 
     private PlayerGraphicsInfo graphicsInfo;
-    PlayerColor color;
+    private PlayerColor color;
 
     public Player(int playerNumber, PlayerColor color) {
-
-        //update Inventory/Bank interactions
 
         secretVictoryPoints=0;
         publicVictoryPoints=0;
@@ -22,13 +20,24 @@ public class Player {
         this.color = color;
         graphicsInfo = new PlayerGraphicsInfo(color);
         buildings = new ArrayList<>();
+        roads = new ArrayList<>();
     }
-
-
 
     public void addBuilding(Building building) {
         buildings.add(building);
+        inventory.decrementItem(ItemType.Settlement);
         publicVictoryPoints++;
+    }
+
+    public void upgradeBuilding(Building building) {
+        inventory.decrementItem(ItemType.City);
+        inventory.incrementItem(ItemType.Settlement);
+        publicVictoryPoints++;
+    }
+
+    public void addRoad(Road road) {
+        roads.add(road);
+        inventory.decrementItem(ItemType.Road);
     }
 
     public ArrayList<Building> getBuildings() {
@@ -48,36 +57,12 @@ public class Player {
         otherPlayer.payItem(resource, 1);
 
         return resource;
-
-    public void upgradeBuilding(Building b){
-       /* if(b.getType()==BuildingType.Settlement) {
-            if(!playerInventory.purchase(0, 0, 3, 2, 0)){
-                //not enough resources to upgrade to city
-                return;
-            }
-            else{
-                //upgrade to city (resources already subtracted)
-
-            }
-            b.upgrade();
-            publicVictoryPoints++;
-        }*/
-    }
-    public void createRoad(Edge e){
-        //road already exists on edge
-       /* if(e.containsRoad()||!e.roadAvailable(this)) return;
-        if(!playerInventory.purchase(1, 0, 0, 0, 1)){
-            //not enough resources to purchase road
-            return;
-        }
-        //purchase road
-
-        roads.add(new Road(this, e));*/
     }
 
-    public void purchaseDevelopmentCard(){
+    public void addDevelopmentCard(){
 
     }
+
     public void useKnightCard(){
 
     }
@@ -87,7 +72,22 @@ public class Player {
     public int getSecretVictoryPoints(){
         return secretVictoryPoints;
     }
+    public void changePublicVictoryPoints(int increment) {
+        publicVictoryPoints += increment;
+    }
 
+    public void addPublicVictoryPoints(int n) {
+        publicVictoryPoints+=n;
+    }
+    public void addSecretVictoryPoints(int n) {
+        secretVictoryPoints+=n;
+    }
+    public void subtractPublicVictoryPoints(int n) {
+        publicVictoryPoints-=n;
+    }
+    public void subtractSecretVictoryPoints(int n) {
+        secretVictoryPoints-=n;
+    }
 
     public Inventory getInventory() {
         return inventory;
@@ -96,13 +96,8 @@ public class Player {
     public PlayerGraphicsInfo getGraphicsInfo() {
         return graphicsInfo;
     }
-
     @Override
     public String toString() {
         return color.toString() + " Player";
-    }
-
-    public void addSecretVictoryPoints(int n){
-        secretVictoryPoints+=n;
     }
 }

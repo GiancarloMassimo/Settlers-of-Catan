@@ -7,6 +7,7 @@ public class Player {
     private int secretVictoryPoints;
     private int publicVictoryPoints;
     private int playerNumber;
+    private int knightsUsedCount;
 
     private PlayerGraphicsInfo graphicsInfo;
     private PlayerColor color;
@@ -15,6 +16,7 @@ public class Player {
 
         secretVictoryPoints=0;
         publicVictoryPoints=0;
+        knightsUsedCount=0;
         this.playerNumber=playerNumber;
         inventory = new Inventory();
         this.color = color;
@@ -64,8 +66,11 @@ public class Player {
     }
 
     public void useKnightCard(){
-
+        // use card
+    knightsUsedCount++;
+        GameManager.instance.getLargestArmy().checkLargestArmy(this, knightsUsedCount);
     }
+
     public int getPublicVictoryPoints(){
         return publicVictoryPoints;
     }

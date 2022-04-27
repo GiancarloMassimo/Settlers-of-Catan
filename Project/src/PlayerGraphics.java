@@ -40,6 +40,14 @@ public class PlayerGraphics implements GraphicsItem
             g.drawString(longestRoad.getRoadLength(players[i]) + "", 1235, 422 + i * 80);
 
 
+            g.setColor(ColorPalette.vpColor);
+            g.fillArc(1106,375 + i * 80,35,35,0,360);
+            g.setColor(Color.WHITE);
+            if (players[i] == GameManager.instance.getCurrentPlayer())
+                g.drawString(players[i].getSecretVictoryPoints()+"", 1120, 397 + i * 80);
+
+
+
             g.drawString("1", 1290, 422 + i * 80);
 
             g.setFont(new Font("default", Font.BOLD, 50));

@@ -17,7 +17,6 @@ public class Main {
             3. Show largest army
             4. Declare a winner
          */
-
         GameLog log = new GameLog();
         GameManager gameManager = new GameManager();
         Frame frame = new Frame("Settlers of Catan: Team MatthewZ");

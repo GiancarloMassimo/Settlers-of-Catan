@@ -3,7 +3,7 @@ import java.util.HashMap;
 public class Bank {
     private HashMap<ItemType, ItemCost> costMap;
     private HashMap<ResourceType, Integer> bankStock;
-    private int developmentCardCount = 25;
+    private int developmentCardCount;
     private HashMap<DevelopmentCardType, Integer> developmentCardStock;
 
     public Bank() {
@@ -20,6 +20,9 @@ public class Bank {
         developmentCardStock.put(DevelopmentCardType.Knight, 14);
         developmentCardStock.put(DevelopmentCardType.VictoryPoint, 5);
         developmentCardStock.put(DevelopmentCardType.Progress, 6);//could treat different types of progress cards as separate
+
+        developmentCardCount = 25;
+
     }
 
     public void initializeCosts() {
@@ -57,7 +60,12 @@ public class Bank {
     public void purchase(Inventory inventory, ItemType itemType) {
         HashMap<ResourceType, Integer> cost = costMap.get(itemType).getCostMap();
 
-        if (hasEnoughResources(inventory, cost) && inventory.itemAvailable(itemType)) {
+        if (hasEnoughResources(inventory, cost)) {
+            if (itemType == ItemType.DevelopmentCard && developmentCardCount > 1){
+                //give player the devcard
+                developmentCardCount--;
+        }
+            else if(inventory.itemAvailable(itemType)) {
             try {
                 if (itemType == ItemType.Road) {
                     ItemPlacementController.placeRoad();
@@ -66,10 +74,11 @@ public class Bank {
                 } else if (itemType == ItemType.City) {
                     ItemPlacementController.placeCity();
                 }
-            }
-            catch (NoValidPositionForItemException e) {
+            } catch (NoValidPositionForItemException e) {
                 return;
             }
+        }
+            else return;
 
             GameLog.instance.logEvent(GameManager.instance.getCurrentPlayer() + " bought a " + itemType.toString());
 

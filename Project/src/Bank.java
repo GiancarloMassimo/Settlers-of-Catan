@@ -23,6 +23,7 @@ public class Bank {
         developmentCardStock.put(DevelopmentCardType.RoadBuilding, 2);
         developmentCardStock.put(DevelopmentCardType.YearOfPlenty, 2);
 
+        developmentCardCount = 25;
     }
 
     public void initializeCosts() {
@@ -60,7 +61,12 @@ public class Bank {
     public void purchase(Inventory inventory, ItemType itemType) {
         HashMap<ResourceType, Integer> cost = costMap.get(itemType).getCostMap();
 
-        if (hasEnoughResources(inventory, cost) && inventory.itemAvailable(itemType)) {
+        if (hasEnoughResources(inventory, cost)) {
+            if (itemType == ItemType.DevelopmentCard && developmentCardCount > 1){
+                //give player the devcard
+                developmentCardCount--;
+            }
+            else if(inventory.itemAvailable(itemType)) {
             try {
                 if (itemType == ItemType.Road) {
                     ItemPlacementController.placeRoad();
@@ -73,9 +79,9 @@ public class Bank {
             catch (NoValidPositionForItemException e) {
                 return;
             }
-
+            }
+            else return;
             GameLog.instance.logEvent(GameManager.instance.getCurrentPlayer() + " bought a " + itemType.toString());
-
 
             for (ResourceType resourceType : cost.keySet()) {
                 inventory.payItem(resourceType, cost.get(resourceType));

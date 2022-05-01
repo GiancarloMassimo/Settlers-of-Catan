@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class GameManager implements KeyEventHandler {
     public static GameManager instance;
@@ -17,6 +18,8 @@ public class GameManager implements KeyEventHandler {
     private Map map;
     private Robber robber;
     private LongestRoad longestRoad;
+    private LargestArmy largestArmy;
+
     private TradingGraphics tradingGraphics;
 
     private boolean buildPhase = true;
@@ -36,6 +39,7 @@ public class GameManager implements KeyEventHandler {
         map = new Map();
         robber = new Robber(map.getDesert());
         longestRoad = new LongestRoad();
+        largestArmy = new LargestArmy();
 
         turnCount = 0;
         initialTurns = players.length * 2;
@@ -166,6 +170,11 @@ public class GameManager implements KeyEventHandler {
     public LongestRoad getLongestRoad() {
         return longestRoad;
     }
+
+    public LargestArmy getLargestArmy() {
+        return largestArmy;
+    }
+
 
     public Player[] getPlayers()
     {

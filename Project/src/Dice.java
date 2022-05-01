@@ -8,6 +8,7 @@ public class Dice {
         GameManager.instance.distributeResources();
 
         if (getDiceTotal() == 7) {
+            //before this, players with resource counts above 7 choose half their resources to lose, someone with 9 will choose 4
             ItemPlacementController.placeRobber();
         }
     }

@@ -22,6 +22,7 @@ public class GamePanel extends JPanel implements KeyListener, MouseListener {
         addGraphicItem(new BackgroundGraphics());
         addGraphicItem(new InfoPanelGraphics());
         addGraphicItem(new MapGraphics(GameManager.instance.getMap()));
+        addGraphicItem(new PortGraphics());
         addGraphicItem(new InventoryGraphics());
         addGraphicItem(new ShopGraphics());
         addGraphicItem(new TradingGraphics());
@@ -48,6 +49,12 @@ public class GamePanel extends JPanel implements KeyListener, MouseListener {
     }
 
     private void drawGraphicsItems(Graphics g) {
+        for (Player player : GameManager.instance.getPlayers()) {
+            if (player.getPublicVictoryPoints() + player.getSecretVictoryPoints() >= 10) {
+                GameManager.instance.endGame(player);
+            }
+        }
+
         for (GraphicsItem graphicsItem : graphicsItems) {
             graphicsItem.draw(g);
         }

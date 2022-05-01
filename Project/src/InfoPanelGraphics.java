@@ -10,8 +10,7 @@ public class InfoPanelGraphics implements GraphicsItem{
             "Use the trading panel to trade with other players on your turn.\n" +
             "To buy resources, you must click the resource desired from the shop below\n" +
             "• Click on a resource to offer/ask for it\n" +
-            "• Press O to offer the current selected trade\n" +
-            "• Players will click on the check box to accept the trade offer\n" +
+            "• Players will click on the check box to accept the trade offer\n\n" +
             "Click on a Development Card to play it.\n" +
             "Press E to end turn.    Press L (on this window) to toggle the Game Log.";
     private final float FONT_SIZE = 14f;

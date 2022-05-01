@@ -32,6 +32,8 @@ public class GameActionHandler {
     }
 
     private static boolean canTakeAction(GameActionTypes type) {
+        if (GameManager.instance.gameOver()) return false;
+
         if (type == GameActionTypes.Instant || type == GameActionTypes.StartMultiStageAction) {
             return !takingAction;
         } else if (type == GameActionTypes.EndMultiStageAction) {

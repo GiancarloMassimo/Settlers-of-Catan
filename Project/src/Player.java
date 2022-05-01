@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Player {
     private ArrayList<Building> buildings;
@@ -11,8 +12,9 @@ public class Player {
     private PlayerGraphicsInfo graphicsInfo;
     private PlayerColor color;
 
-    public Player(int playerNumber, PlayerColor color) {
+    private HashMap<ResourceType, Integer> tradingRatioMap;
 
+    public Player(int playerNumber, PlayerColor color) {
         secretVictoryPoints=0;
         publicVictoryPoints=0;
         this.playerNumber=playerNumber;
@@ -21,12 +23,37 @@ public class Player {
         graphicsInfo = new PlayerGraphicsInfo(color);
         buildings = new ArrayList<>();
         roads = new ArrayList<>();
+        setTradingRatios();
+    }
+
+    private void setTradingRatios() {
+        tradingRatioMap = new HashMap<>();
+        for (ResourceType resourceType : ResourceType.values()) {
+            tradingRatioMap.put(resourceType, 4);
+        }
+    }
+
+    public int getTradingRatio(ResourceType resourceType) {
+        return tradingRatioMap.get(resourceType);
     }
 
     public void addBuilding(Building building) {
         buildings.add(building);
         inventory.decrementItem(ItemType.Settlement);
         publicVictoryPoints++;
+
+        if (building.getLocation().getPort() != null) {
+            Port port = building.getLocation().getPort();
+            if (port.type == null) {
+                for (ResourceType resourceType : tradingRatioMap.keySet()) {
+                    if (tradingRatioMap.get(resourceType) > 3) {
+                        tradingRatioMap.put(resourceType, 3);
+                    }
+                }
+            } else {
+                tradingRatioMap.put(port.type, 2);
+            }
+        }
     }
 
     public void upgradeBuilding(Building building) {

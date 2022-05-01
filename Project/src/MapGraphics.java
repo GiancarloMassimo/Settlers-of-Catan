@@ -36,6 +36,13 @@ public class MapGraphics implements GraphicsItem {
     public void draw(Graphics g) {
         drawBackground(g);
         drawTiles(g);
+
+        if (GameManager.instance.gameOver()) {
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("default", Font.BOLD, 36));
+
+            g.drawString(GameManager.instance.getWinner() + " Wins!", 70, 70);
+        }
     }
 
     private void drawBackground(Graphics g) {

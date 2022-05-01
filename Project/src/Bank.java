@@ -73,7 +73,7 @@ public class Bank {
 
             GameLog.instance.logEvent(GameManager.instance.getCurrentPlayer() + " bought a " + itemType.toString());
 
-            //inventory.decrementItem(itemType);
+            GameManager.instance.startBuildPhase();
 
             for (ResourceType resourceType : cost.keySet()) {
                 inventory.payItem(resourceType, cost.get(resourceType));

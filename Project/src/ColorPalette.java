@@ -8,4 +8,5 @@ public class ColorPalette {
     public static final Color playerYellow = new Color(255, 203, 68);
     public static final Color playerBlue = new Color(68, 188, 255);
     public static final Color playerGreen = new Color(11, 229, 59);
+    public static final Color portBrown = new Color(50, 27, 14, 150);
 }

@@ -6,12 +6,12 @@ public class InfoPanelGraphics implements GraphicsItem{
             "\n" +
             "The current player is highlighted below in their color.\n" +
             "Longest Road and Largest Army will be highlighted next to each player.\n" +
-            "\n" +
+            "To buy resources, you must click the item desired from the shop below.\n" +
             "Use the trading panel to trade with other players on your turn.\n" +
-            "To buy resources, you must click the resource desired from the shop below\n" +
-            "• Click on a resource to offer/ask for it\n" +
-            "• Press O to offer the current selected trade\n" +
-            "• Players will click on the check box to accept the trade offer\n" +
+            "• Click on a resource to offer/ask for it.\n" +
+            "• Players will click on their color to accept the trade offer.\n" +
+            "• Port trades are made through the bank: simply offer the correct ratio\n" +
+            "of resources.\n" +
             "Click on a Development Card to play it.\n" +
             "Press E to end turn.    Press L (on this window) to toggle the Game Log.";
     private final float FONT_SIZE = 14f;

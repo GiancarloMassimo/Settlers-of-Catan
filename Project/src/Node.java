@@ -9,6 +9,7 @@ public class Node {
     Building building = null;
     int index = 0;
 
+
     public Node(){
         adjacentTiles = new ArrayList<>();
         edges = new ArrayList<>();
@@ -16,6 +17,7 @@ public class Node {
 
     public Port setPort(Port p) {
         port = p;
+        p.addNode(this);
         return p;
     }
 

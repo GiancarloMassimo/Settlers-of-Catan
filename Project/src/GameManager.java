@@ -20,6 +20,12 @@ public class GameManager implements KeyEventHandler {
     private LongestRoad longestRoad;
     private LargestArmy largestArmy;
 
+    private TradingGraphics tradingGraphics;
+
+    private boolean buildPhase = true;
+
+    private boolean gameHasEnded = false;
+    private Player winner = null;
 
     public GameManager() {
         if (instance == null) {
@@ -46,9 +52,10 @@ public class GameManager implements KeyEventHandler {
                 () -> ItemPlacementController.placeInitialRoad()
         );
         GameStateChangeListener.invoke();
+        tradingGraphics.onNextTurn();
     }
 
-    void InstantiatePlayers() {
+    private void InstantiatePlayers() {
         int playerCount = 4;
         boolean validInput = false;
         while(!validInput) {
@@ -89,7 +96,14 @@ public class GameManager implements KeyEventHandler {
         currentPlayer = players[turnIndex];
 
         dice.rollDice();
+        buildPhase = false;
+        tradingGraphics.onNextTurn();
+
         GameStateChangeListener.invoke();
+    }
+
+    public void setTradingGraphics(TradingGraphics tradingGraphics) {
+        this.tradingGraphics = tradingGraphics;
     }
 
     private void initialTurn() {
@@ -118,6 +132,12 @@ public class GameManager implements KeyEventHandler {
             return turnIndex;
         } else {
             turnIndex--;
+        }
+        if (turnCount >= initialTurns - 1) {
+            buildPhase = false;
+        }
+        else {
+            buildPhase = true;
         }
         return turnIndex;
     }
@@ -175,6 +195,29 @@ public class GameManager implements KeyEventHandler {
 
     public PlayerGraphicsInfo getCurrentPlayerGraphicsInfo() {
         return currentPlayer.getGraphicsInfo();
+    }
+
+    public void startBuildPhase() {
+        buildPhase = true;
+    }
+
+    public boolean isInBuildPhase() {
+        return buildPhase;
+    }
+
+    public void endGame(Player winner) {
+        gameHasEnded = true;
+        this.winner = winner;
+        GameLog.instance.logEvent(winner + " Wins!");
+        GameStateChangeListener.invoke();
+    }
+
+    public Player getWinner() {
+        return winner;
+    }
+
+    public boolean gameOver() {
+        return gameHasEnded;
     }
 
     @Override

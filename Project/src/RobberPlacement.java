@@ -2,7 +2,7 @@ public class RobberPlacement extends ItemPlacement<Tile> {
     @Override
     boolean checkCondition(Tile location) {
         Robber robber = GameManager.instance.getRobber();
-        return location != robber.getTile();
+        return location != robber.getTile() && location.getType() != TileType.Desert;
     }
 
     @Override

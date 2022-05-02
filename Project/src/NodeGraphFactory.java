@@ -1,12 +1,15 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 
 public class NodeGraphFactory {
     private final int nodeCount = 54;
     private final int edgeCount = 72;
+    private final int portCount = 9;
     private Node[] nodes = new Node[nodeCount];
     private Edge[] edges = new Edge[edgeCount];
+    private Port[] ports = new Port[portCount];
     int nodesAdded = 0;
     int edgesAdded = 0;
 
@@ -30,17 +33,33 @@ public class NodeGraphFactory {
 
         Collections.shuffle(ports);
 
-        Iterator<Port> iterator = ports.iterator();
+        for (int i = 0; i < ports.size(); i++) {
+            this.ports[i] = ports.get(i);
+        }
 
-        map[0][0].upper.setPort(map[0][0].upperLeft.setPort(iterator.next()));
-        map[0][1].upper.setPort(map[0][1].upperRight.setPort(iterator.next()));
-        map[1][3].upper.setPort(map[1][3].upperRight.setPort(iterator.next()));
-        map[0][0].upper.setPort(map[0][0].upperLeft.setPort(iterator.next()));
-        map[0][0].upper.setPort(map[0][0].upperLeft.setPort(iterator.next()));
-        map[0][0].upper.setPort(map[0][0].upperLeft.setPort(iterator.next()));
-        map[0][0].upper.setPort(map[0][0].upperLeft.setPort(iterator.next()));
-        map[0][0].upper.setPort(map[0][0].upperLeft.setPort(iterator.next()));
-        map[0][0].upper.setPort(map[0][0].upperLeft.setPort(iterator.next()));
+        Iterator<Port> iterator = ports.iterator();
+        int[][] portPositions = {
+                new int[] {340, 105},
+                new int[] {550, 105},
+                new int[] {690, 190},
+                new int[] {785, 350},
+                new int[] {690, 510},
+                new int[] {550, 590},
+                new int[] {345, 600},
+                new int[] {250, 435},
+                new int[] {255, 260},
+                new int[] {340, 105}
+        };
+
+        map[0][0].upper.setPort(map[0][0].upperLeft.setPort(iterator.next())).setScreenPosition(portPositions[0]);
+        map[0][1].upper.setPort(map[0][1].upperRight.setPort(iterator.next())).setScreenPosition(portPositions[1]);
+        map[1][3].upper.setPort(map[1][3].upperRight.setPort(iterator.next())).setScreenPosition(portPositions[2]);
+        map[2][4].upperRight.setPort(map[2][4].lowerRight.setPort(iterator.next())).setScreenPosition(portPositions[3]);
+        map[3][3].lower.setPort(map[3][3].lowerRight.setPort(iterator.next())).setScreenPosition(portPositions[4]);
+        map[4][1].lower.setPort(map[4][1].lowerRight.setPort(iterator.next())).setScreenPosition(portPositions[5]);
+        map[4][0].lower.setPort(map[4][0].lowerLeft.setPort(iterator.next())).setScreenPosition(portPositions[6]);
+        map[3][0].upperLeft.setPort(map[3][0].lowerLeft.setPort(iterator.next())).setScreenPosition(portPositions[7]);
+        map[1][0].upperLeft.setPort(map[1][0].lowerLeft.setPort(iterator.next())).setScreenPosition(portPositions[8]);
     }
 
     public void createGraph() {
@@ -187,5 +206,9 @@ public class NodeGraphFactory {
 
     public Edge[] getEdges() {
         return edges;
+    }
+
+    public Port[] getPorts() {
+        return ports;
     }
 }

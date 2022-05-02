@@ -24,6 +24,7 @@ public class Bank {
         developmentCardStock.put(DevelopmentCardType.YearOfPlenty, 2);
 
         developmentCardCount = 25;
+
     }
 
     public void initializeCosts() {
@@ -83,6 +84,7 @@ public class Bank {
 
             GameLog.instance.logEvent(GameManager.instance.getCurrentPlayer() + " bought a " + itemType.toString());
 
+            GameManager.instance.startBuildPhase();
 
             for (ResourceType resourceType : cost.keySet()) {
                 inventory.payItem(resourceType, cost.get(resourceType));

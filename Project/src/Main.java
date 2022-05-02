@@ -4,6 +4,7 @@ public class Main {
             5. If the bank is with like 1 or 2 of a resource and multiple people roll on a tile to get resources???
                 This is too fringe of a case for us to consider--at most we'd lose a point on the off chance
                 he can actually pull off a situation like this
+            Does shopping for a dev card end the trading phase???
             Please add any more questions yall have here so we can fix them and not get yeeted
         */
 

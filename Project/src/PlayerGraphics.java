@@ -26,6 +26,7 @@ public class PlayerGraphics implements GraphicsItem
     {
         for (int i = 0; i < players.length; i++)
         {
+            g.setFont(new Font("default", Font.BOLD, 16));
             g.drawImage(OpaqueSquare, 1070, 380 + i * 80, 544 , 81 , null);
             g.drawImage(longestRoad.hasLongestRoad(players[i]) ? LongestRoad : NormalRoad, 1150, 400 + i * 80, 77 , 26 , null);
             g.drawImage(NormalArmy, 1265, 385 + i * 80, 15 , 40 , null);
@@ -43,8 +44,7 @@ public class PlayerGraphics implements GraphicsItem
             g.drawString("1", 1290, 422 + i * 80);
 
             g.setFont(new Font("default", Font.BOLD, 50));
-            g.drawString(players[i].getPublicVictoryPoints()+"", 1075, 427 + i * 80);
-            g.setFont(new Font("default", Font.BOLD, 16));
+            g.drawString(players[i].getPublicVictoryPoints()+"", 1075 - (players[i].getPublicVictoryPoints() > 9 ? 20 : 0), 427 + i * 80);
         }
     }
 }

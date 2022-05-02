@@ -133,7 +133,7 @@ public class GameManager implements KeyEventHandler {
         } else {
             turnIndex--;
         }
-        if (turnCount == initialTurns) {
+        if (turnCount >= initialTurns - 1) {
             buildPhase = false;
         }
         else {

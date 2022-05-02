@@ -50,7 +50,8 @@ public class GamePanel extends JPanel implements KeyListener, MouseListener {
 
     private void drawGraphicsItems(Graphics g) {
         for (Player player : GameManager.instance.getPlayers()) {
-            if (player.getPublicVictoryPoints() + player.getSecretVictoryPoints() >= 10) {
+            if (player.getPublicVictoryPoints() + player.getSecretVictoryPoints() >= 10
+                    && !GameManager.instance.gameOver()) {
                 GameManager.instance.endGame(player);
             }
         }

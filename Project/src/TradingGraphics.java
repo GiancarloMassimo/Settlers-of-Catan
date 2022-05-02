@@ -133,6 +133,14 @@ public class TradingGraphics implements GraphicsItem, MouseEventHandler, KeyEven
 
         if (resourceBeingRequested == null) return false;
 
+        // Check that the bank has the resources being asked for
+
+        for (ResourceType resourceType : ResourceType.values()) {
+            if (GameManager.instance.getBank().getStockOfResource(resourceType) < currentRequest.get(resourceType)) {
+                return false;
+            }
+        }
+
         //check if the player is trading the correct ratio
 
         if (amountBeingOffered % currentPlayer.getTradingRatio(resourceBeingOffered) == 0
@@ -153,6 +161,15 @@ public class TradingGraphics implements GraphicsItem, MouseEventHandler, KeyEven
             }
         }
         if (isEmptyOffer) return;
+
+        boolean isEmptyRequest = true;
+        for (ResourceType resourceType : currentRequest.keySet()) {
+            if (currentRequest.get(resourceType) > 0) {
+                isEmptyRequest = false;
+                break;
+            }
+        }
+        if (isEmptyRequest) return;
 
         for (Player player : players) {
             if (player == currentPlayer) continue;
@@ -175,7 +192,7 @@ public class TradingGraphics implements GraphicsItem, MouseEventHandler, KeyEven
 
         ResourceType clicked = getResourceClicked(e.getX());
         if (clicked != null) {
-            if (e.getY() >= 790 && validRequest(clicked)) {
+            if (e.getY() >= 797 && validRequest(clicked)) {
                 GameActionHandler.signalAction(
                         GameActionTypes.Instant,
                         () -> {
@@ -189,6 +206,7 @@ public class TradingGraphics implements GraphicsItem, MouseEventHandler, KeyEven
                         GameActionTypes.Instant,
                         () -> {
                             currentOffer.put(clicked, currentOffer.get(clicked) + 1);
+                            updateAvailableTrades();
                             GameStateChangeListener.invoke();
                         }
                 );

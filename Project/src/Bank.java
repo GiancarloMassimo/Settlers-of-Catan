@@ -124,7 +124,7 @@ public class Bank {
         return getStockOfResource(resourceType) >= amount;
     }
 
-    public void changeDevelopmentCardCount(int n) { developmentCardCount-=n; }
+    public void changeDevelopmentCardCount(int n) { developmentCardCount += n; }
 
     public DevelopmentCard getRandomDevelopmentCard(Player p) {
         if(developmentCardCount == 0) return null;

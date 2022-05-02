@@ -1,5 +1,7 @@
 public enum DevelopmentCardType {
     Knight,
-    Progress,
+    Monopoly,
+    RoadBuilding,
+    YearOfPlenty,
     VictoryPoint
 }

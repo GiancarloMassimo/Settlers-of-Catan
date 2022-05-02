@@ -5,7 +5,7 @@ public class Main {
             2. The rules say something different than him on collecting resources from settlements placed in the initial rounds
             3. Are you allowed to move the robber to the desert?
             4. Are you allowed to steal nothing from a player with no resources?
-            5. If the bank is with like 1 or 2 of a resource and multiple people roll on a tile to get resources???
+            5. If the bank is with like 1 or 2 of a resource and multiple people roll on a tile to get resources??? (no player gets any resources)
 
             Please add any more questions yall have here so we can fix them and not get yeeted
         */

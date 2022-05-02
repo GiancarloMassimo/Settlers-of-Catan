@@ -1,8 +1,8 @@
 public class VictoryPointCard extends DevelopmentCard{
     private String title; // all points are 1
-    public VictoryPointCard(String t, Player o){
+    public VictoryPointCard(Player o){
         super(o);
-        title =t;
+        //title =t;
     }
 
     public void use(){

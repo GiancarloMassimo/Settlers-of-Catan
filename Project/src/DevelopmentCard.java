@@ -7,4 +7,8 @@ public class DevelopmentCard {
     public Player getOwner() {
         return owner;
     }
+
+    public void use() {
+        GameManager.instance.getBank().changeDevelopmentCardCount(1);
+    }
 }

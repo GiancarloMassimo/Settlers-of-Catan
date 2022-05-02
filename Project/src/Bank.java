@@ -3,7 +3,7 @@ import java.util.HashMap;
 public class Bank {
     private HashMap<ItemType, ItemCost> costMap;
     private HashMap<ResourceType, Integer> bankStock;
-    private int developmentCardCount = 25;
+    private int developmentCardCount;
     private HashMap<DevelopmentCardType, Integer> developmentCardStock;
 
     public Bank() {
@@ -19,7 +19,12 @@ public class Bank {
         }
         developmentCardStock.put(DevelopmentCardType.Knight, 14);
         developmentCardStock.put(DevelopmentCardType.VictoryPoint, 5);
-        developmentCardStock.put(DevelopmentCardType.Progress, 6);//could treat different types of progress cards as separate
+        developmentCardStock.put(DevelopmentCardType.Monopoly, 2);
+        developmentCardStock.put(DevelopmentCardType.RoadBuilding, 2);
+        developmentCardStock.put(DevelopmentCardType.YearOfPlenty, 2);
+
+        developmentCardCount = 25;
+
     }
 
     public void initializeCosts() {
@@ -57,7 +62,12 @@ public class Bank {
     public void purchase(Inventory inventory, ItemType itemType) {
         HashMap<ResourceType, Integer> cost = costMap.get(itemType).getCostMap();
 
-        if (hasEnoughResources(inventory, cost) && inventory.itemAvailable(itemType)) {
+        if (hasEnoughResources(inventory, cost)) {
+            if (itemType == ItemType.DevelopmentCard && developmentCardCount > 1){
+                //give player the devcard
+                developmentCardCount--;
+        }
+            else if(inventory.itemAvailable(itemType)) {
             try {
                 if (itemType == ItemType.Road) {
                     ItemPlacementController.placeRoad();
@@ -66,14 +76,15 @@ public class Bank {
                 } else if (itemType == ItemType.City) {
                     ItemPlacementController.placeCity();
                 }
-            }
-            catch (NoValidPositionForItemException e) {
+            } catch (NoValidPositionForItemException e) {
                 return;
             }
+        }
+            else return;
 
             GameLog.instance.logEvent(GameManager.instance.getCurrentPlayer() + " bought a " + itemType.toString());
 
-            //inventory.decrementItem(itemType);
+            GameManager.instance.startBuildPhase();
 
             for (ResourceType resourceType : cost.keySet()) {
                 inventory.payItem(resourceType, cost.get(resourceType));
@@ -113,5 +124,32 @@ public class Bank {
 
     public boolean hasResource(ResourceType resourceType, int amount) {
         return getStockOfResource(resourceType) >= amount;
+    }
+
+    public void changeDevelopmentCardCount(int n) { developmentCardCount += n; }
+
+    public DevelopmentCard getRandomDevelopmentCard(Player p) {
+        if(developmentCardCount == 0) return null;
+        int n = Helpers.randInt(1, developmentCardCount+1);
+        for(DevelopmentCardType t: DevelopmentCardType.values()) {
+            if(n <= developmentCardStock.get(t)) {
+                changeDevelopmentCardCount(-1);
+                developmentCardStock.put(t, developmentCardStock.get(t) - 1);
+                switch(t){
+                    case Knight:
+                        return new KnightCard(p);
+                    case Monopoly:
+                        return new Monopoly(p);
+                    case RoadBuilding:
+                        return new RoadBuilding(p);
+                    case VictoryPoint:
+                        return new VictoryPointCard(p);
+                    case YearOfPlenty:
+                        return new YearOfPlenty(p);
+                }
+            }
+            n -= developmentCardStock.get(t);
+        }
+        return null;
     }
 }

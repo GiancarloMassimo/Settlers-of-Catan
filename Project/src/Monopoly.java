@@ -1,27 +1,64 @@
-public class Monopoly extends ProgressCard{
+import java.util.HashMap;
+
+public class Monopoly extends ProgressCard implements ItemSelection{
+    Player player;
+    int currAmount = 0;
+    ResourceType selectedType;
 
     public Monopoly(Player o){
         super(o,ProgressCardType.Monopoly);
     }
-    //get one requested card from all players, once finished returns the updated player arraylist to update all card counts
-    public void use(ResourceType req, Player[] playerList){
-        Player[] list = playerList;
-        int cnt=0;
-        int pos =0;
-        //gets location of owner
-        for (int j =0;j<list.length;j++)
-            if (list[j]==super.getOwner())
-                pos=j;
-        //subtracts 1 from the number of that players resource excluding the owner/user, then counts the amount the owner gets
-        for (int i =0;i< list.length;i++)
-            if (i != pos)
-                if (list[i].getInventory().getResourceCount(req) != 0){
-                    list[i].getInventory().payItem(req,1);
-                    cnt++;
-                }
 
-        list[pos].getInventory().receiveItem(req,cnt);
+    @Override
+    public void setUp(Player player) {
+        this.player = player;
+        clearSelection();
+    }
 
-        //return list;//returns an array of players to update their inventories
+    @Override
+    public String getSelectionMessage() {
+        return player + "Select one card";
+    }
+
+    @Override
+    public void tryItemSelection(ResourceType resourceType) {
+        if(currAmount==0) currAmount++;
+        selectedType = resourceType;
+    }
+
+    @Override
+    public boolean isCompleteSelection() {
+        return currAmount == 1;
+    }
+
+    @Override
+    public void clearSelection() {
+        selectedType = null;
+        currAmount = 0;
+        GameStateChangeListener.invoke();
+    }
+
+    @Override
+    public void confirm() {
+        Player[] p = GameManager.instance.getPlayers();
+        int received = 0;
+        for(int i=0;i<4;i++) {
+            if(p[i] != player) {
+                Inventory inv = p[i].getInventory();
+                int num = inv.getResourceCount(selectedType);
+                received += num;
+                player.getInventory().receiveItem(selectedType, num);
+                inv.payItem(selectedType, num);
+            }
+        }
+        GameLog.instance.logEvent(player + " received " + received + " cards");
+        GameStateChangeListener.invoke();
+    }
+
+    @Override
+    public HashMap<ResourceType, Integer> getSelection() {
+        HashMap<ResourceType, Integer> selectionMap = new HashMap<>();
+        selectionMap.put(selectedType, 1);
+        return selectionMap;
     }
 }

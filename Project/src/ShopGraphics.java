@@ -64,7 +64,8 @@ public class ShopGraphics implements GraphicsItem, MouseEventHandler
             g.setColor(Color.black);
             g.setFont(new Font("default", Font.PLAIN, 20));
             g.drawString(GameManager.instance.getCurrentPlayer().getInventory().getItemCount(ItemType.Settlement)+"", 307, 820);
-            g.drawString(GameManager.instance.getCurrentPlayer().getInventory().getItemCount(ItemType.Road)+"", 225, 820);
+            g.drawString(GameManager.instance.getCurrentPlayer().getInventory().getItemCount(ItemType.Road)+"",
+                    225 + (GameManager.instance.getCurrentPlayer().getInventory().getItemCount(ItemType.Road) < 10 ? 7 : 0), 820);
             g.drawString(GameManager.instance.getCurrentPlayer().getInventory().getItemCount(ItemType.City)+"", 407, 820);
 
 

@@ -3,7 +3,7 @@ import java.util.HashMap;
 public class Bank {
     private HashMap<ItemType, ItemCost> costMap;
     private HashMap<ResourceType, Integer> bankStock;
-    private int developmentCardCount = 25;
+    private int developmentCardCount;
     private HashMap<DevelopmentCardType, Integer> developmentCardStock;
 
     public Bank() {
@@ -24,6 +24,7 @@ public class Bank {
         developmentCardStock.put(DevelopmentCardType.YearOfPlenty, 2);
 
         developmentCardCount = 25;
+
     }
 
     public void initializeCosts() {
@@ -65,7 +66,7 @@ public class Bank {
             if (itemType == ItemType.DevelopmentCard && developmentCardCount > 1){
                 //give player the devcard
                 developmentCardCount--;
-            }
+        }
             else if(inventory.itemAvailable(itemType)) {
             try {
                 if (itemType == ItemType.Road) {
@@ -75,13 +76,15 @@ public class Bank {
                 } else if (itemType == ItemType.City) {
                     ItemPlacementController.placeCity();
                 }
-            }
-            catch (NoValidPositionForItemException e) {
+            } catch (NoValidPositionForItemException e) {
                 return;
             }
-            }
+        }
             else return;
+
             GameLog.instance.logEvent(GameManager.instance.getCurrentPlayer() + " bought a " + itemType.toString());
+
+            GameManager.instance.startBuildPhase();
 
             for (ResourceType resourceType : cost.keySet()) {
                 inventory.payItem(resourceType, cost.get(resourceType));
@@ -123,7 +126,7 @@ public class Bank {
         return getStockOfResource(resourceType) >= amount;
     }
 
-    public void changeDevelopmentCardCount(int n) { developmentCardCount-=n; }
+    public void changeDevelopmentCardCount(int n) { developmentCardCount += n; }
 
     public DevelopmentCard getRandomDevelopmentCard(Player p) {
         if(developmentCardCount == 0) return null;

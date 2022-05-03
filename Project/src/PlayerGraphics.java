@@ -8,11 +8,12 @@ public class PlayerGraphics implements GraphicsItem
     private Player[] players;
     private LongestRoad longestRoad;
 
-
+    private LargestArmy largestArmy;
     public PlayerGraphics()
     {
         players = GameManager.instance.getPlayers();
         longestRoad = GameManager.instance.getLongestRoad();
+        largestArmy = GameManager.instance.getLargestArmy();
         OpaqueSquare = ImageLoader.getImage("SemiOpaqueBackground");
 
         NormalRoad = ImageLoader.getImage("Normal Road");
@@ -29,7 +30,7 @@ public class PlayerGraphics implements GraphicsItem
             g.setFont(new Font("default", Font.BOLD, 16));
             g.drawImage(OpaqueSquare, 1070, 380 + i * 80, 544 , 81 , null);
             g.drawImage(longestRoad.hasLongestRoad(players[i]) ? LongestRoad : NormalRoad, 1150, 400 + i * 80, 77 , 26 , null);
-            g.drawImage(NormalArmy, 1265, 385 + i * 80, 15 , 40 , null);
+            g.drawImage(largestArmy.hasLargestArmy(players[i]) ? LargestArmy : NormalArmy, 1265, 385 + i * 80, 15 , 40 , null);
             g.setColor(players[i].getGraphicsInfo().getPlayerColor());
             if (players[i] == GameManager.instance.getCurrentPlayer())
                 g.drawRect(1070, 380 + i * 80, 544, 66);
@@ -39,9 +40,7 @@ public class PlayerGraphics implements GraphicsItem
 
             g.setColor(Color.white);
             g.drawString(longestRoad.getRoadLength(players[i]) + "", 1235, 422 + i * 80);
-
-
-            g.drawString("1", 1290, 422 + i * 80);
+            g.drawString(largestArmy.getArmySize(players[i]) + "", 1290, 422 + i * 80);
 
             g.setFont(new Font("default", Font.BOLD, 50));
             g.drawString(players[i].getPublicVictoryPoints()+"", 1075 - (players[i].getPublicVictoryPoints() > 9 ? 20 : 0), 427 + i * 80);

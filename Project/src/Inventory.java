@@ -55,6 +55,10 @@ public class Inventory {
         return developmentCards.get(type);
     }
 
+    public void receiveDevelopmentCard(DevelopmentCardType type) {
+        developmentCards.put(type, developmentCards.get(type) + 1);
+    }
+
     public int getTotalResources() {
         int count = 0;
 

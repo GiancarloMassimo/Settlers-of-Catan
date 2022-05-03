@@ -66,9 +66,26 @@ public class InventoryGraphics implements GraphicsItem, MouseEventHandler
 
     @Override
     public void OnMouseClick(MouseEvent e) {
+        Player p = GameManager.instance.getCurrentPlayer();
         DevelopmentCardType type = getCardType(e.getX(), e.getY());
         if(type == null) return;
-        Inventory inventory = GameManager.instance.getCurrentPlayer().getInventory();
+        Inventory inventory = p.getInventory();
+        if(inventory.getDevelopmentCardCount(type) == 0) return;
+        if(type == DevelopmentCardType.Monopoly){
+            ItemSelectionController.monopoly(p);
+            System.out.println("used monopoly");
+        }
+        else if(type == DevelopmentCardType.YearOfPlenty) {
+            ItemSelectionController.yearOfPlenty(p);
+            System.out.println("used yearofplenty");
+        }
+        else if(type == DevelopmentCardType.Knight) {
+            System.out.println("used knight");
+        }
+        else if(type == DevelopmentCardType.RoadBuilding) {
+            System.out.println("used roadbuilding");
+        }
+
     }
 
     private DevelopmentCardType getCardType(int x, int y) {

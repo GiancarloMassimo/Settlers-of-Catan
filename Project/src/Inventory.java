@@ -4,14 +4,18 @@ public class Inventory {
     private int itemsInInventory = 0;
     private HashMap<ResourceType, Integer> inventory;
     private HashMap<ItemType, Integer> remainingItems;
+    private HashMap<DevelopmentCardType, Integer> developmentCards;
 
     public Inventory() {
         inventory = new HashMap<>();
         remainingItems = new HashMap<>();
+        developmentCards = new HashMap<>();
         for (ResourceType type : ResourceType.values()) {
             inventory.put(type, 0);
         }
-
+        for(DevelopmentCardType type: DevelopmentCardType.values()) {
+            developmentCards.put(type, 0);
+        }
         remainingItems.put(ItemType.Settlement, 5);
         remainingItems.put(ItemType.City, 4);
         remainingItems.put(ItemType.Road, 15);
@@ -45,6 +49,10 @@ public class Inventory {
 
     public int getItemCount(ItemType type) {
         return remainingItems.get(type);
+    }
+
+    public int getDevelopmentCardCount(DevelopmentCardType type) {
+        return developmentCards.get(type);
     }
 
     public int getTotalResources() {

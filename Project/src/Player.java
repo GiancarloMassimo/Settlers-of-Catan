@@ -14,8 +14,6 @@ public class Player {
     private PlayerColor color;
 
     private HashMap<ResourceType, Integer> tradingRatioMap;
-    private HashMap<DevelopmentCardType, Integer> developmentCardHand;
-
     public Player(int playerNumber, PlayerColor color) {
         secretVictoryPoints=0;
         publicVictoryPoints=0;
@@ -27,7 +25,6 @@ public class Player {
         buildings = new ArrayList<>();
         roads = new ArrayList<>();
         setTradingRatios();
-        developmentCardHand = new HashMap<>();
     }
 
     private void setTradingRatios() {
@@ -91,12 +88,14 @@ public class Player {
     }
 
     public void addDevelopmentCard(DevelopmentCardType developmentCardType){
-        developmentCardHand.put(developmentCardType, developmentCardHand.get(developmentCardType)+1);
+        inventory.addDevelopmentCard(developmentCardType,1);
     }
 
     public void useKnightCard(){
+        if (inventory.getDevelopmentCards().get(DevelopmentCardType.Knight)<0)
+            return;
         // use card
-        developmentCardHand.put(DevelopmentCardType.Knight,developmentCardHand.get(DevelopmentCardType.Knight)-1);
+        inventory.addDevelopmentCard(DevelopmentCardType.Knight,-1);
         knightsUsedCount++;
         GameManager.instance.getLargestArmy().checkLargestArmy(this, knightsUsedCount);
     }

@@ -77,4 +77,11 @@ public class Inventory {
         return remainingItems.get(type) > 0;
     }
 
+    public void addDevelopmentCard(DevelopmentCardType developmentCardType, int n){
+        developmentCards.put(developmentCardType,developmentCards.get(developmentCardType)+n);
+    }
+
+    public HashMap<DevelopmentCardType, Integer> getDevelopmentCards(){
+        return developmentCards;
+    }
 }

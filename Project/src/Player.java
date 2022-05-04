@@ -19,7 +19,7 @@ public class Player {
     public Player(int playerNumber, PlayerColor color) {
         secretVictoryPoints=0;
         publicVictoryPoints=0;
-        knightsUsedCount=0;
+        armySize=0;
         this.playerNumber=playerNumber;
         inventory = new Inventory();
         this.color = color;
@@ -94,12 +94,9 @@ public class Player {
     }
 
     public void useKnightCard(){
-        if (inventory.getDevelopmentCards().get(DevelopmentCardType.Knight)<0)
-            return;
-        // use card
         inventory.addDevelopmentCard(DevelopmentCardType.Knight,-1);
-        knightsUsedCount++;
-        GameManager.instance.getLargestArmy().checkLargestArmy(this, knightsUsedCount);
+        armySize++;
+        GameManager.instance.getLargestArmy().checkLargestArmy(this, armySize);
     }
 
     public int getPublicVictoryPoints(){

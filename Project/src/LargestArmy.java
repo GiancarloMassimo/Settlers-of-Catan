@@ -1,7 +1,7 @@
 import java.util.HashMap;
 
 public class LargestArmy {
-    private Player largestArmyPlayer;
+    Player largestArmyPlayer;
     private int largestArmySize;
 
     private HashMap<Player, Integer> largestArmies;
@@ -27,6 +27,7 @@ public class LargestArmy {
 
             largestArmySize = size;
             largestArmyPlayer = player;
+
             }
 
         if (largestArmies.get(player) < size)
@@ -39,6 +40,9 @@ public class LargestArmy {
 
     public boolean hasLargestArmy(Player player) {
         return player == largestArmyPlayer;
+
+        }
+
     }
 
 

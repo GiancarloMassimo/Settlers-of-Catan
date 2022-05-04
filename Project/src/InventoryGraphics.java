@@ -48,26 +48,70 @@ public class InventoryGraphics implements GraphicsItem, MouseEventHandler
         g.drawImage(orepic, 625, 732, 83, 88, null);
         g.drawString(current.getResourceCount(ResourceType.Ore) + "", 645, 796);
 
+        for (int i = 0; i < GameManager.instance.getCurrentPlayer().armySize; i++) {
+            g.drawImage(Knight, 715, 820 + i * 20, 30, 45, null);
+        }
+
+        g.setFont(new Font("default", Font.BOLD, 22));
+
+
         g.drawImage(VPCard, 715, 732, 60, 88, null);
 
+////        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.VictoryPoint) + "", 730, 796);
+//
+//        g.drawImage(Knight, 780, 732, 60, 88, null);
+////        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.Knight) + "", 795, 796);
+//
+//        g.drawImage(Monopoly, 845, 732, 60, 88, null);
+////        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.Monopoly) + "", 860, 796);
+//
+//        g.drawImage(YearOfPlenty, 910, 732, 60, 88, null);
+////        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.YearOfPlenty) + "", 925, 796);
+//
+//        g.drawImage(RoadBuilding, 975, 732, 60, 88, null);
+////        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.RoadBuilding) + "", 990, 796);
+//
+//        for (int i=0;i<5;i++)
+//        g.fillOval(755 + i *65, 800 ,26,25);
+//
+//        g.setColor(Color.BLACK);
+//        g.setFont(new Font("default", Font.BOLD, 20));
+//
+//        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.VictoryPoint) + "", 763, 820);
+//        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.Knight) + "", 828, 820);
+//        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.Monopoly) + "", 893, 820);
+//        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.YearOfPlenty) + "", 958, 820);
+//        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.RoadBuilding) + "", 1023, 820);
+
+
+        g.setColor(Color.WHITE);
+        g.fillOval(745, 800, 25, 25);
+        g.setColor(Color.BLACK);
+        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.VictoryPoint) + "", 750, 820);
+
         g.drawImage(Knight, 780, 732, 60, 88, null);
+        g.setColor(Color.WHITE);
+        g.fillOval(810, 800, 25, 25);
+        g.setColor(Color.BLACK);
+        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.Knight) + "", 815, 820);
 
         g.drawImage(Monopoly, 845, 732, 60, 88, null);
+        g.setColor(Color.WHITE);
+        g.fillOval(875, 800, 25, 25);
+        g.setColor(Color.BLACK);
+        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.Monopoly) + "", 880, 820);
 
         g.drawImage(YearOfPlenty, 910, 732, 60, 88, null);
+        g.setColor(Color.WHITE);
+        g.fillOval(940, 800, 25, 25);
+        g.setColor(Color.BLACK);
+        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.YearOfPlenty) + "", 945, 820);
 
         g.drawImage(RoadBuilding, 975, 732, 60, 88, null);
-
-        for (int i=0;i<5;i++)
-        g.fillOval(755 + i *65, 800 ,26,25);
-
+        g.setColor(Color.WHITE);
+        g.fillOval(1005, 800, 25, 25);
         g.setColor(Color.BLACK);
-        g.setFont(new Font("default", Font.BOLD, 20));
-        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.VictoryPoint) + "", 763, 820);
-        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.Knight) + "", 828, 820);
-        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.Monopoly) + "", 893, 820);
-        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.YearOfPlenty) + "", 958, 820);
-        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.RoadBuilding) + "", 1023, 820);
+        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.RoadBuilding) + "", 1010, 820);
 
     }
 
@@ -89,18 +133,16 @@ public class InventoryGraphics implements GraphicsItem, MouseEventHandler
         if(type == DevelopmentCardType.Monopoly && inventory.canPlayCard(DevelopmentCardType.Monopoly)){
             inventory.playCard(type);
             ItemSelectionController.monopoly(p);
-            System.out.println("used monopoly");
         }
         else if(type == DevelopmentCardType.YearOfPlenty && inventory.canPlayCard(DevelopmentCardType.YearOfPlenty)) {
             inventory.playCard(type);
             ItemSelectionController.yearOfPlenty(p);
-            System.out.println("used yearofplenty");
         }
         else if(type == DevelopmentCardType.Knight && inventory.canPlayCard(DevelopmentCardType.Knight)) {
             inventory.playCard(type);
-            GameManager.instance.getCurrentPlayer().useKnightCard();
+            GameManager.instance.getCurrentPlayer().armySize++;
+            GameManager.instance.getLargestArmy().checkLargestArmy(GameManager.instance.getCurrentPlayer(), GameManager.instance.getCurrentPlayer().armySize);
             ItemPlacementController.placeRobber();
-            System.out.println("used knight");
         }
         else if(type == DevelopmentCardType.RoadBuilding && inventory.canPlayCard(DevelopmentCardType.RoadBuilding)) {
             if (inventory.getItemCount(ItemType.Road) < 2) {
@@ -127,8 +169,6 @@ public class InventoryGraphics implements GraphicsItem, MouseEventHandler
                         }
                     }
             );
-
-            System.out.println("used roadbuilding");
         }
     }
 

@@ -18,7 +18,7 @@ public class Bank {
             bankStock.put(resourceType, 19);
         }
         developmentCardStock.put(DevelopmentCardType.Knight, 14);
-        developmentCardStock.put(DevelopmentCardType.VictoryPoint, 2);
+        developmentCardStock.put(DevelopmentCardType.VictoryPoint, 5);
         developmentCardStock.put(DevelopmentCardType.Monopoly, 2);
         developmentCardStock.put(DevelopmentCardType.RoadBuilding, 2);
         developmentCardStock.put(DevelopmentCardType.YearOfPlenty, 2);

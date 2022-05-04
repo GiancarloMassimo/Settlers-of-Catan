@@ -8,6 +8,7 @@ public class Player {
     private int secretVictoryPoints;
     private int publicVictoryPoints;
     private int playerNumber;
+    public int armySize = 0;
 
     private PlayerGraphicsInfo graphicsInfo;
     private PlayerColor color;

@@ -1,5 +1,5 @@
 public class LargestArmy {
-    private Player largestArmyPlayer;
+    Player largestArmyPlayer;
     private int largestArmySize;
 
     public LargestArmy(){
@@ -18,7 +18,7 @@ public class LargestArmy {
 
             largestArmySize = size;
             largestArmyPlayer = player;
-            }
+        }
     }
 
 

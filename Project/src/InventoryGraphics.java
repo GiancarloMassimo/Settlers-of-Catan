@@ -48,6 +48,9 @@ public class InventoryGraphics implements GraphicsItem, MouseEventHandler
         g.drawImage(orepic, 625, 732, 83, 88, null);
         g.drawString(current.getResourceCount(ResourceType.Ore) + "", 645, 796);
 
+        for (int i = 0; i < GameManager.instance.getCurrentPlayer().armySize; i++) {
+            g.drawImage(Knight, 715, 820 + i * 20, 30, 45, null);
+        }
 
         g.setFont(new Font("default", Font.BOLD, 22));
 
@@ -100,17 +103,16 @@ public class InventoryGraphics implements GraphicsItem, MouseEventHandler
         if(type == DevelopmentCardType.Monopoly && inventory.canPlayCard(DevelopmentCardType.Monopoly)){
             inventory.playCard(type);
             ItemSelectionController.monopoly(p);
-            System.out.println("used monopoly");
         }
         else if(type == DevelopmentCardType.YearOfPlenty && inventory.canPlayCard(DevelopmentCardType.YearOfPlenty)) {
             inventory.playCard(type);
             ItemSelectionController.yearOfPlenty(p);
-            System.out.println("used yearofplenty");
         }
         else if(type == DevelopmentCardType.Knight && inventory.canPlayCard(DevelopmentCardType.Knight)) {
             inventory.playCard(type);
+            GameManager.instance.getCurrentPlayer().armySize++;
+            GameManager.instance.getLargestArmy().checkLargestArmy(GameManager.instance.getCurrentPlayer(), GameManager.instance.getCurrentPlayer().armySize);
             ItemPlacementController.placeRobber();
-            System.out.println("used knight");
         }
         else if(type == DevelopmentCardType.RoadBuilding && inventory.canPlayCard(DevelopmentCardType.RoadBuilding)) {
             if (inventory.getItemCount(ItemType.Road) < 2) {
@@ -137,8 +139,6 @@ public class InventoryGraphics implements GraphicsItem, MouseEventHandler
                         }
                     }
             );
-
-            System.out.println("used roadbuilding");
         }
     }
 

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Player {
     private ArrayList<Building> buildings;
@@ -7,26 +8,53 @@ public class Player {
     private int secretVictoryPoints;
     private int publicVictoryPoints;
     private int playerNumber;
+    private int knightsUsedCount;
 
     private PlayerGraphicsInfo graphicsInfo;
     private PlayerColor color;
 
+    private HashMap<ResourceType, Integer> tradingRatioMap;
     public Player(int playerNumber, PlayerColor color) {
-
         secretVictoryPoints=0;
         publicVictoryPoints=0;
+        knightsUsedCount=0;
         this.playerNumber=playerNumber;
         inventory = new Inventory();
         this.color = color;
         graphicsInfo = new PlayerGraphicsInfo(color);
         buildings = new ArrayList<>();
         roads = new ArrayList<>();
+        setTradingRatios();
+    }
+
+    private void setTradingRatios() {
+        tradingRatioMap = new HashMap<>();
+        for (ResourceType resourceType : ResourceType.values()) {
+            tradingRatioMap.put(resourceType, 4);
+        }
+    }
+
+    public int getTradingRatio(ResourceType resourceType) {
+        return tradingRatioMap.get(resourceType);
     }
 
     public void addBuilding(Building building) {
         buildings.add(building);
         inventory.decrementItem(ItemType.Settlement);
         publicVictoryPoints++;
+
+        if (building.getLocation().getPort() != null) {
+            Port port = building.getLocation().getPort();
+            if (port.type == null) {
+                for (ResourceType resourceType : tradingRatioMap.keySet()) {
+                    if (tradingRatioMap.get(resourceType) > 3) {
+                        tradingRatioMap.put(resourceType, 3);
+                    }
+                }
+            } else {
+                tradingRatioMap.put(port.type, 2);
+            }
+        }
     }
 
     public void upgradeBuilding(Building building) {
@@ -59,13 +87,19 @@ public class Player {
         return resource;
     }
 
-    public void addDevelopmentCard(){
-
+    public void addDevelopmentCard(DevelopmentCardType developmentCardType){
+        inventory.addDevelopmentCard(developmentCardType,1);
     }
 
     public void useKnightCard(){
-
+        if (inventory.getDevelopmentCards().get(DevelopmentCardType.Knight)<0)
+            return;
+        // use card
+        inventory.addDevelopmentCard(DevelopmentCardType.Knight,-1);
+        knightsUsedCount++;
+        GameManager.instance.getLargestArmy().checkLargestArmy(this, knightsUsedCount);
     }
+
     public int getPublicVictoryPoints(){
         return publicVictoryPoints;
     }

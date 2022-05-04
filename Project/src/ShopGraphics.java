@@ -64,7 +64,8 @@ public class ShopGraphics implements GraphicsItem, MouseEventHandler
             g.setColor(Color.black);
             g.setFont(new Font("default", Font.PLAIN, 20));
             g.drawString(GameManager.instance.getCurrentPlayer().getInventory().getItemCount(ItemType.Settlement)+"", 307, 820);
-            g.drawString(GameManager.instance.getCurrentPlayer().getInventory().getItemCount(ItemType.Road)+"", 225, 820);
+            g.drawString(GameManager.instance.getCurrentPlayer().getInventory().getItemCount(ItemType.Road)+"",
+                    225 + (GameManager.instance.getCurrentPlayer().getInventory().getItemCount(ItemType.Road) < 10 ? 7 : 0), 820);
             g.drawString(GameManager.instance.getCurrentPlayer().getInventory().getItemCount(ItemType.City)+"", 407, 820);
 
 
@@ -92,11 +93,13 @@ public class ShopGraphics implements GraphicsItem, MouseEventHandler
         final int itemRadius = 30;
         final int[] roadPos = {250, 810},
                     settlementPos = {310, 810},
-                    cityPos = {410, 810};
+                    cityPos = {410, 810},
+                    DevPos = {540, 810};
 
         if (Helpers.getDistance(x, y, roadPos[0] + 20, roadPos[1] + 20) < itemRadius) return ItemType.Road;
         if (Helpers.getDistance(x, y, settlementPos[0] + 20, settlementPos[1] + 20) < itemRadius) return ItemType.Settlement;
         if (Helpers.getDistance(x, y, cityPos[0] + 20, cityPos[1] + 20) < itemRadius) return ItemType.City;
+        if (Helpers.getDistance(x, y, DevPos[0] + 20, DevPos[1] + 20) < itemRadius) return ItemType.DevelopmentCard;
 
         return null;
     }

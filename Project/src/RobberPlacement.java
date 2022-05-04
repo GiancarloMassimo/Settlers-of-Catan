@@ -2,7 +2,7 @@ public class RobberPlacement extends ItemPlacement<Tile> {
     @Override
     boolean checkCondition(Tile location) {
         Robber robber = GameManager.instance.getRobber();
-        return location != robber.getTile();
+        return location != robber.getTile() && location.getType() != TileType.Desert;
     }
 
     @Override
@@ -11,9 +11,11 @@ public class RobberPlacement extends ItemPlacement<Tile> {
         robber.move(location);
         GameLog.instance.logEvent("Robber moved to " + location.toString());
 
-        for (Player player : GameManager.instance.getPlayers()) {
-            if (player.getInventory().getTotalResources() > 7) {
-                ItemSelectionController.discard(player);
+        if (!GameManager.instance.devCardPlayed) {
+            for (Player player : GameManager.instance.getPlayers()) {
+                if (player.getInventory().getTotalResources() > 7) {
+                    ItemSelectionController.discard(player);
+                }
             }
         }
 

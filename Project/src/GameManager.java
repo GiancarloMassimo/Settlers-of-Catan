@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 public class GameManager implements KeyEventHandler {
@@ -18,6 +19,17 @@ public class GameManager implements KeyEventHandler {
     private Map map;
     private Robber robber;
     private LongestRoad longestRoad;
+    private LargestArmy largestArmy;
+
+    private TradingGraphics tradingGraphics;
+
+    private boolean buildPhase = true;
+
+    private boolean gameHasEnded = false;
+    private Player winner = null;
+
+    public boolean devCardPlayed = false;
+    public HashMap<DevelopmentCardType, Integer> devCardTurnPurchase;
 
     public GameManager() {
         if (instance == null) {
@@ -31,6 +43,7 @@ public class GameManager implements KeyEventHandler {
         map = new Map();
         robber = new Robber(map.getDesert());
         longestRoad = new LongestRoad();
+        largestArmy = new LargestArmy();
 
         turnCount = 0;
         initialTurns = players.length * 2;
@@ -43,9 +56,10 @@ public class GameManager implements KeyEventHandler {
                 () -> ItemPlacementController.placeInitialRoad()
         );
         GameStateChangeListener.invoke();
+        tradingGraphics.onNextTurn();
     }
 
-    void InstantiatePlayers() {
+    private void InstantiatePlayers() {
         int playerCount = 4;
         boolean validInput = false;
         while(!validInput) {
@@ -76,6 +90,11 @@ public class GameManager implements KeyEventHandler {
     private void nextTurn() {
         GameLog.instance.logEvent(getCurrentPlayer() + " ended their turn\n");
         turnCount++;
+        devCardPlayed = false;
+        devCardTurnPurchase = new HashMap<>();
+        for (DevelopmentCardType developmentCardType : DevelopmentCardType.values()) {
+            devCardTurnPurchase.put(developmentCardType, 0);
+        }
 
         if (turnCount < initialTurns) {
             initialTurn();
@@ -86,7 +105,14 @@ public class GameManager implements KeyEventHandler {
         currentPlayer = players[turnIndex];
 
         dice.rollDice();
+        buildPhase = false;
+        tradingGraphics.onNextTurn();
+
         GameStateChangeListener.invoke();
+    }
+
+    public void setTradingGraphics(TradingGraphics tradingGraphics) {
+        this.tradingGraphics = tradingGraphics;
     }
 
     private void initialTurn() {
@@ -115,6 +141,12 @@ public class GameManager implements KeyEventHandler {
             return turnIndex;
         } else {
             turnIndex--;
+        }
+        if (turnCount >= initialTurns - 1) {
+            buildPhase = false;
+        }
+        else {
+            buildPhase = true;
         }
         return turnIndex;
     }
@@ -148,6 +180,11 @@ public class GameManager implements KeyEventHandler {
         return longestRoad;
     }
 
+    public LargestArmy getLargestArmy() {
+        return largestArmy;
+    }
+
+
     public Player[] getPlayers()
     {
         return players;
@@ -167,6 +204,29 @@ public class GameManager implements KeyEventHandler {
 
     public PlayerGraphicsInfo getCurrentPlayerGraphicsInfo() {
         return currentPlayer.getGraphicsInfo();
+    }
+
+    public void startBuildPhase() {
+        buildPhase = true;
+    }
+
+    public boolean isInBuildPhase() {
+        return buildPhase;
+    }
+
+    public void endGame(Player winner) {
+        gameHasEnded = true;
+        this.winner = winner;
+        GameLog.instance.logEvent(winner + " Wins!");
+        GameStateChangeListener.invoke();
+    }
+
+    public Player getWinner() {
+        return winner;
+    }
+
+    public boolean gameOver() {
+        return gameHasEnded;
     }
 
     @Override

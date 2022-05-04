@@ -6,6 +6,7 @@ public class Map {
     private Tile[][] map;
     private Node[] nodes;
     private Edge[] edges;
+    private Port[] ports;
     private Tile desert;
 
     public Map() {
@@ -25,6 +26,8 @@ public class Map {
         NodeGraphFactory nodeGraphFactory = new NodeGraphFactory(map);
         nodes = Arrays.copyOf(nodeGraphFactory.getNodes(), nodeGraphFactory.getNodes().length);
         edges = Arrays.copyOf(nodeGraphFactory.getEdges(), nodeGraphFactory.getEdges().length);
+        ports = Arrays.copyOf(nodeGraphFactory.getPorts(), nodeGraphFactory.getPorts().length);
+        nodeGraphFactory = null;
     }
 
     public Tile[][] getTiles() {
@@ -41,5 +44,9 @@ public class Map {
 
     public Edge[] getEdges() {
         return edges;
+    }
+
+    public Port[] getPorts() {
+        return ports;
     }
 }

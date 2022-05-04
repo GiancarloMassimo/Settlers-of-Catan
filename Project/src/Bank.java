@@ -155,4 +155,9 @@ public class Bank {
             n -= developmentCardStock.get(t);
         }
     }
+
+    public void giveBackDevelopmentCard(DevelopmentCardType developmentCardType) {
+        developmentCardStock.put(developmentCardType, developmentCardStock.get(developmentCardType) + 1);
+        changeDevelopmentCardCount(1);
+    }
 }

@@ -13,7 +13,7 @@ public class MonopolyItemSelection implements ItemSelection{
 
     @Override
     public String getSelectionMessage() {
-        return player + "Select one card";
+        return "Monopoly: select one card";
     }
 
     @Override

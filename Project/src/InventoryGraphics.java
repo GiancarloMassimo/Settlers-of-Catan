@@ -90,18 +90,20 @@ public class InventoryGraphics implements GraphicsItem, MouseEventHandler
         if(type == null) return;
         Inventory inventory = p.getInventory();
         if(inventory.getDevelopmentCardCount(type) == 0) return;
-        if(type == DevelopmentCardType.Monopoly){
+        if(type == DevelopmentCardType.Monopoly && inventory.canPlayCard(DevelopmentCardType.Monopoly)){
+            inventory.playCard(type);
             ItemSelectionController.monopoly(p);
             System.out.println("used monopoly");
         }
-        else if(type == DevelopmentCardType.YearOfPlenty) {
+        else if(type == DevelopmentCardType.YearOfPlenty && inventory.canPlayCard(DevelopmentCardType.YearOfPlenty)) {
+            inventory.playCard(type);
             ItemSelectionController.yearOfPlenty(p);
             System.out.println("used yearofplenty");
         }
-        else if(type == DevelopmentCardType.Knight) {
+        else if(type == DevelopmentCardType.Knight && inventory.canPlayCard(DevelopmentCardType.Knight)) {
             System.out.println("used knight");
         }
-        else if(type == DevelopmentCardType.RoadBuilding) {
+        else if(type == DevelopmentCardType.RoadBuilding && inventory.canPlayCard(DevelopmentCardType.RoadBuilding)) {
             System.out.println("used roadbuilding");
         }
 

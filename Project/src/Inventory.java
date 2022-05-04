@@ -19,6 +19,7 @@ public class Inventory {
         remainingItems.put(ItemType.Settlement, 5);
         remainingItems.put(ItemType.City, 4);
         remainingItems.put(ItemType.Road, 15);
+        remainingItems.put(ItemType.DevelopmentCard, 0);
     }
 
     public void receiveItem(ResourceType type, int count) {
@@ -57,6 +58,26 @@ public class Inventory {
 
     public void receiveDevelopmentCard(DevelopmentCardType type) {
         developmentCards.put(type, developmentCards.get(type) + 1);
+        GameManager.instance.devCardTurnPurchase.put(type, GameManager.instance.devCardTurnPurchase.get(type) + 1);
+    }
+
+    public boolean canPlayCard(DevelopmentCardType type) {
+        if (GameManager.instance.devCardPlayed) {
+            return false;
+        }
+        if (type == DevelopmentCardType.VictoryPoint) {
+            return false;
+        }
+        if (getDevelopmentCardCount(type) <= GameManager.instance.devCardTurnPurchase.get(type)) {
+            return false;
+        }
+        return true;
+    }
+
+    public void playCard(DevelopmentCardType type) {
+        GameManager.instance.devCardPlayed = true;
+        developmentCards.put(type, developmentCards.get(type) - 1);
+        GameManager.instance.getBank().giveBackDevelopmentCard(type);
     }
 
     public int getTotalResources() {

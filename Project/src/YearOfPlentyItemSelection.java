@@ -22,7 +22,7 @@ public class YearOfPlentyItemSelection implements ItemSelection{
 
     @Override
     public void tryItemSelection(ResourceType resourceType) {
-        if(currAmount < 2) {
+        if(currAmount < 2 && GameManager.instance.getBank().getStockOfResource(resourceType) > selectionMap.get(resourceType)) {
             selectionMap.put(resourceType, selectionMap.get(resourceType) + 1);
             currAmount++;
         }

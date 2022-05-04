@@ -1,3 +1,5 @@
+import java.util.LongSummaryStatistics;
+
 public class InitialSettlementItemPlacement extends ItemPlacement<Node> {
     @Override
     public boolean checkCondition(Node location) {
@@ -31,5 +33,11 @@ public class InitialSettlementItemPlacement extends ItemPlacement<Node> {
         currentPlayer.addBuilding(building);
         location.building = building;
         GameLog.instance.logEvent(building.getOwner() + " placed a " + building.getType() + " at " + location);
+
+        for (Edge edge : building.location.getEdges()) {
+            if (edge.road != null && edge.road.getOwner() != currentPlayer) {
+                GameManager.instance.getLongestRoad().checkLongestRoadBreakup(edge.getRoad().getOwner());
+            }
+        }
     }
 }

@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 public class GameManager implements KeyEventHandler {
@@ -26,6 +27,9 @@ public class GameManager implements KeyEventHandler {
 
     private boolean gameHasEnded = false;
     private Player winner = null;
+
+    public boolean devCardPlayed = false;
+    public HashMap<DevelopmentCardType, Integer> devCardTurnPurchase;
 
     public GameManager() {
         if (instance == null) {
@@ -86,6 +90,11 @@ public class GameManager implements KeyEventHandler {
     private void nextTurn() {
         GameLog.instance.logEvent(getCurrentPlayer() + " ended their turn\n");
         turnCount++;
+        devCardPlayed = false;
+        devCardTurnPurchase = new HashMap<>();
+        for (DevelopmentCardType developmentCardType : DevelopmentCardType.values()) {
+            devCardTurnPurchase.put(developmentCardType, 0);
+        }
 
         if (turnCount < initialTurns) {
             initialTurn();

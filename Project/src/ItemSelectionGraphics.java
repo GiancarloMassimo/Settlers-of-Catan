@@ -91,16 +91,11 @@ public class ItemSelectionGraphics implements GraphicsItem, KeyEventHandler, Mou
         }
     }
 
-    public void startSelection(ItemSelection selection) {
-        this.selection = selection;
-    }
-
     public void startSelection(ItemSelection selection, Player player) {
         this.selection = selection;
         this.currentPlayer = player;
-        if (selection instanceof DiscardItemSelection) {
-            selection.setUp(player);
-        }
+        System.out.println("Item selection started");
+        selection.setUp(player);
     }
 
     @Override

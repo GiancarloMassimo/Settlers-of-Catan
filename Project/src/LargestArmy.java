@@ -41,9 +41,6 @@ public class LargestArmy {
     public boolean hasLargestArmy(Player player) {
         return player == largestArmyPlayer;
 
-        }
-
     }
-
 
 }

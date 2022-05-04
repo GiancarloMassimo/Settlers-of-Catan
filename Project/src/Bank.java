@@ -63,9 +63,8 @@ public class Bank {
         HashMap<ResourceType, Integer> cost = costMap.get(itemType).getCostMap();
 
         if (hasEnoughResources(inventory, cost)) {
-            if (itemType == ItemType.DevelopmentCard && developmentCardCount > 1){
-                //give player the devcard
-                developmentCardCount--;
+            if (itemType == ItemType.DevelopmentCard && developmentCardCount > 0){
+                giveRandomDevelopmentCard(inventory);
         }
             else if(inventory.itemAvailable(itemType)) {
             try {
@@ -128,8 +127,8 @@ public class Bank {
 
     public void changeDevelopmentCardCount(int n) { developmentCardCount += n; }
 
-    public DevelopmentCard getRandomDevelopmentCard(Player p) {
-        if(developmentCardCount == 0) return null;
+    public void giveRandomDevelopmentCard(Inventory inventory) {
+        if(developmentCardCount == 0) return;
         int n = Helpers.randInt(1, developmentCardCount+1);
         for(DevelopmentCardType t: DevelopmentCardType.values()) {
             if(n <= developmentCardStock.get(t)) {
@@ -137,19 +136,24 @@ public class Bank {
                 developmentCardStock.put(t, developmentCardStock.get(t) - 1);
                 switch(t){
                     case Knight:
-                        return new KnightCard(p);
+                        inventory.receiveDevelopmentCard(DevelopmentCardType.Knight);
+                        return;
                     case Monopoly:
-                        return new Monopoly(p);
+                        inventory.receiveDevelopmentCard(DevelopmentCardType.Monopoly);
+                        return;
                     case RoadBuilding:
-                        return new RoadBuilding(p);
+                        inventory.receiveDevelopmentCard(DevelopmentCardType.RoadBuilding);
+                        return;
                     case VictoryPoint:
-                        return new VictoryPointCard(p);
+                        inventory.receiveDevelopmentCard(DevelopmentCardType.VictoryPoint);
+                        return;
                     case YearOfPlenty:
-                        return new YearOfPlenty(p);
+                        inventory.receiveDevelopmentCard(DevelopmentCardType.YearOfPlenty);
+                        return;
                 }
+
             }
             n -= developmentCardStock.get(t);
         }
-        return null;
     }
 }

@@ -90,6 +90,13 @@ public class InventoryGraphics implements GraphicsItem, MouseEventHandler
         if(type == null) return;
         Inventory inventory = p.getInventory();
         if(inventory.getDevelopmentCardCount(type) == 0) return;
+        GameActionHandler.signalAction(
+                GameActionTypes.Instant,
+                () -> playCard(type, inventory, p)
+        );
+    }
+
+    private void playCard(DevelopmentCardType type, Inventory inventory, Player p) {
         if(type == DevelopmentCardType.Monopoly && inventory.canPlayCard(DevelopmentCardType.Monopoly)){
             inventory.playCard(type);
             ItemSelectionController.monopoly(p);
@@ -101,12 +108,38 @@ public class InventoryGraphics implements GraphicsItem, MouseEventHandler
             System.out.println("used yearofplenty");
         }
         else if(type == DevelopmentCardType.Knight && inventory.canPlayCard(DevelopmentCardType.Knight)) {
+            inventory.playCard(type);
+            ItemPlacementController.placeRobber();
             System.out.println("used knight");
         }
         else if(type == DevelopmentCardType.RoadBuilding && inventory.canPlayCard(DevelopmentCardType.RoadBuilding)) {
+            if (inventory.getItemCount(ItemType.Road) < 2) {
+                return;
+            }
+            inventory.playCard(type);
+            GameActionHandler.signalAction(
+                    GameActionTypes.Instant,
+                    () -> {
+                        try {
+                            ItemPlacementController.placeRoad();
+                        } catch (NoValidPositionForItemException e) {
+                            //do nothing
+                        }
+                    }
+            );
+            GameActionHandler.queueAction(
+                    GameActionTypes.Instant,
+                    () -> {
+                        try {
+                            ItemPlacementController.placeRoad();
+                        } catch (NoValidPositionForItemException e) {
+                            //do nothing
+                        }
+                    }
+            );
+
             System.out.println("used roadbuilding");
         }
-
     }
 
     private DevelopmentCardType getCardType(int x, int y) {

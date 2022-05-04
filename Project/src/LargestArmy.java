@@ -34,8 +34,6 @@ public class LargestArmy {
     }
 
     public int getArmySize(Player player){
-        if(largestArmyPlayer==null)
-        return 0;
         return largestArmies.get(player);
     }
 

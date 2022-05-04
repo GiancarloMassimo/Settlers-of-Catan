@@ -49,20 +49,34 @@ public class InventoryGraphics implements GraphicsItem, MouseEventHandler
         g.drawString(current.getResourceCount(ResourceType.Ore) + "", 645, 796);
 
         g.drawImage(VPCard, 715, 732, 60, 88, null);
-        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.VictoryPoint) + "", 730, 796);
+//        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.VictoryPoint) + "", 730, 796);
 
         g.drawImage(Knight, 780, 732, 60, 88, null);
-        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.Knight) + "", 795, 796);
+//        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.Knight) + "", 795, 796);
 
         g.drawImage(Monopoly, 845, 732, 60, 88, null);
-        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.Monopoly) + "", 860, 796);
+//        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.Monopoly) + "", 860, 796);
 
         g.drawImage(YearOfPlenty, 910, 732, 60, 88, null);
-        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.YearOfPlenty) + "", 925, 796);
+//        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.YearOfPlenty) + "", 925, 796);
 
         g.drawImage(RoadBuilding, 975, 732, 60, 88, null);
-        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.RoadBuilding) + "", 990, 796);
+//        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.RoadBuilding) + "", 990, 796);
+
+        for (int i=0;i<5;i++)
+        g.fillOval(755 + i *65, 800 ,26,25);
+
+        g.setColor(Color.BLACK);
+        g.setFont(new Font("default", Font.BOLD, 20));
+
+        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.VictoryPoint) + "", 763, 820);
+        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.Knight) + "", 828, 820);
+        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.Monopoly) + "", 893, 820);
+        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.YearOfPlenty) + "", 958, 820);
+        g.drawString(current.getDevelopmentCardCount(DevelopmentCardType.RoadBuilding) + "", 1023, 820);
+
     }
+
 
     @Override
     public void OnMouseClick(MouseEvent e) {

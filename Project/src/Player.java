@@ -92,9 +92,6 @@ public class Player {
     }
 
     public void useKnightCard(){
-        if (inventory.getDevelopmentCards().get(DevelopmentCardType.Knight)<0)
-            return;
-        // use card
         inventory.addDevelopmentCard(DevelopmentCardType.Knight,-1);
         knightsUsedCount++;
         GameManager.instance.getLargestArmy().checkLargestArmy(this, knightsUsedCount);

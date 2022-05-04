@@ -58,6 +58,9 @@ public class Inventory {
 
     public void receiveDevelopmentCard(DevelopmentCardType type) {
         developmentCards.put(type, developmentCards.get(type) + 1);
+        if (type == DevelopmentCardType.VictoryPoint) {
+            GameManager.instance.getCurrentPlayer().addSecretVictoryPoints(1);
+        }
         GameManager.instance.devCardTurnPurchase.put(type, GameManager.instance.devCardTurnPurchase.get(type) + 1);
     }
 

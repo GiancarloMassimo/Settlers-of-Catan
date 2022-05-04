@@ -18,13 +18,12 @@ public class Bank {
             bankStock.put(resourceType, 19);
         }
         developmentCardStock.put(DevelopmentCardType.Knight, 0);
-        developmentCardStock.put(DevelopmentCardType.VictoryPoint, 0);
-        developmentCardStock.put(DevelopmentCardType.Monopoly, 2);
+        developmentCardStock.put(DevelopmentCardType.VictoryPoint, 10);
+        developmentCardStock.put(DevelopmentCardType.Monopoly, 0);
         developmentCardStock.put(DevelopmentCardType.RoadBuilding, 0);
-        developmentCardStock.put(DevelopmentCardType.YearOfPlenty, 2);
+        developmentCardStock.put(DevelopmentCardType.YearOfPlenty, 0);
 
-        developmentCardCount = 4;
-
+        developmentCardCount = 10;
     }
 
     public void initializeCosts() {

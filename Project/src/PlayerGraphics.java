@@ -45,6 +45,14 @@ public class PlayerGraphics implements GraphicsItem
 
             g.setFont(new Font("default", Font.BOLD, 50));
             g.drawString(players[i].getPublicVictoryPoints()+"", 1075 - (players[i].getPublicVictoryPoints() > 9 ? 20 : 0), 427 + i * 80);
+
+            if (players[i] == GameManager.instance.getCurrentPlayer() && players[i].getSecretVictoryPoints() > 0) {
+                g.setColor(ColorPalette.devCardPurple);
+                g.fillOval(1090, 360 + i * 80, 40, 40);
+                g.setColor(Color.white);
+                g.setFont(new Font("default", Font.BOLD, 32));
+                g.drawString(players[i].getSecretVictoryPoints() + "", 1102, 390 + i * 80);
+            }
         }
     }
 }

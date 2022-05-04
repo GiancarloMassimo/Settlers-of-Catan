@@ -17,14 +17,14 @@ public class ItemSelectionController {
     }
 
     public static void monopoly(Player player) {
-        GameActionHandler.queueAction(
+        GameActionHandler.signalAction(
                 GameActionTypes.StartMultiStageAction,
                 () -> itemSelector.startSelection(monopolyItemSelection, player)
         );
     }
 
     public static void yearOfPlenty(Player player) {
-        GameActionHandler.queueAction(
+        GameActionHandler.signalAction(
                 GameActionTypes.StartMultiStageAction,
                 () -> itemSelector.startSelection(yearOfPlentyItemSelection, player)
         );

@@ -17,13 +17,13 @@ public class Bank {
         for (ResourceType resourceType : ResourceType.values()) {
             bankStock.put(resourceType, 19);
         }
-        developmentCardStock.put(DevelopmentCardType.Knight, 14);
-        developmentCardStock.put(DevelopmentCardType.VictoryPoint, 5);
+        developmentCardStock.put(DevelopmentCardType.Knight, 0);
+        developmentCardStock.put(DevelopmentCardType.VictoryPoint, 0);
         developmentCardStock.put(DevelopmentCardType.Monopoly, 2);
-        developmentCardStock.put(DevelopmentCardType.RoadBuilding, 2);
+        developmentCardStock.put(DevelopmentCardType.RoadBuilding, 0);
         developmentCardStock.put(DevelopmentCardType.YearOfPlenty, 2);
 
-        developmentCardCount = 25;
+        developmentCardCount = 4;
 
     }
 
@@ -65,8 +65,7 @@ public class Bank {
         if (hasEnoughResources(inventory, cost)) {
             if (itemType == ItemType.DevelopmentCard && developmentCardCount > 0){
                 giveRandomDevelopmentCard(inventory);
-        }
-            else if(inventory.itemAvailable(itemType)) {
+        } else if(inventory.itemAvailable(itemType)) {
             try {
                 if (itemType == ItemType.Road) {
                     ItemPlacementController.placeRoad();

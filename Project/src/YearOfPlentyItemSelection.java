@@ -17,7 +17,7 @@ public class YearOfPlentyItemSelection implements ItemSelection{
 
     @Override
     public String getSelectionMessage() {
-        return player + ": Select 2 cards";
+        return "Year of Plenty: Select 2 cards";
     }
 
     @Override
@@ -35,6 +35,7 @@ public class YearOfPlentyItemSelection implements ItemSelection{
 
     @Override
     public void clearSelection() {
+        selectionMap = new HashMap<>();
         for(ResourceType resourceType: ResourceType.values()) {
             selectionMap.put(resourceType, 0);
         }

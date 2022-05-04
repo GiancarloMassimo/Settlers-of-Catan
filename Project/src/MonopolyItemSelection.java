@@ -38,7 +38,7 @@ public class MonopolyItemSelection implements ItemSelection{
     public void confirm() {
         Player[] p = GameManager.instance.getPlayers();
         int received = 0;
-        for(int i=0;i<4;i++) {
+        for(int i=0;i<p.length;i++) {
             if(p[i] != player) {
                 Inventory inv = p[i].getInventory();
                 int num = inv.getResourceCount(selectedType);
@@ -54,6 +54,9 @@ public class MonopolyItemSelection implements ItemSelection{
     @Override
     public HashMap<ResourceType, Integer> getSelection() {
         HashMap<ResourceType, Integer> selectionMap = new HashMap<>();
+        for (ResourceType resourceType : ResourceType.values()) {
+            selectionMap.put(resourceType, 0);
+        }
         selectionMap.put(selectedType, 1);
         return selectionMap;
     }

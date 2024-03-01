@@ -80,7 +80,9 @@ public class Inventory {
     public void playCard(DevelopmentCardType type) {
         GameManager.instance.devCardPlayed = true;
         developmentCards.put(type, developmentCards.get(type) - 1);
-        GameManager.instance.getBank().giveBackDevelopmentCard(type);
+        if (type != DevelopmentCardType.Knight) {
+            GameManager.instance.getBank().giveBackDevelopmentCard(type);
+        }
     }
 
     public int getTotalResources() {
@@ -107,9 +109,5 @@ public class Inventory {
 
     public void addDevelopmentCard(DevelopmentCardType developmentCardType, int n){
         developmentCards.put(developmentCardType,developmentCards.get(developmentCardType)+n);
-    }
-
-    public HashMap<DevelopmentCardType, Integer> getDevelopmentCards(){
-        return developmentCards;
     }
 }
